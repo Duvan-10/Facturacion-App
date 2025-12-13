@@ -1,0 +1,275 @@
+/*
+ * =================================================================
+ * ARCHIVO: styles.css (para vistas de autenticación: Login y Register)
+ * FUNCIÓN: Define la apariencia visual de la tarjeta de autenticación 
+ * utilizando un diseño Dark Theme modular y la implementación del Light Mode.
+ * =================================================================
+ */
+
+/* ---------------------------------------------------- */
+/* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
+/* ---------------------------------------------------- */
+:root {
+    /* Fondo principal y tarjeta */
+    --color-background-dark: hsl(220, 10%, 8%); 
+    --color-card-dark: hsl(0, 0%, 12%); 
+    --color-input-background: #0d0d0d; 
+    
+    /* Colores primarios (texto, bordes) */
+    --color-text-light: hwb(0 88% 12%); 
+    --color-text-muted: lab(98.31% -3.36 2.05); 
+
+    /* Color de acento/Botones (Verde/Cian Brillante) */
+    --color-accent-teal: hsl(151, 100%, 45%); 
+    --color-accent-darker: #00b35b; 
+}
+
+/* ----------------------------------------------------------------- */
+/* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
+/* ----------------------------------------------------------------- */
+html.light-mode {
+    --color-background-dark: #f0f0f0;    
+    --color-card-dark: #ffffff;          
+    --color-input-background: #ffffff;   
+    --color-text-light: #1f1f1f;         
+    --color-text-muted: #666666;         
+    /* Colores de acento se mantienen si no se definen aquí */
+}
+
+/* ------------------------------------- */
+/* 1. ESTRUCTURA Y FONDO GENERAL */
+/* ------------------------------------- */
+
+.auth {
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-color: var(--color-background-dark); 
+    font-family: Arial, sans-serif;
+    color: var(--color-text-light); 
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px; 
+    background-color: var(--color-card-dark); 
+    padding: 30px;
+    position: relative; 
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
+    text-align: center;
+}
+
+/* ------------------------------------- */
+/* 2. CABECERA Y LOGO */
+/* ------------------------------------- */
+.auth-header{
+    margin-bottom:25px;
+    padding-bottom:20px;
+}
+
+.brand-logo{
+    /* Aumentar tamaño para visibilidad */
+    width:100px;
+    height:100px;
+    margin-bottom:10px;
+    /* Filtro fuerte para hacer brillar el logo con el color de acento */
+    filter:drop-shadow(0 0 10px rgba(0,230,118,0.6));
+}
+
+.auth-header h1{
+    font-size:1.5em;
+    font-weight:bold;
+    color:var(--color-text-light);
+    margin-bottom:5px;
+}
+
+.subtitle{
+    font-size:0.95em;
+    color:var(--color-text-muted);
+    margin-bottom:5px;
+}
+
+.tagline{
+    font-size:1.2em;
+    font-weight:bold;
+    color:var(--color-text-light);
+    margin-bottom:20px;
+}
+
+
+/* ------------------------------------- */
+/* 3. CAMPOS DE FORMULARIO (Código Restaurado) */
+/* ------------------------------------- */
+
+form {
+    text-align: left;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-text-light);
+    font-size: 0.9em;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-input-background); 
+    border: 1px solid #333333; 
+    color: var(--color-text-light);
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: var(--color-accent-teal); 
+    outline: none;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: var(--color-accent-teal);
+    cursor: pointer;
+    font-size: 0.85em;
+    padding: 0;
+}
+
+/* ------------------------------------- */
+/* 4. FILA DE ACCIONES Y LINKS (Código Restaurado) */
+/* ------------------------------------- */
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85em;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-text-light);
+}
+
+.checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--color-text-muted);
+    background-color: var(--color-input-background);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox input[type="checkbox"]:checked {
+    background-color: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+}
+
+.link {
+    color: var(--color-accent-teal);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.link:hover {
+    color: var(--color-accent-darker);
+    text-decoration: underline;
+}
+
+/* ------------------------------------- */
+/* 5. BOTONES Y ACCIONES (Código Restaurado) */
+/* ------------------------------------- */
+
+.form-actions {
+    margin-bottom: 25px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn.primary {
+    background-color: var(--color-accent-teal);
+    /* En modo oscuro, el fondo del botón es el background-dark */
+    color: var(--color-background-dark); 
+}
+
+.btn.primary:hover:not(:disabled) {
+    background-color: var(--color-accent-darker);
+}
+
+.btn:disabled {
+    background-color: var(--color-text-muted);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* ------------------------------------- */
+/* 6. MENSAJE DE REGISTRO (Pie de formulario) (Código Restaurado) */
+/* ------------------------------------- */
+
+.register-wrapper {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.register-wrapper p {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.register-link {
+    color: var(--color-accent-teal);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.status {
+    text-align: center;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+    background-color: rgba(0, 230, 118, 0.1); 
+    border: 1px solid var(--color-accent-teal);
+}
+
+.help {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.75em;
+    color: var(--color-text-muted);
+}
+

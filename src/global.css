@@ -1,0 +1,96 @@
+/* src/global.css */
+
+/*
+ * =================================================================
+ * ESTILOS GLOBALES DE APLICACIÓN
+ * FUNCIÓN: Reseteo de estilos y definición de paletas de color CSS Variables.
+ * =================================================================
+ */
+
+/* ---------------------------------------------------- */
+/* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
+/* ---------------------------------------------------- */
+:root {
+    /* Color de fondo que usas para el navegador y contenedores principales */
+    --color-background-dark: oklab(28.63% -0.00377 0.00257); /* Gris muy oscuro base */
+    
+    /* Variables de color de la tarjeta y otros elementos (Importadas de auth/styles.css) */
+    --color-card-dark: hsl(0, 0%, 12%); 
+    --color-input-background: #0d0d0d; 
+    --color-text-light: hwb(0 88% 12%);
+    --color-text-muted: lab(98.31% -3.36 2.05);
+    --color-accent-teal: hsl(151, 100%, 45%); 
+    --color-accent-darker: #00b35b;
+}
+
+/* ----------------------------------------------------------------- */
+/* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
+/* La clase 'light-mode' se aplica a la etiqueta <html> por el AuthContext. */
+/* ----------------------------------------------------------------- */
+html.light-mode {
+    /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
+    --color-background-dark: #f0f0f0;    /* Fondo de página muy claro */
+    --color-card-dark: #ffffff;          /* Tarjeta blanca */
+    --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
+    
+    --color-text-light: #333333;         /* Texto oscuro */
+    --color-text-muted: #666666;         /* Texto secundario gris */
+
+    --color-accent-teal: #00a852; 
+    --color-accent-darker: #008a40;
+}
+
+/* ------------------------------------- */
+/* 1. Reseteo básico y Estilo Global de Fondo */
+/* ------------------------------------- */
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    /* Asegura que la aplicación ocupe el 100% del viewport */
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box; 
+
+    /* ¡CLAVE! Usa la variable de color. El tema cambiará este valor automáticamente. */
+    background-color: var(--color-background-dark); 
+}
+
+/* ------------------------------------- */
+/* 2. Reseteo de fuente (Opcional, pero recomendado) */
+/* ------------------------------------- */
+* {
+    font-family: Arial, sans-serif;
+}
+
+/* ------------------------------------- */
+/* 3. COMPONENTE GLOBAL: SWITCH DE TEMA */
+/* ------------------------------------- */
+
+.theme-switcher-global {
+    /* Contenedor que siempre está visible */
+    position: fixed; 
+    top: 20px;
+    right: 20px;
+    z-index: 1000; 
+}
+
+.theme-button {
+    /* Estilo del botón (ícono) */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    
+    /* Colores dinámicos */
+    color: var(--color-text-muted); 
+    background-color: var(--color-card-dark); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+}
+
+.theme-button:hover {
+    color: var(--color-accent-teal); 
+    background-color: var(--color-input-background); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
