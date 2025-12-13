@@ -19,7 +19,7 @@ const ThemeSwitch = () => {
                 className="theme-button"
                 // Atributos de accesibilidad y ayuda
                 aria-label={isLightMode ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
-                title={isLightMode ? 'Modo Oscuro' : 'Modo Claro'}
+                title={isLightMode ? 'Click Para Cambiar a Modo Oscuro' : 'Click Para Cambiar a Modo Claro'}
             >
                 {/* Funcion Desactivada: (Renderiza el icono de la Luna si está en Modo Claro (para cambiar a Oscuro)
                     y el icono del Sol si está en Modo Oscuro (para cambiar a Claro) 
