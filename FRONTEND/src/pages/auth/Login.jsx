@@ -1,4 +1,4 @@
-// src/pages/auth/Login.jsx
+// src/pages/auth/Login.js
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
