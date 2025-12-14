@@ -18,6 +18,7 @@
     /* Colores primarios (texto, bordes) */
     --color-text-light: hwb(0 88% 12%); 
     --color-text-muted: lab(98.31% -3.36 2.05); 
+    --color-input-hover: hwb(0 15% 85%); /* Añadido para el hover de rol */
 
     /* Color de acento/Botones (Verde/Cian Brillante) */
     --color-accent-teal: hsl(151, 100%, 45%); 
@@ -28,12 +29,12 @@
 /* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
 /* ----------------------------------------------------------------- */
 html.light-mode {
-    --color-background-dark: #f0f0f0;    
-    --color-card-dark: #ffffff;          
-    --color-input-background: #ffffff;   
-    --color-text-light: #1f1f1f;         
-    --color-text-muted: #666666;         
-    /* Colores de acento se mantienen si no se definen aquí */
+    --color-background-dark: #f0f0f0;
+    --color-card-dark: #ffffff;
+    --color-input-background: #ffffff; 
+    --color-text-light: #1f1f1f; 
+    --color-text-muted: #666666; 
+    --color-input-hover: #f0f0f0; /* Tono más claro en Light Mode */
 }
 
 /* ------------------------------------- */
@@ -45,29 +46,29 @@ html.light-mode {
     display: flex;
     justify-content: center; 
     align-items: center; 
+    /* Corregido: Usar --color-background-dark */
     background-color: var(--color-background-dark); 
     font-family: Arial, sans-serif;
     color: var(--color-text-light); 
 
-     /* Permitir scroll si la card es más alta que la pantalla (especialmente en móviles) */
+    /* Permitir scroll si la card es más alta que la pantalla (especialmente en móviles) */
     padding: 20px; 
     overflow-y: auto; 
     
-    background-color: var(--color-background);
-
+    /* Nota: Se eliminó el segundo background-color: var(--color-background); */
 }
 
 .auth-card {
 /* Anchura flexible, pero limitada: */
-    width: 90%; /* Ocupa el 90% del ancho del viewport */
-    max-width: 400px; /* Pero nunca será más ancha de 400px (buena lectura en desktop) */
-    min-width: 300px; /* Asegura que en pantallas pequeñas, no se vuelva demasiado estrecha */
+    width: 90%; 
+    max-width: 400px; 
+    min-width: 300px; 
 
-/* Centrado vertical y horizontal */
-    padding: 30px;
+/* Se mantiene el padding de 30px, pero si hay scroll, se debe reducir a 15px */
+    padding: 30px; 
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
+    background-color: var(--color-card-dark); /* Añadido para Light Mode */
 }
 
 
@@ -76,75 +77,86 @@ html.light-mode {
 /* ------------------------------------- */
 .auth-header {
     text-align: center;
-    /* Ajuste para reducir el espacio */
-    margin-bottom: 10px; /* Valor ajustado, antes era 40px o más */
+    /* AJUSTE COMPRESIÓN: Reducido para acercar el logo y el texto */
+    margin-bottom: 5px; 
 }
 
 .brand-logo{
-    /* Aumentar tamaño para visibilidad */
-    width:100px;
-    height:100px;
-    margin-bottom:10px;
+    /* AJUSTE CLAVE: Reducido a 80px para compresión */
+    width: 80px;
+    height: 80px;
+    /* AJUSTE COMPRESIÓN: Reducido el margen debajo del logo */
+    margin-bottom: 5px; 
     /* Filtro fuerte para hacer brillar el logo con el color de acento */
     filter:drop-shadow(0 0 10px rgba(0,230,118,0.6));
 }
 
+/* Título de Marca: PFEPS (h1) - Estilo independiente */
 .auth-header h1{
-    font-size:1.5em;
-    font-weight:bold;
-    color:var(--color-text-light);
-    margin-bottom:5px;
+    font-size: 1.8em; /* Mayor tamaño para la marca */
+    font-weight: 700;
+   color:  hwb(0 85% 15%); /* Color usando valores RGB */
+   margin-top: 0;
+    margin-bottom: 5px; /* Compresión */
 }
 
+/* Subtítulo: Accede a tu cuenta - Estilo independiente */
 .subtitle{
-    font-size:0.95em;
-    color:var(--color-text-muted);
-    margin-bottom:5px;
+    font-size: 1em; /* Tamaño estándar */
+    font-weight: 400;
+    color: var(--color-text-muted); /* Color suave para ser informativo */
+    margin-top: 0;
+    margin-bottom:10px     /* Separación del tagline */
 }
 
+/* Tagline: Software de Facturación Electrónica - Estilo independiente */
 .tagline{
-    font-size:1.2em;
-    font-weight:bold;
-    color:var(--color-text-light);
-    margin-bottom:10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--color-text-light); /* Color de texto principal */
+    /* AJUSTE COMPRESIÓN: Espacio antes del selector de rol */
+    margin-top: 0;
+    margin-bottom: 15px; 
 }
+
 
 /* ------------------------------------- */
 /* 2.1. SELECTOR DE ROL */
 /* ------------------------------------- */
 
-.auth-header h1{
-    font-size:1.5em;
-    font-weight:bold;
-    color:var(--color-text-light);
-    margin-bottom:5px;
-}
-.subtitle{
-    font-size:0.95em;
-    color:var(--color-text-muted);
-    margin-bottom:5px;
+/* Nota: Eliminé el bloque duplicado de h1 y .subtitle de esta sección. */
+
+/* Título: Ingresar como: */
+.role-selector-title {
+    color: var(--color-text-light); 
+    font-family: 'Inter', sans-serif; 
+    font-size: 0.95em; 
+    font-weight: 500; 
+    margin-top: 0;
+    margin-bottom: 8px; /* Compresión antes de las opciones de rol */
+    text-align: center;
 }
 
 .role-selector-container {
-    /* Eliminamos el fondo que parecía una card */
-    background-color: transparent; /* Antes: var(--color-background-dark) */
-    padding: 0; /* Eliminamos el padding */
+    /* Define la apariencia y el espaciado vertical del contenedor de "Ingresar como:" y botones de rol */
+    background-color: transparent; 
+    padding: 0; 
     border-radius: 0; 
-    border: none; /* Eliminamos el borde */
-    margin-bottom: 20px; /* Espacio antes del campo de Email */
-    text-align: center;/*Boton de Ingresar Como*/
-    
+    border: none; 
+    /* AJUSTE COMPRESIÓN: Mantenido en 15px (antes 20px) */
+    margin-top: 0;
+    margin-bottom: 15px; 
+    text-align: center;
 }
 
 .role-options {
-    display: flex; /* Usamos Flexbox para alinear las opciones una al lado de la otra */
-    justify-content: space-evenly; /* Espacio entre las opciones */
-    gap: 5px; /* Espacio entre el botón Usuario y Administrador */
+    display: flex; 
+    justify-content: space-evenly; 
+    gap: 5px; 
 }
 
-
 /* ------------------------------------- */
-/* 3. CAMPOS DE FORMULARIO (Código Restaurado) */
+/* 3. CAMPOS DE FORMULARIO */
 /* ------------------------------------- */
 
 form {
@@ -152,7 +164,8 @@ form {
 }
 
 .field {
-    margin-bottom: 18px;
+    /* AJUSTE COMPRESIÓN: Reducido a 12px (antes 18px) */
+    margin-bottom: 12px;
 }
 
 .field label {
@@ -198,14 +211,15 @@ input:focus {
 }
 
 /* ------------------------------------- */
-/* 4. FILA DE ACCIONES Y LINKS (Código Restaurado) */
+/* 4. FILA DE ACCIONES Y LINKS */
 /* ------------------------------------- */
 
 .form-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    /* AJUSTE COMPRESIÓN: Reducido a 10px (antes 25px) */
+    margin-bottom: 10px;
     font-size: 0.85em;
 }
 
@@ -245,11 +259,12 @@ input:focus {
 }
 
 /* ------------------------------------- */
-/* 5. BOTONES Y ACCIONES (Código Restaurado) */
+/* 5. BOTONES Y ACCIONES */
 /* ------------------------------------- */
 
 .form-actions {
-    margin-bottom: 25px;
+    /* AJUSTE COMPRESIÓN: Reducido a 10px (antes 25px) */
+    margin-bottom: 10px;
 }
 
 .btn {
@@ -265,7 +280,6 @@ input:focus {
 
 .btn.primary {
     background-color: var(--color-accent-teal);
-    /* En modo oscuro, el fondo del botón es el background-dark */
     color: var(--color-background-dark); 
 }
 
@@ -280,11 +294,12 @@ input:focus {
 }
 
 /* ------------------------------------- */
-/* 6. MENSAJE DE REGISTRO (Pie de formulario) (Código Restaurado) */
+/* 6. MENSAJE DE REGISTRO (Pie de formulario) */
 /* ------------------------------------- */
 
 .register-wrapper {
-    margin-top: 20px;
+    /* AJUSTE COMPRESIÓN: Reducido a 10px (antes 20px) */
+    margin-top: 10px;
     text-align: center;
     font-size: 0.9em;
 }
@@ -322,17 +337,17 @@ input:focus {
 /*--------------------------------------------------------------*/
 @media (max-width: 450px) {
     .auth {
-        /* Deshabilitamos el centrado vertical estricto para que la card empiece arriba */
         align-items: flex-start; 
-        padding-top: 20px;
+        /* AJUSTE COMPRESIÓN */
+        padding-top: 10px;
     }
 
     .auth-card {
-        /* Permitimos que ocupe casi todo el ancho disponible */
         width: 100%; 
-        min-width: unset; /* Eliminamos la restricción de ancho mínimo */
+        min-width: unset; 
         max-width: 100%;
         margin: 0;
-        padding: 20px;
+        /* AJUSTE COMPRESIÓN: Reducido a 10px para máxima compactación en móvil */
+        padding: 10px;
     }
 }
