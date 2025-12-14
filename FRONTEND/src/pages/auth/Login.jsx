@@ -52,6 +52,8 @@ function Login() {
                 <div className="role-selector-container" role="radiogroup" aria-label="Seleccionar tipo de cuenta">
                     <p className="role-selector-title">Ingresar como:</p>
                     <div className="role-options">
+
+                        
                         
                         {/* Opción 1: Usuario */}
                         <label htmlFor="role-user" className={`role-option ${role === 'usuario' ? 'selected' : ''}`}>

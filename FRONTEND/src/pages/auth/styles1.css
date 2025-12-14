@@ -1,6 +1,6 @@
 /*
  * =================================================================
- * ARCHIVO: styles.css (para vistas de autenticación: Login y Register)
+ Estilo 2 (para vistas de autenticación: Login y Register)
  * FUNCIÓN: Define la apariencia visual de la tarjeta de autenticación 
  * utilizando un diseño Dark Theme modular y la implementación del Light Mode.
  * =================================================================
@@ -18,6 +18,7 @@
     /* Colores primarios (texto, bordes) */
     --color-text-light: hwb(0 88% 12%); 
     --color-text-muted: lab(98.31% -3.36 2.05); 
+    --color-input-hover: hwb(0 15% 85%);
 
     /* Color de acento/Botones (Verde/Cian Brillante) */
     --color-accent-teal: hsl(151, 100%, 45%); 
@@ -28,12 +29,12 @@
 /* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
 /* ----------------------------------------------------------------- */
 html.light-mode {
-    --color-background-dark: #f0f0f0;    
-    --color-card-dark: #ffffff;          
-    --color-input-background: #ffffff;   
-    --color-text-light: #1f1f1f;         
-    --color-text-muted: #666666;         
-    /* Colores de acento se mantienen si no se definen aquí */
+    --color-background-dark: #f0f0f0;
+    --color-card-dark: #ffffff;
+    --color-input-background: #ffffff; 
+    --color-text-light: #1f1f1f; 
+    --color-text-muted: #666666; 
+    --color-input-hover: #f0f0f0; /* Tono más claro en Light Mode */
 }
 
 /* ------------------------------------- */
@@ -41,104 +42,102 @@ html.light-mode {
 /* ------------------------------------- */
 
 .auth {
-    /* Asegura que el contenedor ocupe toda la altura visible */
     min-height: 100vh;
-    
-    /* Centrado con Flexbox */
     display: flex;
-    justify-content: center; /* Centrado horizontal */
-    align-items: center; /* Centrado vertical */
-    
-    /* Permitir scroll si la card es más alta que la pantalla (especialmente en móviles) */
-    padding: 20px; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 0px; 
     overflow-y: auto; 
-    
-    background-color: var(--color-background);
+    background-color: var(--color-background-dark); 
 }
 
 
 .auth-card {
-    /* Anchura flexible, pero limitada: */
-    width: 90%; /* Ocupa el 90% del ancho del viewport */
-    max-width: 400px; /* Pero nunca será más ancha de 400px (buena lectura en desktop) */
-    min-width: 300px; /* Asegura que en pantallas pequeñas, no se vuelva demasiado estrecha */
-
-    /* Centrado vertical y horizontal */
-    padding: 25px;
+    width: 80%; 
+    max-width: 400px; 
+    min-width: 300px; 
+    padding: 15px; 
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    background-color: var(--color-card-dark);
 }
 
 /* ------------------------------------- */
 /* 2. CABECERA Y LOGO */
 /* ------------------------------------- */
+/* AJUSTE CABECERA*/
 .auth-header {
     text-align: center;
-    /* Ajuste para reducir el espacio */
-    margin-bottom: 10px; /* Valor ajustado, antes era 40px o más */
+    margin-bottom: 5px; 
 }
 
+  /* AJUSTE LOGO: */
 .brand-logo{
-    /* Aumentar tamaño para visibilidad */
-    width:1000px;
-    height:80px;
-    margin-bottom:5px;
-    /* Filtro fuerte para hacer brillar el logo con el color de acento */
+  
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0px;
     filter:drop-shadow(0 0 10px rgba(0,230,118,0.6));
 }
 
+/* Título de Marca: PFEPS (h1) - Estilo independiente */
 .auth-header h1{
-    font-size:1.5em;
-    font-weight:bold;
-    color:var(--color-text-light);
-    margin-bottom:5px;
+    font-size: 1.8em; 
+    font-weight: 700;
+    color: var(--color-accent-teal); 
+    margin-top: 5;
+    margin-bottom: 0px; 
 }
 
+/* Subtítulo: Accede a tu cuenta - Estilo independiente */
 .subtitle{
-    font-size:0.95em;
-    color:var(--color-text-muted);
-    margin-bottom:5px;
+    font-size: 1em; 
+    font-weight: 400; 
+    color: hsl(0, 1%, 38%);
+    margin-top: 0;
+    margin-bottom: 10px; 
 }
 
+/* Tagline: Software de Facturación Electrónica - Estilo independiente */
 .tagline{
-    font-size:1.2em;
-    font-weight:bold;
-    color:var(--color-text-light);
-    margin-bottom:10px;
+    font-size: 1.1em;
+    font-weight: 600; 
+    color: var(--color-text-light); 
+    margin-top: 0;
+    margin-bottom: 15px; 
+    
 }
 
 /* ------------------------------------- */
 /* 2.1. SELECTOR DE ROL */
 /* ------------------------------------- */
 
-.auth-header h1{
-    font-size:1.5em;
-    font-weight:bold;
-    color:var(--color-text-light);
-    margin-bottom:5px;
-}
-.subtitle{
-    font-size:0.95em;
-    color:var(--color-text-muted);
-    margin-bottom:5px;
+/* Estilo para el título "Ingresar como:" */
+.role-selector-title {
+    color: #e0d3d3 ;
+    font-family: 'Inter', sans-serif; 
+    font-size: 1.1em; 
+    font-weight: 500; 
+    margin-top: 5;
+    margin-bottom: 5%; 
+    text-align: center;
 }
 
 .role-selector-container {
-    /* Eliminamos el fondo que parecía una card */
-    background-color: transparent; /* Antes: var(--color-background-dark) */
-    padding: 0; /* Eliminamos el padding */
+/* Define la apariencia y el espaciado vertical del contenedor de "Ingresar como:" y botones de rol */
+    background-color: transparent; 
+    padding: 0; 
     border-radius: 0; 
-    border: none; /* Eliminamos el borde */
-    margin-bottom: 20px; /* Espacio antes del campo de Email */
+    border: none; 
+    margin-top: 0;
+    margin-bottom: 50px; 
     text-align: center;
-    
 }
 
 .role-options {
-    display: flex; /* Usamos Flexbox para alinear las opciones una al lado de la otra */
-    justify-content: space-between; /* Espacio entre las opciones */
-    gap: 15px; /* Espacio entre el botón Usuario y Administrador */
+    display: flex; 
+    justify-content: space-between; 
+    gap: 20px; 
 }
 
 /* Estilo base de cada opción de rol (el botón) */
@@ -146,35 +145,34 @@ html.light-mode {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; /* Permite que cada opción crezca y ocupe el espacio disponible */
+    flex-grow: 1; 
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 4px;
     border: 1px solid var(--color-input-background);
-    background-color: var(--color-input-background); /* Fondo ligeramente más claro que el contenedor */
+    background-color: var(--color-input-background); 
     color: var(--color-text-light);
     transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 /* Efecto hover */
 .role-option:hover {
-    background-color: hsl(0, 0%, 15%); /* Tono más oscuro al pasar el ratón */
+    background-color: var(--color-input-hover); 
     border-color: var(--color-text-muted);
 }
 
 /* Estilo para la opción SELECCIONADA */
 .role-option.selected {
-    border-color: var(--color-accent-teal); /* Borde de color de acento */
-    background-color: var(--color-accent-teal); /* Fondo de color de acento */
-    color: var(--color-background-dark); /* Texto oscuro para el contraste */
+    border-color: var(--color-accent-teal); 
+    background-color: var(--color-accent-teal); 
+    color: var(--color-background-dark); 
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 230, 118, 0.4); /* Sombra sutil para destacar */
+    box-shadow: 0 0 10px rgba(0, 230, 118, 0.4); 
 }
 
 /* Iconos dentro de la opción */
 .role-icon {
     margin-right: 8px;
-    /* En modo seleccionado, el color del icono se invertirá automáticamente por 'color: var(--color-background-dark);' */
 }
 
 /* Ocultar el radio button nativo. Usaremos el estilo del contenedor como el botón. */
@@ -184,24 +182,31 @@ html.light-mode {
 
 
 
+
 /* ------------------------------------- */
-/* 3. CAMPOS DE FORMULARIO (Código Restaurado) */
+/* 3. CAMPOS DE FORMULARIO */
 /* ------------------------------------- */
 
 form {
+    
+    
     text-align: left;
+   
 }
 
 .field {
-    margin-bottom: 12px;
+    /* AJUSTE COMPRESIÓN: Reducido a 12px */
+    margin-bottom: 10px;
 }
 
 .field label {
     display: block;
-    margin-bottom: 5px;
+     margin-bottom: 10px; 
     font-weight: bold;
     color: var(--color-text-light);
     font-size: 0.9em;
+    margin-bottom: 10px; 
+
 }
 
 input[type="email"],
@@ -215,6 +220,7 @@ input[type="text"] {
     border-radius: 4px;
     transition: border-color 0.3s;
     box-sizing: border-box;
+    
 }
 
 input:focus {
@@ -239,13 +245,14 @@ input:focus {
 }
 
 /* ------------------------------------- */
-/* 4. FILA DE ACCIONES Y LINKS (Código Restaurado) */
+/* 4. FILA DE ACCIONES Y LINKS */
 /* ------------------------------------- */
 
 .form-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* AJUSTE COMPRESIÓN: Reducido a 10px */
     margin-bottom: 10px;
     font-size: 0.85em;
 }
@@ -286,10 +293,11 @@ input:focus {
 }
 
 /* ------------------------------------- */
-/* 5. BOTONES Y ACCIONES (Código Restaurado) */
+/* 5. BOTONES Y ACCIONES */
 /* ------------------------------------- */
 
 .form-actions {
+    /* AJUSTE COMPRESIÓN: Reducido a 10px */
     margin-bottom: 10px;
 }
 
@@ -306,7 +314,6 @@ input:focus {
 
 .btn.primary {
     background-color: var(--color-accent-teal);
-    /* En modo oscuro, el fondo del botón es el background-dark */
     color: var(--color-background-dark); 
 }
 
@@ -321,11 +328,12 @@ input:focus {
 }
 
 /* ------------------------------------- */
-/* 6. MENSAJE DE REGISTRO (Pie de formulario) (Código Restaurado) */
+/* 6. MENSAJE DE REGISTRO (Pie de formulario) */
 /* ------------------------------------- */
 
 .register-wrapper {
-    margin-top: 0px;
+    /* AJUSTE COMPRESIIÓN: Reducido a 0px */
+    margin-top: 0px; 
     text-align: center;
     font-size: 15px;
 }
@@ -363,17 +371,16 @@ input:focus {
 /*-----------------------------------------------------------*/
 @media (max-width: 450px) {
     .auth {
-        /* Deshabilitamos el centrado vertical estricto para que la card empiece arriba */
         align-items: flex-start; 
         padding-top: 10px;
     }
 
     .auth-card {
-        /* Permitimos que ocupe casi todo el ancho disponible */
         width: 100%; 
-        min-width: unset; /* Eliminamos la restricción de ancho mínimo */
+        min-width: unset; 
         max-width: 100%;
         margin: 0;
+        /* AJUSTE COMPRESIÓN: Padding ajustado a 10px para máxima compactación en móvil */
         padding: 10px;
     }
 }
