@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; 
 import { User, Settings } from 'lucide-react';
 import logo from '../../assets/logo.png';
-import './styles.css';
+import './styles1.css'; {/*Habilitado estilo 1*/}
 
 function Login() {
     // Obtenemos las funciones y estados del Vigilante (AuthContext)
