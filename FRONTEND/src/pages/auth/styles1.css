@@ -41,24 +41,33 @@ html.light-mode {
 /* ------------------------------------- */
 
 .auth {
-    min-height: 100vh; 
+    /* Asegura que el contenedor ocupe toda la altura visible */
+    min-height: 100vh;
+    
+    /* Centrado con Flexbox */
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    background-color: var(--color-background-dark); 
-    font-family: Arial, sans-serif;
-    color: var(--color-text-light); 
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    
+    /* Permitir scroll si la card es más alta que la pantalla (especialmente en móviles) */
+    padding: 20px; 
+    overflow-y: auto; 
+    
+    background-color: var(--color-background);
 }
 
+
 .auth-card {
-    width: 100%;
-    max-width: 400px; 
-    background-color: var(--color-card-dark); 
-    padding: 30px;
-    position: relative; 
+    /* Anchura flexible, pero limitada: */
+    width: 90%; /* Ocupa el 90% del ancho del viewport */
+    max-width: 400px; /* Pero nunca será más ancha de 400px (buena lectura en desktop) */
+    min-width: 300px; /* Asegura que en pantallas pequeñas, no se vuelva demasiado estrecha */
+
+    /* Centrado vertical y horizontal */
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
-    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
 }
 
 /* ------------------------------------- */
@@ -72,9 +81,9 @@ html.light-mode {
 
 .brand-logo{
     /* Aumentar tamaño para visibilidad */
-    width:100px;
-    height:100px;
-    margin-bottom:10px;
+    width:1000px;
+    height:80px;
+    margin-bottom:5px;
     /* Filtro fuerte para hacer brillar el logo con el color de acento */
     filter:drop-shadow(0 0 10px rgba(0,230,118,0.6));
 }
@@ -175,14 +184,6 @@ html.light-mode {
 
 
 
-
-
-
-
-
-
-
-
 /* ------------------------------------- */
 /* 3. CAMPOS DE FORMULARIO (Código Restaurado) */
 /* ------------------------------------- */
@@ -192,7 +193,7 @@ form {
 }
 
 .field {
-    margin-bottom: 18px;
+    margin-bottom: 12px;
 }
 
 .field label {
@@ -245,7 +246,7 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     font-size: 0.85em;
 }
 
@@ -289,7 +290,7 @@ input:focus {
 /* ------------------------------------- */
 
 .form-actions {
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 }
 
 .btn {
@@ -324,9 +325,9 @@ input:focus {
 /* ------------------------------------- */
 
 .register-wrapper {
-    margin-top: 20px;
+    margin-top: 0px;
     text-align: center;
-    font-size: 0.9em;
+    font-size: 15px;
 }
 
 .register-wrapper p {
@@ -355,5 +356,25 @@ input:focus {
     margin-top: 5px;
     font-size: 0.75em;
     color: var(--color-text-muted);
+}
+
+/*-------------------------------------------------------------*/
+/* AJUSTE RESPONSIVE: Para pantallas de móvil muy pequeñas */
+/*-----------------------------------------------------------*/
+@media (max-width: 450px) {
+    .auth {
+        /* Deshabilitamos el centrado vertical estricto para que la card empiece arriba */
+        align-items: flex-start; 
+        padding-top: 10px;
+    }
+
+    .auth-card {
+        /* Permitimos que ocupe casi todo el ancho disponible */
+        width: 100%; 
+        min-width: unset; /* Eliminamos la restricción de ancho mínimo */
+        max-width: 100%;
+        margin: 0;
+        padding: 10px;
+    }
 }
 

@@ -14,12 +14,13 @@
     /* Color de fondo que usas para el navegador y contenedores principales */
     --color-background-dark: oklab(28.63% -0.00377 0.00257); /* Gris muy oscuro base */
     
-    /* Variables de color de la tarjeta y otros elementos (Importadas de auth/styles.css) */
+    /* Variables de color de la tarjeta y otros elementos*/
     --color-card-dark: hsl(0, 0%, 12%); 
     --color-input-background: #0d0d0d; 
     --color-text-light: hwb(0 88% 12%);
     --color-text-muted: lab(98.31% -3.36 2.05);
-    --color-accent-teal: hsl(151, 100%, 45%); 
+    --color-accent-teal: hwb(151 0% 10%); /*Color Fondo Botones login Modo Dar*/
+    --color-accent-darker: #008a40;
     --color-accent-darker: #00b35b;
 }
 
@@ -29,14 +30,14 @@
 /* ----------------------------------------------------------------- */
 html.light-mode {
     /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
-    --color-background-dark: #f0f0f0;    /* Fondo de página muy claro */
-    --color-card-dark: #ffffff;          /* Tarjeta blanca */
+    --color-background-dark: hsl(0, 0%, 94%);    /* Fondo de página muy claro */
+    --color-card-dark: hsl(0, 0%, 100%);          /* Tarjeta blanca */
     --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
     
     --color-text-light: #333333;         /* Texto oscuro */
     --color-text-muted: #666666;         /* Texto secundario gris */
 
-    --color-accent-teal: #00a852; 
+    --color-accent-teal: lab(11.86% 0.47 0.17); /*Color Fondo Botones login Modo Calro*/
     --color-accent-darker: #008a40;
 }
 

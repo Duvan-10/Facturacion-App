@@ -48,18 +48,28 @@ html.light-mode {
     background-color: var(--color-background-dark); 
     font-family: Arial, sans-serif;
     color: var(--color-text-light); 
+
+     /* Permitir scroll si la card es más alta que la pantalla (especialmente en móviles) */
+    padding: 20px; 
+    overflow-y: auto; 
+    
+    background-color: var(--color-background);
+
 }
 
 .auth-card {
-    width: 100%;
-    max-width: 400px; 
-    background-color: var(--color-card-dark); 
+/* Anchura flexible, pero limitada: */
+    width: 90%; /* Ocupa el 90% del ancho del viewport */
+    max-width: 400px; /* Pero nunca será más ancha de 400px (buena lectura en desktop) */
+    min-width: 300px; /* Asegura que en pantallas pequeñas, no se vuelva demasiado estrecha */
+
+/* Centrado vertical y horizontal */
     padding: 30px;
-    position: relative; 
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
-    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
 }
+
 
 /* ------------------------------------- */
 /* 2. CABECERA Y LOGO */
@@ -305,4 +315,24 @@ input:focus {
     margin-top: 5px;
     font-size: 0.75em;
     color: var(--color-text-muted);
+}
+
+/*--------------------------------------------------------------*/
+/* AJUSTE RESPONSIVE: Para pantallas de móvil muy pequeñas */
+/*--------------------------------------------------------------*/
+@media (max-width: 450px) {
+    .auth {
+        /* Deshabilitamos el centrado vertical estricto para que la card empiece arriba */
+        align-items: flex-start; 
+        padding-top: 20px;
+    }
+
+    .auth-card {
+        /* Permitimos que ocupe casi todo el ancho disponible */
+        width: 100%; 
+        min-width: unset; /* Eliminamos la restricción de ancho mínimo */
+        max-width: 100%;
+        margin: 0;
+        padding: 20px;
+    }
 }
