@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import { useAuth } from '../../context/AuthContext'; 
+import { User, Settings } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import './styles.css';
 
@@ -16,6 +17,10 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     
+    // ==========================================================
+    // ¡DEFINICIÓN DEL ESTADO 'role'
+    // ==========================================================
+    const [role, setRole] = useState('usuario'); // Valores posibles: 'usuario' o 'administrador'
     const titleText = 'Accede a tu cuenta';
     const buttonText = isLoading ? 'Iniciando...' : 'Iniciar sesión';
 
@@ -42,6 +47,44 @@ function Login() {
                     <p className="subtitle">{titleText}</p>
                     <p className="tagline">Software de Facturación Electrónica</p>
                 </header>
+
+                {/* 3. NUEVO BLOQUE JSX: Selector de Rol */}
+                <div className="role-selector-container" role="radiogroup" aria-label="Seleccionar tipo de cuenta">
+                    <p className="role-selector-title">Ingresar como:</p>
+                    <div className="role-options">
+                        
+                        {/* Opción 1: Usuario */}
+                        <label htmlFor="role-user" className={`role-option ${role === 'usuario' ? 'selected' : ''}`}>
+                            <input 
+                                type="radio" 
+                                id="role-user" 
+                                name="role" 
+                                value="usuario" 
+                                checked={role === 'usuario'}
+                                onChange={() => setRole('usuario')}
+                            />
+                            <User size={20} className="role-icon"/>
+                            <span>Usuario</span>
+                        </label>
+                        
+                        {/* Opción 2: Administrador */}
+                        <label htmlFor="role-admin" className={`role-option ${role === 'administrador' ? 'selected' : ''}`}>
+                            <input 
+                                type="radio" 
+                                id="role-admin" 
+                                name="role" 
+                                value="administrador" 
+                                checked={role === 'administrador'}
+                                onChange={() => setRole('administrador')}
+                            />
+                            <Settings size={20} className="role-icon"/>
+                            <span>Administrador</span>
+                        </label>
+
+                    </div>
+                </div>
+                {/* FIN DEL NUEVO BLOQUE */}
+                
 
                 <form onSubmit={handleSubmit}>
                     
