@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import { useAuth } from '../../context/AuthContext';
 import logo from '../../assets/logo.png'; 
-import './styles1.css';
+import './styles.css';
 
 function Register() {
     // Obtenemos las funciones y estados del Vigilante (AuthContext)
