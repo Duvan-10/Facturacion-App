@@ -14,8 +14,8 @@ function Register() {
     const { handleRegister, isLoading, statusMessage, setStatusMessage } = useAuth();
 
     // Estados locales para almacenar los datos del formulario
-    const [name, setName] = useState('');
     const [identification, setIdentification] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -180,23 +180,6 @@ function Register() {
                 
                 <form onSubmit={handleSubmit}>
                     
-                    {/* 1. Campo de Nombre */}
-                    <div className="field">
-                        <label htmlFor="name">Nombre Completo</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Ej. Juan Pérez"
-                            value={name}
-                            onChange={(e) => handleChange(e, setName)} 
-                            onBlur={handleBlur} // Valida al salir (obligatoriedad y formato)
-                            // ✅ Aplica la clase de error si el campo tiene un error
-                            className={errors.name ? 'input-error' : ''}
-                        />
-                        {/* Muestra el error si existe en el estado 'errors' */}
-                        {errors.name && <p className="help error">{errors.name}</p>}
-                    </div>
 
                     {/* 2. Campo de Identificación */}
                     <div className="field">
@@ -217,6 +200,24 @@ function Register() {
                         <small className="help">Este campo es obligatorio y único.</small>
                         {/* Muestra el error de Carácter/Longitud */}
                         {errors.identification && <p className="help error">{errors.identification}</p>}
+                    </div>
+
+  {/* 1. Campo de Nombre */}
+                    <div className="field">
+                        <label htmlFor="name">Nombre Completo</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Ej. Juan Pérez"
+                            value={name}
+                            onChange={(e) => handleChange(e, setName)} 
+                            onBlur={handleBlur} // Valida al salir (obligatoriedad y formato)
+                            // ✅ Aplica la clase de error si el campo tiene un error
+                            className={errors.name ? 'input-error' : ''}
+                        />
+                        {/* Muestra el error si existe en el estado 'errors' */}
+                        {errors.name && <p className="help error">{errors.name}</p>}
                     </div>
 
                     {/* 3. Campo de Email */}
