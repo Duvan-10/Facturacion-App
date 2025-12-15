@@ -30,8 +30,8 @@
 /* ----------------------------------------------------------------- */
 html.light-mode {
     /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
-    --color-background-dark: hsl(0, 0%, 94%);    /* Fondo de página muy claro */
-    --color-card-dark: hsl(0, 0%, 100%);          /* Tarjeta blanca */
+    --color-background-dark: oklch(92.739% 0.00758 16.529);    /* Fondo de página muy claro */
+    --color-card-dark: lab(77.7% 0 -0.01);          /* Tarjeta blanca */
     --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
     
     --color-text-light: #333333;         /* Texto oscuro */

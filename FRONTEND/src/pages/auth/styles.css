@@ -23,7 +23,14 @@
     /* Color de acento/Botones (Verde/Cian Brillante) */
     --color-accent-teal: hsl(151, 100%, 45%); 
     --color-accent-darker: #00b35b; 
+
+    /* ✅ NUEVO: Colores para errores y alertas */
+    --color-error-text: #e53e3e;        /* Rojo fuerte para mensajes de error */
+    --color-error-background: #9b2c2c;  /* Fondo/Borde oscuro para errores globales */
+    --color-warning-text: #9c5700;
 }
+
+
 
 /* ----------------------------------------------------------------- */
 /* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
@@ -35,7 +42,12 @@ html.light-mode {
     --color-text-light: #1f1f1f; 
     --color-text-muted: #666666; 
     --color-input-hover: #f0f0f0; /* Tono más claro en Light Mode */
+
+    /* ✅ NUEVO: Adaptar colores de error para Light Mode */
+    --color-error-text: #c53030;
+    --color-error-background: #f9d8d8;
 }
+
 /* ------------------------------------- */
 /* 1. ESTRUCTURA Y FONDO GENERAL */
 /* ------------------------------------- */
@@ -69,13 +81,13 @@ html.light-mode {
     margin-bottom: 5px; 
 }
 
- /* AJUSTE LOGO: */
-.brand-logo{
-  
+ /* AJUSTE LOGO: */
+
+.brand-logo { /* <-- Selector necesario */
     width: 80px;
     height: 80px;
     margin-bottom: 5px;
-    filter:drop-shadow(0 0 10px rgba(0,230,118,0.6));
+    filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
 }
 
 /* Título de Marca: PFEPS (h1) - Estilo independiente */
@@ -142,10 +154,6 @@ html.light-mode {
     margin-right: 5px;
 }
 
-/* Nota: Faltan estilos de .role-option, .role-option.selected, etc. 
-   Asegúrate de copiarlos de styles1.css o de tenerlos definidos aquí. */
-
-
 /* ------------------------------------- */
 /* 3. CAMPOS DE FORMULARIO */
 /* ------------------------------------- */
@@ -176,14 +184,22 @@ input[type="text"] {
     border: 1px solid #333333; 
     color: var(--color-text-light);
     border-radius: 4px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Añadido box-shadow */
     box-sizing: border-box;
 }
 
 input:focus {
     border-color: var(--color-accent-teal); 
     outline: none;
+    box-shadow: 0 0 0 1px var(--color-accent-teal);
 }
+
+/* ✅ NUEVO: Estilo para inputs cuando tienen un error (clase 'input-error' en JSX) */
+input.input-error {
+    border-color: var(--color-error-text) !important;
+    box-shadow: 0 0 0 1px var(--color-error-text) !important;
+}
+
 
 .label-row {
     display: flex;
@@ -266,7 +282,11 @@ input:focus {
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, opacity 0.3s;
+    /* ✅ NUEVO: Estilos para alinear icono y texto en el botón */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn.primary {
@@ -279,13 +299,90 @@ input:focus {
 }
 
 .btn:disabled {
-    background-color: var(--color-text-muted);
+    /* ✅ ESTILO DE BOTÓN DESHABILITADO */
+    background-color: #4a5568; /* Gris oscuro para el disabled */
+    color: #a0aec0; /* Texto gris claro */
     cursor: not-allowed;
-    opacity: 0.7;
+    opacity: 1; 
+}
+
+/* ✅ NUEVO: Estilo para el icono de bloqueo dentro del botón deshabilitado */
+.btn.primary:disabled .icon-locked {
+    color: #a0aec0; /* Color del icono, igual al texto deshabilitado */
+    font-size: 1.1em;
+    margin-right: 8px; 
+    /* Animación sutil para llamar la atención sobre el bloqueo */
+    animation: shake 0.5s infinite alternate; 
+}
+
+/* Animación sutil para el candado */
+@keyframes shake {
+    from { transform: translateX(0); }
+    to { transform: translateX(1px); }
 }
 
 /* ------------------------------------- */
-/* 6. MENSAJE DE REGISTRO (Pie de formulario) */
+/* 6. MENSAJES DE ERROR Y ALERTA */
+/* ------------------------------------- */
+
+/* Base para mensajes auxiliares bajo el input */
+.help {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.75em;
+    color: var(--color-text-muted);
+}
+
+/* ✅ MENSAJE DE ERROR BAJO EL INPUT */
+.help.error {
+    color: var(--color-error-text); /* Rojo fuerte */
+    font-weight: 600;
+    display: block !important; 
+    margin-top: 5px; 
+    font-size: 0.8rem; /* Ligeramente más grande para que sea legible */
+    opacity: 1 !important;
+    animation: fade-in 0.3s ease-out; /* Animación sutil */
+}
+
+/* Mensaje de estado Global (ej. Error de servidor) */
+.status {
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+/* ✅ MENSAJE DE ERROR GLOBAL (para statusMessage) */
+.status.error-message {
+    background-color: #ffeaea; /* Fondo rosa claro */
+    color: #9b2c2c; /* Texto rojo oscuro */
+    border: 1px solid #f9d8d8;
+}
+
+/* ✅ MENSAJE DE ADVERTENCIA GLOBAL (opcional, pero añadido por consistencia) */
+.status.warning-message {
+    background-color: #fffbeb; /* Fondo amarillo claro */
+    color: var(--color-warning-text); /* Texto naranja oscuro */
+    border: 1px solid #fef3c7;
+}
+
+/* Animación de entrada para mensajes */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ------------------------------------- */
+/* 7. PIE DE FORMULARIO */
 /* ------------------------------------- */
 
 .register-wrapper {
@@ -306,22 +403,6 @@ input:focus {
     text-decoration: none;
 }
 
-.status {
-    text-align: center;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 4px;
-    color: var(--color-text-light);
-    background-color: rgba(0, 230, 118, 0.1); 
-    border: 1px solid var(--color-accent-teal);
-}
-
-.help {
-    display: block;
-    margin-top: 5px;
-    font-size: 0.75em;
-    color: var(--color-text-muted);
-}
 
 /*--------------------------------------------------------------*/
 /* AJUSTE RESPONSIVE: Para pantallas de móvil muy pequeñas */

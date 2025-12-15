@@ -11,12 +11,13 @@ const API_URL = 'http://localhost:3000/api/auth';
 
 // 2. Componente Proveedor (Provider)
 export const AuthProvider = ({ children }) => {
-    const navigate = useNavigate();
-    // Los estados user y token estarán en null, simulando que nadie ha iniciado sesión
-    const [user, setUser] = useState(null); 
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [isLoading, setIsLoading] = useState(false);
-    const [statusMessage, setStatusMessage] = useState('');
+    const navigate = useNavigate();
+    // Los estados user y token estarán en null, simulando que nadie ha iniciado sesión
+    const [user, setUser] = useState(null); 
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [isLoading, setIsLoading] = useState(false);
+    // ✅ setStatusMessage ES LA FUNCIÓN QUE FALTABA EXPORTAR
+    const [statusMessage, setStatusMessage] = useState(''); 
 
     /* * =======================================================
      * FUNCIÓN NUEVA: GESTIÓN DEL MODO CLARO/OSCURO (THEME)
@@ -55,125 +56,126 @@ export const AuthProvider = ({ children }) => {
      */
 
 
-    // --- Lógica de recuperación de sesión (Se mantiene por si hay token guardado) ---
-    useEffect(() => {
-        if (token) {
-            try {
-                const storedUser = JSON.parse(localStorage.getItem('user'));
-                setUser(storedUser);
-                if (storedUser) {
-                    navigate('/home', { replace: true });
-                }
-            } catch (e) {
-                handleLogout();
-            }
-        } else {
-            setUser(null);
-        }
-    }, [token, navigate]);
+    // --- Lógica de recuperación de sesión (Se mantiene por si hay token guardado) ---
+    useEffect(() => {
+        if (token) {
+            try {
+                const storedUser = JSON.parse(localStorage.getItem('user'));
+                setUser(storedUser);
+                if (storedUser) {
+                    navigate('/home', { replace: true });
+                }
+            } catch (e) {
+                handleLogout();
+            }
+        } else {
+            setUser(null);
+        }
+    }, [token, navigate]);
 
-    // --- FUNCIÓN DE LOGOUT (Se mantiene funcional) ---
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setToken(null);
-        setUser(null);
-        setStatusMessage('Sesión cerrada correctamente.');
-        navigate('/login', { replace: true });
-    };
+    // --- FUNCIÓN DE LOGOUT (Se mantiene funcional) ---
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setToken(null);
+        setUser(null);
+        setStatusMessage('Sesión cerrada correctamente.');
+        navigate('/login', { replace: true });
+    };
 
-    // --- FUNCIÓN DE REGISTRO (MODO SIMULACIÓN) ---
-    const handleRegister = async (userData) => {
-        setIsLoading(true);
-        setStatusMessage('');
+    // --- FUNCIÓN DE REGISTRO (MODO SIMULACIÓN) ---
+    const handleRegister = async (userData) => {
+        setIsLoading(true);
+        setStatusMessage('');
 
-        try {
-            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
-            await new Promise(resolve => setTimeout(resolve, 2000)); 
-            
-            // SIMULACIÓN: Asumimos que el registro es exitoso en el front-end
-            setStatusMessage(`🎉 SIMULACIÓN EXITOSA. Usuario creado, redirigiendo a Login.`);
-            
-            // Navegamos al login después de la simulación de éxito
-            navigate('/login'); 
-            return { success: true };
+        try {
+            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
+            await new Promise(resolve => setTimeout(resolve, 2000)); 
+            
+            // SIMULACIÓN: Asumimos que el registro es exitoso en el front-end
+            setStatusMessage(`🎉 SIMULACIÓN EXITOSA. Usuario creado, redirigiendo a Login.`);
+            
+            // Navegamos al login después de la simulación de éxito
+            navigate('/login'); 
+            return { success: true };
 
-        } catch (error) {
-            // Esto solo se ejecutaría por errores internos de JS, no por errores de red en este modo.
-            setStatusMessage('⚠️ Error interno durante la simulación.');
-            return { success: false, message: 'Error interno.' };
-        } finally {
-            // Importante: deshabilita el estado de carga
-            setIsLoading(false);
-        }
-    };
+        } catch (error) {
+            // Esto solo se ejecutaría por errores internos de JS, no por errores de red en este modo.
+            setStatusMessage('⚠️ Error interno durante la simulación.');
+            return { success: false, message: 'Error interno.' };
+        } finally {
+            // Importante: deshabilita el estado de carga
+            setIsLoading(false);
+        }
+    };
 
-    // --- FUNCIÓN DE LOGIN (MODO SIMULACIÓN) ---
-    const handleLogin = async (email, password) => {
-        setIsLoading(true);
-        setStatusMessage('');
+    // --- FUNCIÓN DE LOGIN (MODO SIMULACIÓN) ---
+    const handleLogin = async (email, password) => {
+        setIsLoading(true);
+        setStatusMessage('');
 
-        try {
-            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // --- LÓGICA DE PRUEBA DE ÉXITO/FALLO EN SIMULACIÓN ---
-            
-            // Ejemplo de credenciales simuladas
-            if (email === 'test@pfeps.com' && password === '123456') {
-                
-                // SIMULACIÓN DE LOGIN EXITOSO: 
-                const mockUser = { id: 1, name: 'Usuario Prueba', email: email };
-                const mockToken = 'mock-jwt-token-12345';
+        try {
+            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // --- LÓGICA DE PRUEBA DE ÉXITO/FALLO EN SIMULACIÓN ---
+            
+            // Ejemplo de credenciales simuladas
+            if (email === 'test@pfeps.com' && password === '123456') {
+                
+                // SIMULACIÓN DE LOGIN EXITOSO: 
+                const mockUser = { id: 1, name: 'Usuario Prueba', email: email };
+                const mockToken = 'mock-jwt-token-12345';
 
-                localStorage.setItem('token', mockToken);
-                localStorage.setItem('user', JSON.stringify(mockUser));
-                setToken(mockToken);
-                setUser(mockUser);
-                setStatusMessage(`🎉 SIMULACIÓN EXITOSA. Redirigiendo a Home...`);
-                // El useEffect de arriba se encargará de la redirección a /home
+                localStorage.setItem('token', mockToken);
+                localStorage.setItem('user', JSON.stringify(mockUser));
+                setToken(mockToken);
+                setUser(mockUser);
+                setStatusMessage(`🎉 SIMULACIÓN EXITOSA. Redirigiendo a Home...`);
+                // El useEffect de arriba se encargará de la redirección a /home
 
-                return { success: true };
+                return { success: true };
 
-            } else {
-                // SIMULACIÓN DE LOGIN FALLIDO:
-                setStatusMessage(`❌ SIMULACIÓN FALLIDA: Credenciales incorrectas.`);
-                return { success: false, message: 'Credenciales incorrectas.' };
-            }
-            
-        } catch (error) {
-            setStatusMessage('⚠️ Error interno durante la simulación.');
-            return { success: false, message: 'Error interno.' };
-        } finally {
-            // Importante: deshabilita el estado de carga
-            setIsLoading(false);
-        }
-    };
+            } else {
+                // SIMULACIÓN DE LOGIN FALLIDO:
+                setStatusMessage(`❌ SIMULACIÓN FALLIDA: Credenciales incorrectas.`);
+                return { success: false, message: 'Credenciales incorrectas.' };
+            }
+            
+        } catch (error) {
+            setStatusMessage('⚠️ Error interno durante la simulación.');
+            return { success: false, message: 'Error interno.' };
+        } finally {
+            // Importante: deshabilita el estado de carga
+            setIsLoading(false);
+        }
+    };
 
 
     // 3. Objeto que se pasa a los componentes que usan el contexto
-    const contextValue = {
-        user,
-        token,
-        isLoading,
-        statusMessage,
-        login: handleLogin,
-        register: handleRegister,
-        logout: handleLogout,
+    const contextValue = {
+        user,
+        token,
+        isLoading,
+        statusMessage,
+        setStatusMessage, // ✅ ¡AÑADIDO! Esto soluciona el error en Register.jsx
+        login: handleLogin,
+        register: handleRegister,
+        logout: handleLogout,
         
         // --- VALORES DEL TEMA A EXPORTAR ---
         isLightMode,
         toggleTheme,
-    };
+    };
 
-    return (
-        <AuthContext.Provider value={contextValue}>
-            {children}
-        </AuthContext.Provider>
-    );
+    return (
+        <AuthContext.Provider value={contextValue}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 // 4. Hook para facilitar el uso del contexto
 export const useAuth = () => {
-    return useContext(AuthContext);
+    return useContext(AuthContext);
 };
