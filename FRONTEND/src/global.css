@@ -17,7 +17,7 @@
     /* Variables de color de la tarjeta y otros elementos*/
     --color-card-dark: hsl(0, 0%, 12%); 
     --color-input-background: #0d0d0d; 
-    --color-text-light: hwb(0 88% 12%);
+    --color-text-light: lab(83.4% 5.91 2.13);
     --color-text-muted: lab(98.31% -3.36 2.05);
     --color-accent-teal: hwb(151 0% 10%); /*Color Fondo Botones login Modo Dar*/
     --color-accent-darker: #008a40;
@@ -34,8 +34,8 @@ html.light-mode {
     --color-card-dark: lab(77.7% 0 -0.01);          /* Tarjeta blanca */
     --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
     
-    --color-text-light: #333333;         /* Texto oscuro */
-    --color-text-muted: #666666;         /* Texto secundario gris */
+    --color-text-light: hsl(0, 4%, 5%);         /* Texto oscuro */
+    --color-text-muted: hwb(0 7% 93%);         /* Texto secundario gris */
 
     --color-accent-teal: lab(11.86% 0.47 0.17); /*Color Fondo Botones login Modo Calro*/
     --color-accent-darker: #008a40;

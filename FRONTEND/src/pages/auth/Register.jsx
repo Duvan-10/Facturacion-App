@@ -48,7 +48,7 @@ function Register() {
             if (!value.trim()) {
                 errorMessage = 'El nombre es obligatorio.';
             } else if (!nameRegex.test(value)) {
-                errorMessage = 'Solo se permiten letras, espacios, guiones y acentos.';
+                errorMessage = 'Solo se permiten letras y espacios.';
             }
         } else if (fieldName === 'identification') {
             if (!value.trim()) {
@@ -91,7 +91,7 @@ function Register() {
         
         // 2. Validación Instantánea (Solo Caracteres Prohibidos)
         if (fieldName === 'name' && value.trim() && !nameRegex.test(value)) {
-            currentErrors.name = 'Solo se permiten letras, espacios, guiones y acentos.';
+            currentErrors.name = 'Solo se permiten letras y espacios.';
         } else if (fieldName === 'identification' && value.trim() && !identificationRegex.test(value)) {
              // Mensaje específico de Carácter Inválido (Ej: el usuario teclea una letra)
             currentErrors.identification = 'Caracter Invalido solo Numeros';
@@ -286,9 +286,6 @@ function Register() {
                     
                     {/* Enlace de Navegación a Login */}
                     <div className="register-wrapper">
-                        <p className="subtitle">
-                            ¿Ya tienes una cuenta? <Link to="/login" className="link">Iniciar sesión</Link>
-                        </p>
                     </div>
 
                     {/* Mensaje de estado (éxito/error) */}
