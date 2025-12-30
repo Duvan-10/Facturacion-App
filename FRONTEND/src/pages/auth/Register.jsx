@@ -31,7 +31,7 @@ function Register() {
 
     // Patrones de expresiones regulares (Regex) para validación
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]+$/; // Letras, espacios, guiones y acentos
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/; // Letras, espacios, guiones y acentos
     const identificationRegex = /^[0-9]+$/; // Solo números
     const forbiddenEmailCharsRegex = /[<>"'();:\\,]/; // Caracteres peligrosos en el correo
     const MAX_DIGITS = 10; // Límite máximo para la cédula

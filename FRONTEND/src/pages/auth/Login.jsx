@@ -35,7 +35,7 @@ function Register() {
 
     // Patrones de expresiones regulares (Regex) para validación
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]+$/; 
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/; 
     const identificationRegex = /^[0-9]+$/; 
     const forbiddenEmailCharsRegex = /[<>"'();:\\,]/; 
     const MAX_DIGITS = 10; 
