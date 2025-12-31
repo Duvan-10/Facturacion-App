@@ -28,8 +28,49 @@ function Login() {
     const statusClassName = `status ${statusMessage.type || ''}`;
 
 
+<<<<<<< HEAD
     const handleSubmit = async (e) => {
         e.preventDefault();
+=======
+    // Patrones de expresiones regulares (Regex) para validación
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/; 
+    const identificationRegex = /^[0-9]+$/; 
+    const forbiddenEmailCharsRegex = /[<>"'();:\\,]/; 
+    const MAX_DIGITS = 10; 
+
+    // ==========================================================
+    // ✅ NUEVO: EFECTO PARA VERIFICAR SI YA EXISTE UN ADMINISTRADOR
+    // ==========================================================
+    useEffect(() => {
+        const checkAdminStatus = async () => {
+            // *** ATENCIÓN: ESTA LÓGICA ES UNA SIMULACIÓN TEMPORAL ***
+            // DEBES REEMPLAZARLA CON UNA LLAMADA HTTP A TU BACKEND:
+            // 
+            // try {
+            //    const response = await fetch('/api/check-admin-exists');
+            //    const data = await response.json();
+            //    const exists = data.isAdminExists;
+            //    setIsAdminRegistered(exists);
+            // } catch (error) {
+            //    console.error("Error al verificar Admin:", error);
+            // } finally {
+            //    setIsCheckingAdmin(false);
+            // }
+
+            // SIMULACIÓN:
+            await new Promise(resolve => setTimeout(resolve, 800)); 
+            const exists = false; // <-- Cambiar a TRUE para simular que ya hay Admin
+
+            setIsAdminRegistered(exists);
+            setIsCheckingAdmin(false);
+            
+            // Si el Admin ya existe, forzamos la vista al rol 'Usuario' 
+            if (exists) {
+                 setSelectedRole('Client');
+            }
+        };
+>>>>>>> 683d8e2857ad81384ac7131f38c8a0e366b9e2c7
         
         // 💡 AJUSTE 1: Limpiamos el mensaje estableciendo el objeto a vacío
         setStatusMessage({ type: null, message: '' }); 
