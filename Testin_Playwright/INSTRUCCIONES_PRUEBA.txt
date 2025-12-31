@@ -1,5 +1,0 @@
-No puedo ejecutar las pruebas directamente.
-
-Por favor, abre una terminal en la carpeta 'Testin_Playwright' y ejecuta el comando:
-
-npm test

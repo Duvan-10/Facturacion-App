@@ -1,3 +1,0 @@
-He creado el archivo de prueba 'Testin_Playwright/tests/welcome.spec.js'.
-
-Asegúrate de que tu servidor de desarrollo esté en funcionamiento y luego ejecuta 'npm test' en la carpeta 'Testin_Playwright' para probarlo.
