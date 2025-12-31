@@ -6,48 +6,6 @@
  * =================================================================
  */
 
-/* ---------------------------------------------------- */
-/* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
-/* ---------------------------------------------------- */
-:root {
-    /* Fondo principal y tarjeta */
-    --color-background-dark: hsl(220, 10%, 8%); 
-    --color-card-dark: hsl(0, 0%, 12%); 
-    --color-input-background: #0d0d0d; 
-    
-    /* Colores primarios (texto, bordes) */
-    --color-text-light: hwb(0 88% 12%); 
-    --color-text-muted: lab(98.31% -3.36 2.05); 
-    --color-input-hover: hwb(0 15% 85%); 
-
-    /* Color de acento/Botones (Verde/Cian Brillante) */
-    --color-accent-teal: hsl(151, 100%, 45%); 
-    --color-accent-darker: #00b35b; 
-
-    /* ✅ NUEVO: Colores para errores y alertas */
-    --color-error-text: #e53e3e;        /* Rojo fuerte para mensajes de error */
-    --color-error-background: #9b2c2c;  /* Fondo/Borde oscuro para errores globales */
-    --color-warning-text: #9c5700;
-}
-
-
-
-/* ----------------------------------------------------------------- */
-/* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
-/* ----------------------------------------------------------------- */
-html.light-mode {
-    --color-background-dark: #f0f0f0;
-    --color-card-dark: #ffffff;
-    --color-input-background: #ffffff; 
-    --color-text-light: #1f1f1f; 
-    --color-text-muted: #666666; 
-    --color-input-hover: #f0f0f0; /* Tono más claro en Light Mode */
-
-    /* ✅ NUEVO: Adaptar colores de error para Light Mode */
-    --color-error-text: #c53030;
-    --color-error-background: #f9d8d8;
-}
-
 /* ------------------------------------- */
 /* 1. ESTRUCTURA Y FONDO GENERAL */
 /* ------------------------------------- */
@@ -421,4 +379,43 @@ input.input-error {
         /* AJUSTE COMPRESIÓN: Reducido a 10px para máxima compactación en móvil */
         padding: 10px;
     }
+}
+
+/* ========================================================== */
+/* ESTILOS BASE PARA TODOS LOS MENSAJES DE ESTADO */
+/* ========================================================== */
+.status {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 0.95em;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid transparent; /* Base de borde transparente */
+}
+
+/* ========================================================== */
+/* ESTILOS CONDICIONALES POR TIPO */
+/* ========================================================== */
+
+/* 1. MENSAJES DE INFORMACIÓN (Ej: Onboarding, Sesión Cerrada) */
+.status.info {
+    color: var(--color-info-text, #00529B); 
+    background-color: var(--color-info-bg, #BDE5F8);
+    border-color: var(--color-info-border, #00529B);
+}
+
+/* 2. MENSAJES DE ÉXITO (Ej: Login exitoso, Registro exitoso) */
+.status.success {
+    color: var(--color-success-text, #4F8A10);
+    background-color: var(--color-success-bg, #DFF2BF);
+    border-color: var(--color-success-border, #4F8A10);
+}
+
+/* 3. MENSAJES DE ERROR (Ej: Credenciales incorrectas, Validación fallida) */
+.status.error {
+    color: var(--color-error-text, #D8000C);
+    background-color: var(--color-error-bg, #FFD2D2);
+    border-color: var(--color-error-border, #D8000C);
+    font-weight: 600; /* Mayor énfasis en errores */
 }

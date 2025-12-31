@@ -3,48 +3,10 @@
  Estilo 2 (para vistas de autenticación: Login y Register)
  * FUNCIÓN: Define la apariencia visual de la tarjeta de autenticación 
  * utilizando un diseño Dark Theme modular y la implementación del Light Mode.
- * =================================================================
- */
-
+ * ===============================================================*/
 /* ---------------------------------------------------- */
 /* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
 /* ---------------------------------------------------- */
-:root {
-    /* Fondo principal y tarjeta */
-    --color-background-dark: hsl(220, 10%, 8%); 
-    --color-card-dark: hsl(0, 0%, 12%); 
-    --color-input-background: #0d0d0d; 
-    
-    /* Colores primarios (texto, bordes) */
-    --color-text-light: hwb(0 88% 12%); 
-    --color-text-muted: lab(98.31% -3.36 2.05); 
-    --color-input-hover: hwb(0 15% 85%);
-
-    /* Color de acento/Botones (Verde/Cian Brillante) */
-    --color-accent-teal: hsl(151, 100%, 45%); 
-    --color-accent-darker: #00b35b; 
-
-    /* Colores para errores y alertas */
-    --color-error-text: #e53e3e;        /* Rojo fuerte para mensajes de error */
-    --color-error-border: #9b2c2c;      /* Borde/Fondo más oscuro para errores globales */
-    --color-warning-text: #9c5700;
-}
-
-/* ----------------------------------------------------------------- */
-/* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
-/* ----------------------------------------------------------------- */
-html.light-mode {
-    --color-background-dark: lab(94.8% 0.01 -0.01 / 0.568);
-    --color-card-dark: #ffffff;
-    --color-input-background: #ffffff; 
-    --color-text-light: #1f1f1f; 
-    --color-text-muted: #666666; 
-    --color-input-hover: #f0f0f0; /* Tono más claro en Light Mode */
-    
-    /* Adaptar colores de error para Light Mode */
-    --color-error-text: #c53030;
-    --color-error-border: #f9d8d8;
-}
 
 /* ------------------------------------- */
 /* 1. ESTRUCTURA Y FONDO GENERAL */
@@ -122,7 +84,7 @@ html.light-mode {
 
 /* Estilo para el título "Ingresar como:" */
 .role-selector-title {
-    color: #e0d3d3 ;
+    color: var(--color-text-light); 
     font-family: 'Inter', sans-serif; 
     font-size: 1.1em; 
     font-weight: 500; 
@@ -461,3 +423,4 @@ input.input-error {
         padding: 10px;
     }
 }
+
