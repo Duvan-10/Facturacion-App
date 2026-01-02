@@ -1,6 +1,6 @@
 // src/pages/auth/Register.jsx
 
-import { useState, useEffect } from 'react'; // ✅ Añadido useEffect
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 import { useAuth } from '../../context/AuthContext';
 import logo from '../../assets/logo.png';

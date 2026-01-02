@@ -30,8 +30,8 @@
 /* ----------------------------------------------------------------- */
 html.light-mode {
     /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
-    --color-background-dark: oklch(92.739% 0.00758 16.529);    /* Fondo de página muy claro */
-    --color-card-dark: lab(77.7% 0 -0.01);          /* Tarjeta blanca */
+    --color-background-dark: hsl(0, 0%, 100%);    /* Fondo de página muy claro */
+    --color-card-dark: oklch(100% 0.00011 271.152);          /* Tarjeta blanca */
     --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
     
     --color-text-light: hsl(0, 4%, 5%);         /* Texto oscuro */
@@ -93,5 +93,5 @@ body, html, #root {
 .theme-button:hover {
     color: var(--color-accent-teal); 
     background-color: var(--color-input-background); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 8px hsl(0, 0%, 9%);
 }

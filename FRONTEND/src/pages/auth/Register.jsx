@@ -42,10 +42,10 @@ function Register() {
     const buttonText = isLoading ? 'Guardando...' : 'Completar Registro';
 
     // Patrones de expresiones regulares (Regex) para validación
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Validar Formato básico de correo electrónico
     const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/; // Letras, espacios, guiones y acentos
     const identificationRegex = /^[0-9]+$/; // Solo números
-    const forbiddenEmailCharsRegex = /[<>"'();:\\,]/; // Caracteres peligrosos en el correo
+    const forbiddenEmailCharsRegex = /[?¡¿*<>"'();:\\,]/; // Caracteres peligrosos en el correo
     const MAX_DIGITS = 10; // Límite máximo para la cédula
 
     // ==========================================================
@@ -96,28 +96,67 @@ function Register() {
         const { name: fieldName, value } = e.target;
         setter(value); 
 
-        let currentErrors = { ...errors }; 
-        
-        // 1. Limpieza de mensajes de éxito/error al empezar a editar
-        if (statusMessage || registrationSuccess) {
-            setStatusMessage('');
-            setRegistrationSuccess(false);
-        }
-        
-        // 2. Validación Instantánea (solo caracteres prohibidos o longitud min.)
-        if (fieldName === 'identification' && value.trim() && !identificationRegex.test(value)) {
-            currentErrors.identification = 'Caracter Inválido (solo números)';
-        } else if (fieldName === 'email' && forbiddenEmailCharsRegex.test(value)) {
-            currentErrors.email = 'El correo contiene caracteres especiales inválidos.';
-        } else if (fieldName === 'password' && value.trim() && value.length > 0 && value.length < 6) {
-            currentErrors.password = 'La contraseña debe tener al menos 6 caracteres.';
-        } else if (fieldName === 'confirmPassword' && value !== password && value.length > 0) {
-             currentErrors.confirmPassword = 'Las contraseñas no coinciden.';
-        } else {
-             delete currentErrors[fieldName];
-        }
+        setErrors(prevErrors => {
+            const newErrors = { ...prevErrors };
+    
+            // Limpieza de mensajes de estado/éxito al empezar a editar
+            if (statusMessage || registrationSuccess) {
+                setStatusMessage('');
+                setRegistrationSuccess(false);
+            }
+            
+            // --- Lógica de validación y limpieza de errores ---
+    
+            if (fieldName === 'name') {
+                // Si el valor es inválido (y no está vacío), muestra el error.
+                if (value && !nameRegex.test(value)) {
+                    newErrors.name = 'Solo se permiten letras y espacios.';
+                } else {
+                    // Si es válido o está vacío, borra cualquier error que tuviera el campo.
+                    delete newErrors.name;
+                }
+            }
+    
+            if (fieldName === 'identification') {
+                if (value && !identificationRegex.test(value)) {
+                    newErrors.identification = 'Caracter Inválido (solo números)';
+                } else {
+                    delete newErrors.identification;
+                }
+            }
+    
+            if (fieldName === 'email') {
+                if (forbiddenEmailCharsRegex.test(value)) {
+                    newErrors.email = 'El correo contiene caracteres especiales inválidos.';
+                } else if (newErrors.email === 'El correo contiene caracteres especiales inválidos.') {
+                    // Borra solo este error específico si se corrige, para no interferir
+                    // con el error de formato que se valida en el blur.
+                    delete newErrors.email;
+                }
+            }
+            
+            // Validación cruzada para la confirmación de contraseña
+            if (fieldName === 'password' || fieldName === 'confirmPassword') {
+                const currentPassword = fieldName === 'password' ? value : password;
+                const currentConfirmPassword = fieldName === 'confirmPassword' ? value : confirmPassword;
+    
+                // Si el campo de confirmación tiene algo y no coincide, muestra el error.
+                if (currentConfirmPassword && currentPassword !== currentConfirmPassword) {
+                    newErrors.confirmPassword = 'Las contraseñas no coinciden.';
+                } else {
+                    // Si coinciden o el campo está vacío, borra el error.
+                    delete newErrors.confirmPassword;
+                }
+            }
+    
+            // Para la contraseña, el error de longitud se manejará en el blur para mejor UX.
+            // Si el usuario borra la contraseña, el error de 'no coinciden' debe desaparecer.
+            if (fieldName === 'password' && !value) {
+                delete newErrors.password;
+            }
 
-        setErrors(currentErrors); 
+            return newErrors;
+        });
     };
 
     // FUNCIÓN BLUR (onBlur)

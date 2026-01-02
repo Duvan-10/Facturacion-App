@@ -81,14 +81,14 @@ html.light-mode {
     margin-bottom: 5px; 
 }
 
- /* AJUSTE LOGO: */
-
+/* AJUSTE LOGO: */
 .brand-logo { /* <-- Selector necesario */
     width: 80px;
     height: 80px;
     margin-bottom: 5px;
     filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
 }
+
 
 /* Título de Marca: PFEPS (h1) - Estilo independiente */
 .auth-header h1{
@@ -386,7 +386,6 @@ input.input-error {
 /* ------------------------------------- */
 
 .register-wrapper {
-    /* AJUSTE COMPRESIÓN: Reducido a 10px */
     margin-top: 10px;
     text-align: center;
     font-size: 0.9em;
@@ -418,7 +417,6 @@ input.input-error {
         min-width: unset; 
         max-width: 100%;
         margin: 0;
-        /* AJUSTE COMPRESIÓN: Reducido a 10px para máxima compactación en móvil */
         padding: 10px;
     }
 }

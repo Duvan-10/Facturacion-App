@@ -158,7 +158,7 @@ export const AuthProvider = ({ children }) => {
         token,
         isLoading,
         statusMessage,
-        setStatusMessage, // ✅ ¡AÑADIDO! Esto soluciona el error en Register.jsx
+        setStatusMessage,
         login: handleLogin,
         register: handleRegister,
         logout: handleLogout,

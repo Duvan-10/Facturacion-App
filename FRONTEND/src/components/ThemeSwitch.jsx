@@ -27,6 +27,8 @@ const ThemeSwitch = () => {
 
                 {/* 1. Si está en Modo CLARO (isLightMode es true) -> Muestra el SOL (Sun) 
                     2. Si está en Modo OSCURO (isLightMode es false) -> Muestra la LUNA (Moon) */}
+
+                    
                 {isLightMode ? <Sun size={24} /> : <Moon size={24} />} {/*Funcion Activa*/}
             </button>
         </div>
