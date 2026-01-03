@@ -1,32 +1,37 @@
 /*
  * =================================================================
- Estilo 2 (para vistas de autenticación: Login y Register)
- * FUNCIÓN: Define la apariencia visual de la tarjeta de autenticación 
- * utilizando un diseño Dark Theme modular y la implementación del Light Mode.
+ * Estilo 2: Vistas de Autenticación (Login/Register)
+ * FUNCIÓN: Define la apariencia visual para las tarjetas de Login y
+ *          Registro, implementando un diseño modular con soporte
+ *          para tema oscuro (por defecto) y claro.
  * =================================================================
  */
+
+/* =================================================================
+ * SECCIÓN 0: PALETA DE COLORES Y VARIABLES GLOBALES
+ * ================================================================= */
 
 /* ---------------------------------------------------- */
 /* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
 /* ---------------------------------------------------- */
 :root {
-    /* Fondo principal y tarjeta */
+    /* Fondo principal y superficie de la tarjeta */
     --color-background-dark: hsl(220, 10%, 8%); 
     --color-card-dark: hsl(0, 0%, 12%); 
     --color-input-background: #0d0d0d; 
     
-    /* Colores primarios (texto, bordes) */
+    /* Colores primarios para texto y elementos UI */
     --color-text-light: hwb(0 88% 12%); 
     --color-text-muted: lab(98.31% -3.36 2.05); 
     --color-input-hover: hwb(0 15% 85%);
 
-    /* Color de acento/Botones (Verde/Cian Brillante) */
-    --color-accent-teal: hsl(151, 100%, 45%); 
-    --color-accent-darker: #00b35b; 
+    /* Color de acento para botones y elementos destacados */
+    --color-accent-teal: lab(40.88% 63.85 40.98); 
+    --color-accent-darker: hsl(152, 42%, 94%); 
 
-    /* Colores para errores y alertas */
-    --color-error-text: #e53e3e;        /* Rojo fuerte para mensajes de error */
-    --color-error-border: #9b2c2c;      /* Borde/Fondo más oscuro para errores globales */
+    /* Colores para estados de error y advertencia */
+    --color-error-text: #e53e3e;
+    --color-error-border: #9b2c2c;
     --color-warning-text: #9c5700;
 }
 
@@ -39,137 +44,126 @@ html.light-mode {
     --color-input-background: #ffffff; 
     --color-text-light: #1f1f1f; 
     --color-text-muted: #666666; 
-    --color-input-hover: #f0f0f0; /* Tono más claro en Light Mode */
+    --color-input-hover: #f0f0f0;
     
-    /* Adaptar colores de error para Light Mode */
+    /* Colores de error adaptados para el modo claro */
     --color-error-text: #c53030;
     --color-error-border: #f9d8d8;
 }
 
-/* ------------------------------------- */
-/* 1. ESTRUCTURA Y FONDO GENERAL */
-/* ------------------------------------- */
+/* =================================================================
+ * SECCIÓN 1: ESTRUCTURA GENERAL Y LAYOUT
+ * ================================================================= */
 
+/* Contenedor principal que ocupa toda la vista y centra el contenido. */
 .auth {
-    min-height: 90vh;
+    min-height: 100vh; /* Corrección para ocupar toda la altura */
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding: 0px; 
+    padding: 20px; /* Añadido padding para seguridad en pantallas pequeñas */
     overflow-y: auto; 
     background-color: var(--color-background-dark); 
 }
 
-
+/* Tarjeta flotante que contiene todos los elementos de autenticación. */
 .auth-card {
-    width: 80%; 
+    width: 100%; /* Ajustado para mejor responsividad */
     max-width: 400px; 
     min-width: 300px; 
-    padding: 15px; 
+    padding: 25px; /* Incrementado para más aire */
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
     background-color: var(--color-card-dark);
 }
 
-/* ------------------------------------- */
-/* 2. CABECERA Y LOGO */
-/* ------------------------------------- */
-/* AJUSTE CABECERA*/
+/* =================================================================
+ * SECCIÓN 2: CABECERA, LOGO Y TÍTULOS
+ * ================================================================= */
+
+/* Contenedor del encabezado (logo, títulos, etc.). */
 .auth-header {
     text-align: center;
-    margin-bottom: 5px; 
+    margin-bottom: 20px; /* Aumentado para separar del contenido */
 }
 
-/* AJUSTE LOGO: */
-.brand-logo{
+/* Estilo del logo de la marca. */
+.brand-logo {
     width: 80px;
     height: 80px;
-    margin-bottom: 0px;
-    filter:drop-shadow(0 0 10px rgba(0,230,118,0.6));
+    margin-bottom: 10px; /* Espacio entre logo y título */
+    filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
 }
 
-/* Título de Marca: PFEPS (h1) - Estilo independiente */
-.auth-header h1{
+/* Título principal de la marca (ej. "PFEPS"). */
+.auth-header h1 {
     font-size: 1.8em; 
     font-weight: 700;
     color: var(--color-accent-teal); 
-    margin-top: 5;
-    margin-bottom: 0px; 
+    margin: 0;
 }
 
-/* Subtítulo: Accede a tu cuenta - Estilo independiente */
-.subtitle{
+/* Subtítulo de la acción (ej. "Iniciar Sesión"). */
+.subtitle {
     font-size: 1em; 
     font-weight: 400; 
-    color: hsl(0, 1%, 38%);
-    margin-top: 0;
-    margin-bottom: 10px; 
+    color: hsl(0, 1%, 50%); /* Ligeramente más visible */
+    margin: 5px 0 10px;
 }
 
-/* Tagline: Software de Facturación Electrónica - Estilo independiente */
-.tagline{
+/* Lema o descripción de la aplicación. */
+.tagline {
     font-size: 1.1em;
     font-weight: 600; 
     color: var(--color-text-light); 
-    margin-top: 0;
-    margin-bottom: 15px; 
-    
+    margin: 0 0 15px; 
 }
 
-/* ------------------------------------- */
-/* 2.1. SELECTOR DE ROL */
-/* ------------------------------------- */
+/* =================================================================
+ * SECCIÓN 2.1: SELECTOR DE ROL
+ * ================================================================= */
 
-/* Estilo para el título "Ingresar como:" */
-.role-selector-title {
-    color: #e0d3d3 ;
-    font-family: 'Inter', sans-serif; 
-    font-size: 1.1em; 
-    font-weight: 500; 
-    margin-top: 5;
-    margin-bottom: 5%; 
-    text-align: center;
-}
-
+/* Contenedor para el título y los botones de selección de rol. */
 .role-selector-container {
-/* Define la apariencia y el espaciado vertical del contenedor de "Ingresar como:" y botones de rol */
-    background-color: transparent; 
-    padding: 0; 
-    border-radius: 0; 
-    border: none; 
-    margin-top: 0;
-    margin-bottom: 15px; 
+    margin-bottom: 20px; 
     text-align: center;
 }
 
+/* Título sobre los botones de rol (ej. "Iniciar sesión como:"). */
+.role-selector-title {
+    color: var(--color-text-muted);
+    font-size: 0.9em; 
+    font-weight: 500; 
+    margin: 0 0 10px; 
+    text-align: center;
+}
+
+/* Contenedor flex para alinear los botones de rol. */
 .role-options {
     display: flex; 
-    justify-content: space-between; 
-    gap: 20px; 
+    justify-content: center; /* Centra los botones */
+    gap: 15px; 
 }
 
-/* Estilo base de cada opción de rol (el botón) */
+/* Estilo base para cada botón de selección de rol (Administrador, Usuario). */
 .role-option {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1; 
+    flex-grow: 1; /* Permite que los botones crezcan por igual */
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 4px;
-    border: 1px solid var(--color-input-background);
-    background-color: var(--color-input-background); 
+    border: 1px solid #333;
+    background-color: transparent; 
     color: var(--color-text-light);
     transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-/* Efecto hover */
+/* Efecto al pasar el cursor sobre un botón de rol. */
 .role-option:hover {
     background-color: var(--color-input-hover); 
     border-color: var(--color-text-muted);
 }
 
-/* Estilo para la opción SELECCIONADA */
+/* Estilo que resalta el botón de rol actualmente seleccionado. */
 .role-option.selected {
     border-color: var(--color-accent-teal); 
     background-color: var(--color-accent-teal); 
@@ -178,121 +172,89 @@ html.light-mode {
     box-shadow: 0 0 10px rgba(0, 230, 118, 0.4); 
 }
 
-/* Iconos dentro de la opción */
-.role-icon {
-    margin-right: 8px;
-}
-
-/* Ocultar el radio button nativo. Usaremos el estilo del contenedor como el botón. */
+/* Oculta el input de radio nativo, ya que se estiliza el contenedor. */
 .role-option input[type="radio"] {
     display: none; 
 }
 
+/* =================================================================
+ * SECCIÓN 3: CAMPOS DE FORMULARIO (INPUTS)
+ * ================================================================= */
 
-
-
-/* ------------------------------------- */
-/* 3. CAMPOS DE FORMULARIO */
-/* ------------------------------------- */
-
-form {
-    text-align: left;
-}
-
+/* Contenedor para cada grupo de label + input. */
 .field {
-    /* AJUSTE COMPRESIÓN: Reducido a 12px */
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Espaciado entre campos */
 }
 
+/* Etiqueta (label) de cada campo. */
 .field label {
     display: block;
-    margin-bottom: 10px; 
+    margin-bottom: 8px; 
     font-weight: bold;
     color: var(--color-text-light);
     font-size: 0.9em;
-    margin-bottom: 0px; 
-
 }
 
+/* Estilo base para los campos de entrada de texto, email y contraseña. */
 input[type="email"],
 input[type="password"],
 input[type="text"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Más padding para mejor tactilidad */
     background-color: var(--color-input-background); 
-    border: 1px solid #333333; 
+    border: 1px solid #333; 
     color: var(--color-text-light);
     border-radius: 4px;
-    transition: border-color 0.3s, box-shadow 0.3s; /* Añadido box-shadow para el error */
+    transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
-    
 }
 
+/* Efecto de resaltado cuando un campo está en foco. */
 input:focus {
     border-color: var(--color-accent-teal); 
     outline: none;
     box-shadow: 0 0 0 1px var(--color-accent-teal);
 }
 
-/* ✅ NUEVO: Estilo para inputs cuando tienen un error (clase 'input-error' en JSX) */
+/* Estilo para un campo de entrada que tiene un error de validación. */
 input.input-error {
     border-color: var(--color-error-text) !important;
     box-shadow: 0 0 0 1px var(--color-error-text) !important;
 }
 
+/* Contenedor para alinear la etiqueta y el botón "Mostrar" en la misma fila. */
 .label-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* Espacio entre la fila y el input */
 }
 
+/* =================================================================
+ * SECCIÓN 4: ENLACES Y BOTONES DE TEXTO
+ * ================================================================= */
+
+/* Estilo genérico para botones que deben parecer un enlace de texto. */
 .link-button {
     background: none;
     border: none;
-    color: var(--color-accent-teal);
-    cursor: pointer;
-    font-size: 0.85em;
     padding: 0;
-}
-
-/* ------------------------------------- */
-/* 4. FILA DE ACCIONES Y LINKS */
-/* ------------------------------------- */
-
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* AJUSTE COMPRESIÓN: Reducido a 10px */
-    margin-bottom: 10px;
-    font-size: 0.85em;
-}
-
-.checkbox {
-    display: flex;
-    align-items: center;
+    margin: 0;
+    color: var(--color-accent-teal);
+    font-size: 0.9.8em;
+    font-family: inherit;
     cursor: pointer;
-    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-.checkbox input[type="checkbox"] {
-    margin-right: 8px;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border: 1px solid var(--color-text-muted);
-    background-color: var(--color-input-background);
-    border-radius: 2px;
-    position: relative;
-    cursor: pointer;
+/* Efecto al pasar el cursor sobre un link-button. */
+.link-button:hover {
+    color: var(--color-accent-darker);
+    text-decoration: underline;
 }
 
-.checkbox input[type="checkbox"]:checked {
-    background-color: var(--color-accent-teal);
-    border-color: var(--color-accent-teal);
-}
-
+/* Estilo genérico para enlaces de texto (etiqueta <a>). */
 .link {
     color: var(--color-accent-teal);
     text-decoration: none;
@@ -304,15 +266,16 @@ input.input-error {
     text-decoration: underline;
 }
 
-/* ------------------------------------- */
-/* 5. BOTONES Y ACCIONES */
-/* ------------------------------------- */
+/* =================================================================
+ * SECCIÓN 5: BOTÓN DE ACCIÓN PRINCIPAL
+ * ================================================================= */
 
+/* Contenedor para el botón de envío principal. */
 .form-actions {
-    /* AJUSTE COMPRESIÓN: Reducido a 10px */
-    margin-bottom: 10px;
+    margin-top: 20px; /* Espacio extra sobre el botón */
 }
 
+/* Estilo base para el botón de acción principal. */
 .btn {
     width: 100%;
     padding: 12px;
@@ -322,113 +285,103 @@ input.input-error {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, opacity 0.3s;
-    /* ✅ NUEVO: Estilos para alinear icono y texto en el botón */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Modificador para el botón primario (usa el color de acento). */
 .btn.primary {
     background-color: var(--color-accent-teal);
     color: var(--color-background-dark); 
 }
 
+/* Efecto hover para el botón primario (si no está deshabilitado). */
 .btn.primary:hover:not(:disabled) {
     background-color: var(--color-accent-darker);
 }
 
+/* Estilo para cualquier botón en estado deshabilitado. */
 .btn:disabled {
-    /* ✅ ESTILO DE BOTÓN DESHABILITADO */
-    background-color: #4a5568; /* Gris oscuro para el disabled */
-    color: #a0aec0; /* Texto gris claro */
-    cursor: not-allowed;/*Funcion de Boton click cambia a prohibido
-    opacity: 1; /* Quitamos la opacidad para que el color sea claro */
+    background-color: #4a5568;
+    color: #a0aec0;
+    cursor: not-allowed;
+    opacity: 1;
 }
 
-/* ✅ NUEVO: Estilo para el icono de bloqueo dentro del botón deshabilitado */
+/* Estilo para el ícono de candado dentro de un botón deshabilitado. */
 .btn.primary:disabled .icon-locked {
-    color: #a0aec0; /* Color del icono, igual al texto deshabilitado */
+    color: #a0aec0;
     font-size: 1.1em;
     margin-right: 8px; 
-    /* Animación sutil para llamar la atención sobre el bloqueo */
     animation: shake 0.5s infinite alternate; 
 }
 
+/* Animación sutil de "temblor" para el ícono de candado. */
 @keyframes shake {
     from { transform: translateX(0); }
     to { transform: translateX(1px); }
 }
 
+/* =================================================================
+ * SECCIÓN 6: MENSAJES DE AYUDA, ERROR Y ESTADO
+ * ================================================================= */
 
-/* ------------------------------------- */
-/* 6. MENSAJES DE ERROR Y ALERTA */
-/* ------------------------------------- */
-
-/* Base para mensajes auxiliares bajo el input */
+/* Texto de ayuda general debajo de un campo de formulario. */
 .help {
     display: block;
-    margin-top: 5px;
-    font-size: 0.75em;
+    margin-top: 6px;
+    font-size: 0.8em;
     color: var(--color-text-muted);
 }
 
-/* ✅ MENSAJE DE ERROR BAJO EL INPUT */
+/* Modificador para el texto de ayuda cuando es un mensaje de error. */
 .help.error {
-    color: var(--color-error-text); /* Rojo fuerte */
+    color: var(--color-error-text);
     font-weight: 600;
-    display: block !important; 
-    margin-top: 5px; 
-    font-size: 0.8rem; /* Ligeramente más grande para que sea legible */
-    opacity: 1 !important;
-    animation: fade-in 0.3s ease-out; /* Animación sutil */
 }
 
-/* Mensaje de estado Global (ej. Error de servidor) */
+/* Contenedor para mensajes de estado globales (ej. "Usuario no encontrado"). */
 .status {
     text-align: center;
     padding: 10px 15px;
     margin-top: 15px;
+    margin-bottom: 15px;
     border-radius: 4px;
     font-size: 0.9em;
     font-weight: 500;
+    animation: fade-in 0.3s ease-out;
 }
 
-/* ✅ MENSAJE DE ERROR GLOBAL (para statusMessage) */
+/* Modificador para el mensaje de estado cuando es un error. */
 .status.error-message {
-    background-color: #ffeaea; /* Fondo rosa claro */
-    color: #9b2c2c; /* Texto rojo oscuro */
+    background-color: #ffeaea;
+    color: #9b2c2c;
     border: 1px solid #f9d8d8;
 }
 
-/* Mensaje de Advertencia Global (opcional) */
+/* Modificador para el mensaje de estado cuando es una advertencia. */
 .status.warning-message {
-    background-color: #fffbeb; /* Fondo amarillo claro */
-    color: var(--color-warning-text); /* Texto naranja oscuro */
+    background-color: #fffbeb;
+    color: var(--color-warning-text);
     border: 1px solid #fef3c7;
 }
 
-/* Animación de entrada para mensajes */
+/* Animación de aparición para los mensajes. */
 @keyframes fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(-3px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* =================================================================
+ * SECCIÓN 7: PIE DE FORMULARIO (ENLACE A REGISTRO)
+ * ================================================================= */
 
-/* ------------------------------------- */
-/* 7. PIE DE FORMULARIO */
-/* ------------------------------------- */
-
+/* Contenedor para el texto y enlace de "No tienes cuenta?". */
 .register-wrapper {
-    /* AJUSTE COMPRESIIÓN: Reducido a 0px */
-    margin-top: 0px; 
+    margin-top: 20px; 
     text-align: center;
-    font-size: 15px;
+    font-size: 0.9em;
 }
 
 .register-wrapper p {
@@ -436,28 +389,90 @@ input.input-error {
     color: var(--color-text-muted);
 }
 
+/* Enlace de texto para ir a la página de registro. */
 .register-link {
     color: var(--color-accent-teal);
     font-weight: bold;
     text-decoration: none;
 }
 
+/* =================================================================
+ * SECCIÓN 8: FILA DE OPCIONES ADICIONALES (RECORDARME, ETC.)
+ * ================================================================= */
 
-/*-------------------------------------------------------------*/
-/* AJUSTE RESPONSIVE: Para pantallas de móvil muy pequeñas */
-/*-----------------------------------------------------------*/
+/* Contenedor para la fila 'Recordarme' y 'Recuperar contraseña'. */
+.Options-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 0.85em;
+}
+
+/* Contenedor para el checkbox 'Recordarme' y su etiqueta. */
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-text-light);
+}
+
+/* Estilo del input checkbox personalizado. */
+.remember-me input[type="checkbox"] {
+    margin-right: 8px;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--color-text-muted);
+    background-color: var(--color-input-background);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    display: grid;
+    place-content: center;
+}
+
+/* Pseudo-elemento que crea la marca de verificación (chulito). */
+.remember-me input[type="checkbox"]::after {
+    content: '';
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--color-background-dark);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+/* Estilo del checkbox cuando está marcado (cambia el fondo). */
+.remember-me input[type="checkbox"]:checked {
+    background-color: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+}
+
+/* Estilo del pseudo-elemento (chulito) cuando el checkbox está marcado. */
+.remember-me input[type="checkbox"]:checked::after {
+    transform: scale(1.2);
+}
+
+/* =================================================================
+ * SECCIÓN 9: AJUSTES RESPONSIVE
+ * ================================================================= */
+
 @media (max-width: 450px) {
+    /* Ajusta el contenedor principal en pantallas muy pequeñas. */
     .auth {
         align-items: flex-start; 
-        padding-top: 10px;
+        padding: 10px;
     }
 
+    /* La tarjeta ocupa todo el ancho en pantallas pequeñas. */
     .auth-card {
         width: 100%; 
         min-width: unset; 
         max-width: 100%;
         margin: 0;
-        /* AJUSTE COMPRESIÓN: Padding ajustado a 10px para máxima compactación en móvil */
-        padding: 10px;
+        padding: 15px; /* Padding reducido para móviles */
     }
 }
