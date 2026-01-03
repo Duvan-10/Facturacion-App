@@ -10,15 +10,6 @@ const API_URL = 'http://localhost:3000/api/auth';
 
 // 2. Componente Proveedor (Provider)
 export const AuthProvider = ({ children }) => {
-<<<<<<< HEAD
-    const navigate = useNavigate();
-    // Los estados user y token estarán en null, simulando que nadie ha iniciado sesión
-    const [user, setUser] = useState(null); 
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [isLoading, setIsLoading] = useState(false);
-    const [statusMessage, setStatusMessage] = useState(''); 
-
-=======
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -209,135 +200,6 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
->>>>>>> 1b66cbc697065a1f44d502d1723c8037109bd87f
-
-<<<<<<< HEAD
-    // 3. Objeto que se pasa a los componentes que usan el contexto
-    // 💡 CAMBIO: setStatusMessage ahora necesita ser compatible con el nuevo tipo de estado
-    const contextValue = {
-        user,
-        token,
-        isLoading,
-        statusMessage, // Es el objeto { type, message }
-        setStatusMessage, // Para limpiar o cambiar el mensaje desde los componentes
-        login: handleLogin,
-        register: handleRegister,
-        logout: handleLogout,
-        
-        // VALORES DEL TEMA
-        isLightMode,
-        toggleTheme,
-    };
-
-    return (
-        <AuthContext.Provider value={contextValue}>
-            {children}
-        </AuthContext.Provider>
-    );
-=======
-    // --- Lógica de recuperación de sesión (Se mantiene por si hay token guardado) ---
-    useEffect(() => {
-        if (token) {
-            try {
-                const storedUser = JSON.parse(localStorage.getItem('user'));
-                setUser(storedUser);
-                // if (storedUser) {
-                //     navigate('/home', { replace: true });
-                // }
-            } catch (e) {
-                handleLogout();
-            }
-        } else {
-            setUser(null);
-        }
-    }, [token, navigate]);
-
-    // --- FUNCIÓN DE LOGOUT (Se mantiene funcional) ---
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setToken(null);
-        setUser(null);
-        setStatusMessage('Sesión cerrada correctamente.');
-        navigate('/login', { replace: true });
-    };
-
-    // --- FUNCIÓN DE REGISTRO (MODO SIMULACIÓN) ---
-    const handleRegister = async (userData) => {
-        setIsLoading(true);
-        setStatusMessage('');
-
-        // 1. Limpiamos cualquier sesión previa para evitar que el Login nos redirija a Home
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setToken(null);
-        setUser(null);
-
-        try {
-            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
-            await new Promise(resolve => setTimeout(resolve, 2000)); 
-
-            // Puedes inspeccionar en consola lo que se intentaría registrar
-            console.log('Simulación registro usuario:', userData);
-            
-            // SIMULACIÓN: Asumimos que el registro es exitoso en el front-end
-            setStatusMessage('🎉 SIMULACIÓN EXITOSA. Usuario creado, redirigiendo a Login.');
-            
-            // Eliminamos navigate() aquí para que Register.jsx maneje la redirección tras mostrar el mensaje
-            return true;
-
-        } catch (error) {
-            // Esto solo se ejecutaría por errores internos de JS, no por errores de red en este modo.
-            console.error('Error interno durante la simulación de registro:', error);
-            setStatusMessage('⚠️ Error interno durante la simulación.');
-            return false;
-        } finally {
-            // Importante: deshabilita el estado de carga
-            setIsLoading(false);
-        }
-    };
-
-    // --- FUNCIÓN DE LOGIN (MODO SIMULACIÓN) ---
-    const handleLogin = async ({ email, password }) => {
-        setIsLoading(true);
-        setStatusMessage('');
-
-        try {
-            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Ejemplo de credenciales simuladas
-            if (email === 'test@pfeps.com' && password === '123456') {
-                
-                // SIMULACIÓN DE LOGIN EXITOSO: 
-                const mockUser = { id: 1, name: 'Usuario Prueba', email };
-                const mockToken = 'mock-jwt-token-12345';
-
-                localStorage.setItem('token', mockToken);
-                localStorage.setItem('user', JSON.stringify(mockUser));
-                setToken(mockToken);
-                setUser(mockUser);
-                setStatusMessage('🎉 SIMULACIÓN EXITOSA. Redirigiendo a Home...');
-
-                return true;
-
-            } else {
-                // SIMULACIÓN DE LOGIN FALLIDO:
-                setStatusMessage('❌ SIMULACIÓN FALLIDA: Credenciales incorrectas.');
-                return false;
-            }
-            
-        } catch (error) {
-            console.error('Error interno durante la simulación de login:', error);
-            setStatusMessage('⚠️ Error interno durante la simulación.');
-            return false;
-        } finally {
-            // Importante: deshabilita el estado de carga
-            setIsLoading(false);
-        }
-    };
-
-
     const isAuthenticated = !!user;
 
     // 3. Objeto que se pasa a los componentes que usan el contexto
@@ -358,19 +220,9 @@ export const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider>
     );
->>>>>>> login
 };
 
 // 4. Hook para facilitar el uso del contexto
 export const useAuth = () => {
-<<<<<<< HEAD
-    const context = useContext(AuthContext);
-    if (context === undefined) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-    return context;
-};
-=======
     return useContext(AuthContext);
 };
->>>>>>> login

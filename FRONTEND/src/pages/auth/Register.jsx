@@ -32,36 +32,21 @@ function Register() {
     
     // Limpia el mensaje de estado al cargar el componente
     useEffect(() => {
-        if (setStatusMessage) setStatusMessage('');
+        if (setStatusMessage) setStatusMessage({ type: null, message: '' });
     }, [setStatusMessage]);
 
     // ========================================================
     // DECLARACIÓN DE VARIABLES Y REGEX
     // ========================================================
-<<<<<<< HEAD
     const titleText = 'Crear una nueva cuenta de Administrador';
     const buttonText = isLoading ? 'Guardando...' : 'Completar Registro';
 
     // Patrones de expresiones regulares (Regex) para validación
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-<<<<<<< HEAD
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]+$/; 
-    const identificationRegex = /^[0-9]+$/; 
-    const forbiddenEmailCharsRegex = /[<>"'();:\\,]/; 
-    const MAX_DIGITS = 10; 
-=======
-=======
-    const titleText = 'Crear cuenta Administrador';
-    const buttonText = isLoading ? 'Guardando...' : 'Completar Registro';
-
-    // Patrones de expresiones regulares (Regex) para validación
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Validar Formato básico de correo electrónico
->>>>>>> login
     const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/; // Letras, espacios, guiones y acentos
     const identificationRegex = /^[0-9]+$/; // Solo números
-    const forbiddenEmailCharsRegex = /[?¡¿*<>"'();:\\,]/; // Caracteres peligrosos en el correo
+    const forbiddenEmailCharsRegex = /[<>"'();:\\,]/; // Caracteres peligrosos en el correo
     const MAX_DIGITS = 10; // Límite máximo para la cédula
->>>>>>> 683d8e2857ad81384ac7131f38c8a0e366b9e2c7
 
     // ==========================================================
     // FUNCIÓN DE VALIDACIÓN COMPLETA POR CAMPO
@@ -111,36 +96,12 @@ function Register() {
         const { name: fieldName, value } = e.target;
         setter(value); 
 
-<<<<<<< HEAD
-        let currentErrors = { ...errors }; 
-        
-        // 1. Limpieza de mensajes de éxito/error al empezar a editar
-        if (statusMessage || registrationSuccess) {
-            setStatusMessage('');
-            setRegistrationSuccess(false);
-        }
-        
-        // 2. Validación Instantánea (solo caracteres prohibidos o longitud min.)
-        if (fieldName === 'identification' && value.trim() && !identificationRegex.test(value)) {
-            currentErrors.identification = 'Caracter Inválido (solo números)';
-        } else if (fieldName === 'email' && forbiddenEmailCharsRegex.test(value)) {
-            currentErrors.email = 'El correo contiene caracteres especiales inválidos.';
-        } else if (fieldName === 'password' && value.trim() && value.length > 0 && value.length < 6) {
-            currentErrors.password = 'La contraseña debe tener al menos 6 caracteres.';
-        } else if (fieldName === 'confirmPassword' && value !== password && value.length > 0) {
-             currentErrors.confirmPassword = 'Las contraseñas no coinciden.';
-        } else {
-             delete currentErrors[fieldName];
-        }
-
-        setErrors(currentErrors); 
-=======
         setErrors(prevErrors => {
             const newErrors = { ...prevErrors };
     
             // Limpieza de mensajes de estado/éxito al empezar a editar
-            if (statusMessage || registrationSuccess) {
-                setStatusMessage('');
+            if (statusMessage.message || registrationSuccess) {
+                setStatusMessage({ type: null, message: '' });
                 setRegistrationSuccess(false);
             }
             
@@ -196,17 +157,11 @@ function Register() {
 
             return newErrors;
         });
->>>>>>> login
     };
 
     // FUNCIÓN BLUR (onBlur)
     const handleBlur = (e) => {
         const { name: fieldName, value } = e.target;
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> login
         const errorMessage = validateField(fieldName, value);
         
         setErrors(prevErrors => {
@@ -233,7 +188,7 @@ function Register() {
     // ==========================================================
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (setStatusMessage) setStatusMessage('');
+        if (setStatusMessage) setStatusMessage({ type: null, message: '' });
         
         // Validación final de todos los campos
         let finalErrors = {};
@@ -250,7 +205,7 @@ function Register() {
         const isValid = Object.keys(finalErrors).length === 0;
 
         if (!isValid) { 
-            setStatusMessage('Por favor, corrige los errores en el formulario para continuar.');
+            setStatusMessage({ type: 'error', message: 'Por favor, corrige los errores en el formulario para continuar.' });
             return;
         }
         
@@ -272,7 +227,7 @@ function Register() {
                 // 3. REGISTRO EXITOSO: Mostrar mensaje de éxito y preparar redirección
                 setRegistrationSuccess(true);
                 // El statusMessage ya es establecido por AuthContext con el mensaje de éxito del registro
-                setStatusMessage('✅ ¡Registro Exitoso! Serás redirigido para Iniciar Sesión.');
+                setStatusMessage({ type: 'success', message: '✅ ¡Registro Exitoso! Serás redirigido para Iniciar Sesión.' });
                 
                 // 4. REDIRECCIÓN A LOGIN después de 2 segundos
                 setTimeout(() => {
@@ -286,7 +241,7 @@ function Register() {
             }
         } catch (error) {
             console.error("Fallo inesperado durante el registro:", error);
-            setStatusMessage('Ocurrió un error inesperado al intentar registrar. Revisa la consola para detalles.');
+            setStatusMessage({ type: 'error', message: 'Ocurrió un error inesperado al intentar registrar. Revisa la consola para detalles.' });
             setRegistrationSuccess(false);
         }
     };
@@ -305,13 +260,13 @@ function Register() {
                 </header>
                 
                 {/* MENSAJES DE ESTADO (Éxito / Error) */}
-                {statusMessage && (
+                {statusMessage.message && (
                     <p 
                         className={`status ${registrationSuccess ? 'success-message' : 'error-message'}`} 
                         role="status" 
                         aria-live="polite"
                     >
-                        {statusMessage}
+                        {statusMessage.message}
                     </p>
                 )}
                 
@@ -331,11 +286,7 @@ function Register() {
                             onBlur={handleBlur} 
                             className={errors.identification ? 'input-error' : ''}
                         />
-<<<<<<< HEAD
                         <small className="help">Este campo es obligatorio y único.</small>
-=======
-                        
->>>>>>> login
                         {errors.identification && <p className="help error">{errors.identification}</p>}
                     </div>
 
