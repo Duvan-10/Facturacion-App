@@ -38,7 +38,7 @@ function Register() {
     // ========================================================
     // DECLARACIÓN DE VARIABLES Y REGEX
     // ========================================================
-    const titleText = 'Crear una nueva cuenta de Administrador';
+    const titleText = 'Crear cuenta Administrador';
     const buttonText = isLoading ? 'Guardando...' : 'Completar Registro';
 
     // Patrones de expresiones regulares (Regex) para validación
@@ -258,7 +258,6 @@ function Register() {
                     <img src={logo} alt="PFEPS Logo" className="brand-logo" /> 
                     <h1 id="auth-title">PFEPS</h1>
                     <p className="subtitle">{titleText}</p> 
-                    <p className="tagline">Software de Facturación Electrónica</p>
                 </header>
                 
                 {/* MENSAJES DE ESTADO (Éxito / Error) */}
