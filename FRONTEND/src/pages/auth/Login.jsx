@@ -13,7 +13,6 @@ function Login() {
     const navigate = useNavigate();
     const { login, isLoading, statusMessage, setStatusMessage, isAuthenticated } = useAuth();
 
-    // Estados para los campos del formulario y UI
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
@@ -35,13 +34,20 @@ function Login() {
     // Efecto para limpiar el mensaje de estado al cargar o desmontar el componente
     useEffect(() => {
         return () => {
-            if (setStatusMessage) setStatusMessage('');
+            if (setStatusMessage) setStatusMessage({ type: null, message: '' });
         };
     }, [setStatusMessage]);
 
     // ========================================================
     // 3. MANEJADORES Y LÓGICA DE VALIDACIÓN
     // ========================================================
+
+    // Helper para determinar el color del mensaje según el tipo
+    const getStatusClass = (type) => {
+        if (type === 'error') return 'error-message';
+        if (type === 'success') return 'success-message';
+        return 'info-message'; // Para mensajes informativos (ej. onboarding)
+    };
 
     // Función para validar los campos antes del envío
     const validateForm = () => {
@@ -59,10 +65,10 @@ function Login() {
     // Manejador del envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (setStatusMessage) setStatusMessage('');
+        if (setStatusMessage) setStatusMessage({ type: null, message: '' });
 
         if (!validateForm()) {
-            setStatusMessage('Por favor, completa todos los campos.');
+            setStatusMessage({ type: 'error', message: 'Por favor, completa todos los campos.' });
             return;
         }
 
@@ -76,7 +82,7 @@ function Login() {
         } catch (error) {
             console.error("Fallo inesperado durante el login:", error);
             if (setStatusMessage) {
-                setStatusMessage('Ocurrió un error inesperado al iniciar sesión.');
+                setStatusMessage({ type: 'error', message: 'Ocurrió un error inesperado al iniciar sesión.' });
             }
         }
     };
@@ -95,9 +101,9 @@ function Login() {
                 </header>
 
                 {/* Mensajes de estado (errores/éxito) */}
-                {statusMessage && (
-                    <p className="status error-message" role="status" aria-live="polite">
-                        {statusMessage}
+                {statusMessage.message && (
+                    <p className={`status ${getStatusClass(statusMessage.type)}`} role="status" aria-live="polite">
+                        {statusMessage.message}
                     </p>
                 )}
 
