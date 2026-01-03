@@ -52,9 +52,6 @@ function Welcome() { // ✅ Renombrado el componente a WelcomePage (nombre del a
                         </button>
                     </div>
 
-               {/* ENLACE A LOGIN: Usa la clase .onboarding-link-wrapper */}
-                    <div className="onboarding-link-wrapper">
-                    </div>
                 </div>
 
        

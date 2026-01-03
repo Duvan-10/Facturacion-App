@@ -7,13 +7,18 @@ import Register from './pages/auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
 
 function App() {
+<<<<<<< HEAD
     const { user } = useAuth(); // Obtenemos el estado de la sesión
+=======
+    const { user } = useAuth(); // Obtenemos el estado de la sesión (por si lo usas luego)
+>>>>>>> login
 
     return (
         <>
             <ThemeSwitch /> 
 
             <Routes>
+<<<<<<< HEAD
                 
                 {/* 1. RUTA RAÍZ: Redirigimos la raíz a /login o a /welcome.
                    La lógica del useEffect en AuthContext tomará el control.
@@ -53,6 +58,33 @@ function App() {
                     </div>
                 } />
 
+=======
+                {/* PÁGINA DE BIENVENIDA (ruta inicial) */}
+                <Route 
+                    path="/" 
+                    element={<WelcomePage />} 
+                />
+
+                {/* RUTAS DE AUTENTICACIÓN (Públicas) */}
+                <Route path="/login" element={<Login />} />
+                
+                {/* RUTA DE REGISTRO */}
+                <Route path="/register" element={<Register />} />
+                
+                {/* RUTA TEMPORAL HOME */}
+                <Route 
+                    path="/home" 
+                    element={
+                        <div style={{ padding: '50px', color: 'var(--color-text-light)' }}>
+                            <h2>🎉 ÉXITO: REDIRECCIÓN A HOME (Temporal)</h2>
+                            <p>El switch de tema debe estar visible en la esquina superior derecha.</p>
+                        </div>
+                    } 
+                />
+
+                {/* CUALQUIER OTRA RUTA → REDIRIGE A BIENVENIDA */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+>>>>>>> login
             </Routes>
         </>
     );
