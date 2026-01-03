@@ -325,13 +325,13 @@
 /* --- Cabecera Registro --- */
 .auth-register .auth-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .auth-register .brand-logo {
     width: 80px;
     height: 80px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
 }
 
@@ -352,12 +352,12 @@
 
 /* --- Inputs y Campos Registro --- */
 .auth-register .field {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .auth-register .field label {
     display: block;
-    margin-bottom: 6px; 
+    margin-bottom: 0px; 
     font-weight: 600;
     color: var(--color-text-light);
     font-size: 0.9em;
