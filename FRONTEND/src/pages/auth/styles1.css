@@ -369,7 +369,7 @@
     width: 100%;
     padding: 12px;
     background-color: var(--color-input-background); 
-    border: 1px solid #333;
+    border: 1px solid hsl(0, 0%, 20%);
     color: var(--color-input-text);
     border-radius: 6px;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -491,7 +491,7 @@
 
 .auth-register .status.error-message {
     background-color: #ffeaea;
-    color: #9b2c2c;
+    color: hsl(0, 39%, 88%);
     border: 1px solid #f9d8d8;
 }
 
