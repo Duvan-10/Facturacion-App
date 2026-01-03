@@ -286,7 +286,7 @@ function Register() {
                             onBlur={handleBlur} 
                             className={errors.identification ? 'input-error' : ''}
                         />
-                        <small className="help">Este campo es obligatorio y único.</small>
+
                         {errors.identification && <p className="help error">{errors.identification}</p>}
                     </div>
 
