@@ -218,9 +218,6 @@ function Register() {
                         </button>
                     </div>
 
-                    <div className="register-wrapper">
-                        <p>¿Ya tienes cuenta? <Link to="/login" className="link-button">Inicia Sesión</Link></p>
-                    </div>
                 </form>
             </section>
         </main>
