@@ -1,5 +1,6 @@
 // src/context/ThemeContext.jsx
 
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
 
 // 1. Crear el Contexto del Tema

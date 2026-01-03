@@ -2,87 +2,96 @@
 
 /*
  * =================================================================
- * ESTILOS GLOBALES DE LA APLICACIÓN
- * FUNCIÓN: Define los estilos base del navegador, el reseteo de márgenes
- * y las paletas de colores globales (CSS Variables) para los temas
- * oscuro y claro.
+ * ESTILOS GLOBALES DE APLICACIÓN
+ * FUNCIÓN: Reseteo de estilos y definición de paletas de color CSS Variables.
  * =================================================================
  */
 
 /* ---------------------------------------------------- */
-/* PALETA DE COLORES MODO OSCURO (TEMA POR DEFECTO)      */
+/* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
 /* ---------------------------------------------------- */
 :root {
-    /* Paleta de colores base para el tema oscuro. */
-
-    /* Fondos */
-    --color-background-dark: oklab(28.63% -0.00377 0.00257); /* Gris muy oscuro para el fondo de la página */
+    /* Color de fondo que usas para el navegador y contenedores principales */
+    --color-background-dark: oklab(28.63% -0.00377 0.00257); /* Gris muy oscuro base */
+    
+    /* Variables de color de la tarjeta y otros elementos*/
     --color-card-dark: hsl(0, 0%, 12%); 
     --color-input-background: #0d0d0d; 
-    
-    /* Textos */
     --color-text-light: lab(83.4% 5.91 2.13);
     --color-text-muted: lab(98.31% -3.36 2.05);
-
-    /* Acentos y Botones */
-    --color-accent-teal: lab(89.11% -2.04 0.38);
+    --color-accent-teal: hwb(151 0% 10%); /*Color Fondo Botones login Modo Dar*/
+    --color-accent-darker: #008a40;
     --color-accent-darker: #00b35b;
 }
 
 /* ----------------------------------------------------------------- */
-/* PALETA DE COLORES MODO CLARO                                      */
-/* Se activa aplicando la clase 'light-mode' a la etiqueta <html>.  */
+/* PALETA DE COLORES MODO CLARO (Sobrescribe las variables anteriores) */
+/* La clase 'light-mode' se aplica a la etiqueta <html> por el AuthContext. */
 /* ----------------------------------------------------------------- */
 html.light-mode {
-    /* Sobrescribe las variables para el tema claro. */
-
-    /* Fondos */
-    --color-background-dark: hsl(0, 0%, 100%);    /* Fondo de página blanco */
-    --color-card-dark: oklch(100% 0.00011 271.152);
-    --color-input-background: #f7f7f7;
+    /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
+    --color-background-dark: hsl(0, 0%, 100%);    /* Fondo de página muy claro */
+    --color-card-dark: oklch(100% 0.00011 271.152);          /* Tarjeta blanca */
+    --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
     
-    /* Textos */
-    --color-text-light: hsl(0, 4%, 5%);
-    --color-text-muted: hwb(0 7% 93%);
+    --color-text-light: hsl(0, 4%, 5%);         /* Texto oscuro */
+    --color-text-muted: hwb(0 7% 93%);         /* Texto secundario gris */
 
-    /* Acentos y Botones */
-    --color-accent-teal: lab(11.86% 0.47 0.17);
+    --color-accent-teal: lab(11.86% 0.47 0.17); /*Color Fondo Botones login Modo Calro*/
     --color-accent-darker: #008a40;
 }
 
 /* ------------------------------------- */
-/* 1. RESETEO BÁSICO Y ESTILOS GLOBALES  */
+/* 1. Reseteo básico y Estilo Global de Fondo */
 /* ------------------------------------- */
-
-/*
- * Reseteo de estilos del navegador y configuración del modelo de caja.
- * Esto asegura un comportamiento consistente a través de diferentes navegadores.
- */
-html {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif; /* Define una fuente base para toda la app */
-}
-
-/*
- * Hereda el box-sizing a todos los elementos para un modelo de caja más intuitivo.
- */
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
-/*
- * Elimina márgenes y paddings por defecto.
- * Asegura que la aplicación ocupe el 100% del alto y ancho disponible.
- */
-body, #root {
+body, html, #root {
     margin: 0;
     padding: 0;
+    /* Asegura que la aplicación ocupe el 100% del viewport */
     width: 100%;
     min-height: 100vh;
+    box-sizing: border-box; 
 
-    /* Asigna el color de fondo usando la variable CSS para que cambie con el tema. */
+    /* ¡CLAVE! Usa la variable de color. El tema cambiará este valor automáticamente. */
     background-color: var(--color-background-dark); 
+}
+
+/* ------------------------------------- */
+/* 2. Reseteo de fuente (Opcional, pero recomendado) */
+/* ------------------------------------- */
+* {
+    font-family: Arial, sans-serif;
+}
+
+/* ------------------------------------- */
+/* 3. COMPONENTE GLOBAL: SWITCH DE TEMA */
+/* ------------------------------------- */
+
+.theme-switcher-global {
+    /* Contenedor que siempre está visible */
+    position: fixed; 
+    top: 20px;
+    right: 20px;
+    z-index: 1000; 
+}
+
+.theme-button {
+    /* Estilo del botón (ícono) */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     
-    /* Transición suave para el cambio de color de fondo al cambiar de tema. */
-    transition: background-color 0.3s ease;
+    /* Colores dinámicos */
+    color: var(--color-text-muted); 
+    background-color: var(--color-card-dark); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+}
+
+.theme-button:hover {
+    color: var(--color-accent-teal); 
+    background-color: var(--color-input-background); 
+    box-shadow: 0 4px 8px hsl(0, 0%, 9%);
 }

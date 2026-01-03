@@ -62,9 +62,9 @@ export const AuthProvider = ({ children }) => {
             try {
                 const storedUser = JSON.parse(localStorage.getItem('user'));
                 setUser(storedUser);
-                // if (storedUser) {
-                //     navigate('/home', { replace: true });
-                // }
+                if (storedUser) {
+                    navigate('/home', { replace: true });
+                }
             } catch (e) {
                 handleLogout();
             }

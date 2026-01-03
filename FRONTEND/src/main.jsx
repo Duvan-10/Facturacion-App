@@ -6,19 +6,21 @@ import App from './App.jsx';
 
 // 1. Componente que maneja la navegación del navegador (el sistema de rutas).
 import { BrowserRouter } from 'react-router-dom';
-// 2. Componente que provee la información de usuario y funciones de Auth a toda la App.
+// 2. Proveedor de autenticación para toda la App.
 import { AuthProvider } from './context/AuthContext.jsx'; 
+// 3. Proveedor de tema (claro/oscuro) global.
+import { ThemeProvider } from './context/ThemeContext.jsx';
 
 import './global.css'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* Habilita React Router en toda la aplicación */}
     <BrowserRouter>
-      {/* Hace que 'useAuth()' esté disponible para todos los componentes internos */}
-      <AuthProvider> 
-        <App />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider> 
+          <App />
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
