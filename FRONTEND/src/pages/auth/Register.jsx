@@ -132,7 +132,7 @@ function Register() {
 
                 <form onSubmit={handleSubmit}>
                     <div className="field">
-                        <label htmlFor="identification">Identificación (Cédula)</label>
+                        <label htmlFor="identification">NIT / CC</label>
                         <input
                             type="text"
                             id="identification"
