@@ -291,9 +291,9 @@
 }
 
 .auth-login .status.error-message {
-    background-color: #ffeaea;
-    color: #9b2c2c;
-    border: 1px solid #f9d8d8;
+    background-color: hsl(0, 3%, 17%);
+    color: hsl(0, 0%, 99%);
+    border: 1px solid hsl(0, 0%, 95%);
 }
 
 /* =================================================================
@@ -490,9 +490,9 @@
 }
 
 .auth-register .status.error-message {
-    background-color: #ffeaea;
-    color: hsl(0, 39%, 88%);
-    border: 1px solid #f9d8d8;
+    background-color: hwb(0 9% 90%);
+    color: lab(86.72% 1.71 0.6);
+    border: 1px solid hsl(0, 4%, 10%);
 }
 
 .auth-register .status.success-message {
