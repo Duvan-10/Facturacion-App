@@ -85,13 +85,12 @@ function Login() {
     // 4. ESTRUCTURA DEL COMPONENTE (RENDERIZADO)
     // ==========================================================
     return (
-        <main className="auth">
+        <main className="auth-login">
             <section className="auth-card" aria-labelledby="auth-title">
                 {/* Encabezado */}
                 <header className="auth-header">
                     <img src={logo} alt="PFEPS Logo" className="brand-logo" />
                     <h1 id="auth-title">PFEPS</h1>
-                    <p className="subtitle">Iniciar Sesión</p>
                     <p className="tagline">Software de Facturación Electrónica</p>
                 </header>
 
@@ -124,11 +123,16 @@ function Login() {
                 </div>
 
                 {/* Formulario de Login */}
+
                 <form onSubmit={handleSubmit}>
                     {/* Campo de Email */}
+
                     <div className="field">
-                        <label htmlFor="email">Correo electrónico</label>
-                        <input
+
+                    
+
+                         <label htmlFor="email">Correo electrónico</label>
+                          <input
                             type="email"
                             id="email"
                             name="email"
@@ -139,14 +143,16 @@ function Login() {
                                 if (errors.email) setErrors(p => ({...p, email: null}));
                             }}
                             className={errors.email ? 'input-error' : ''}
-                        />
-                        {errors.email && <p className="help error">{errors.email}</p>}
-                    </div>
+                          />
+                          {errors.email && <p className="help error">{errors.email}</p>}
+            </div>
+                 
+
 
                     {/* Campo de Contraseña */}
                     <div className="field">
                         
-                        <div className="label-row">
+                        <div className="label-mostrar">
                             <label htmlFor="password">Contraseña</label>
                            
                             <button

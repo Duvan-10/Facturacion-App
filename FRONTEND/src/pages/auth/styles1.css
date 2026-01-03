@@ -1,84 +1,71 @@
-
 /* =================================================================
- * SECCIÓN 1: ESTRUCTURA GENERAL Y LAYOUT
+ * ESTILOS DE AUTENTICACIÓN
+ * Archivo: styles1.css
+ * NOTA: Los estilos están duplicados y separados por ámbito (Scope)
+ * para permitir personalización exclusiva en Login o Registro sin conflictos.
  * ================================================================= */
 
-/* Contenedor principal que ocupa toda la vista y centra el contenido. */
-.auth {
-    min-height: 100vh; /* Corrección para ocupar toda la altura */
+/* =================================================================
+ * SECCIÓN 1: ESTILOS EXCLUSIVOS PARA LOGIN (.auth-login)
+ * ================================================================= */
+
+/* --- Layout Principal Login --- */
+.auth-login {
+    min-height: 100vh;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding: 0px; /* Añadido padding para seguridad en pantallas pequeñas */
+    padding: 0px;
     overflow-y: auto; 
     background-color: var(--color-background-dark); 
 }
 
-/* Tarjeta flotante que contiene todos los elementos de autenticación. */
-.auth-card {
-    width: 100%; /* Ajustado para mejor responsividad */
+/* --- Tarjeta del Formulario Login --- */
+.auth-login .auth-card {
+    width: 100%;
     max-width: 400px; 
     min-width: 300px; 
-    padding: 25px; /* Incrementado para más aire */
-    border-radius: 0px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); 
     background-color: var(--color-card-dark);
 }
 
-/* =================================================================
- * SECCIÓN 2: CABECERA, LOGO Y TÍTULOS
- * ================================================================= */
-
-/* Contenedor del encabezado (logo, títulos, etc.). */
-.auth-header {
+/* --- Cabecera Login --- */
+.auth-login .auth-header {
     text-align: center;
-    margin-bottom: 0px; /* Aumentado para separar del contenido */
+    margin-bottom: 20px;
 }
 
-/* Estilo del logo de la marca. */
-.brand-logo {
+.auth-login .brand-logo {
     width: 80px;
     height: 80px;
-    margin-bottom: 10px; /* Espacio entre logo y título */
+    margin-bottom: 10px;
     filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
 }
 
-/* Título principal de la marca (ej. "PFEPS"). */
-.auth-header h1 {
+.auth-login .auth-header h1 {
     font-size: 1.8em; 
     font-weight: 700;
     color: var(--color-accent-teal); 
     margin: 0;
 }
 
-/* Subtítulo de la acción (ej. "Iniciar Sesión"). */
-.subtitle {
-    font-size: 1em; 
-    font-weight: 400; 
-    color: hsl(0, 1%, 50%); /* Ligeramente más visible */
-    margin: 5px 0 10px;
-}
-
-/* Lema o descripción de la aplicación. */
-.tagline {
+/* Tagline (Exclusivo Login) */
+.auth-login .tagline {
     font-size: 1.1em;
     font-weight: 600; 
     color: var(--color-text-light); 
     margin: 0 0 15px; 
 }
 
-/* =================================================================
- * SECCIÓN 2.1: SELECTOR DE ROL
- * ================================================================= */
-
-/* Contenedor para el título y los botones de selección de rol. */
-.role-selector-container {
+/* --- Selector de Rol (Exclusivo Login) --- */
+.auth-login .role-selector-container {
     margin-bottom: 20px; 
     text-align: center;
 }
 
-/* Título sobre los botones de rol (ej. "Iniciar sesión como:"). */
-.role-selector-title {
+.auth-login .role-selector-title {
     color: var(--color-text-muted);
     font-size: 0.9em; 
     font-weight: 500; 
@@ -86,33 +73,29 @@
     text-align: center;
 }
 
-/* Contenedor flex para alinear los botones de rol. */
-.role-options {
+.auth-login .role-options {
     display: flex; 
-    justify-content: center; /* Centra los botones */
+    justify-content: center;
     gap: 15px; 
 }
 
-/* Estilo base para cada botón de selección de rol (Administrador, Usuario). */
-.role-option {
-    flex-grow: 1; /* Permite que los botones crezcan por igual */
+.auth-login .role-option {
+    flex-grow: 1;
     cursor: pointer;
     padding: 10px 15px;
-    border-radius: 4px;
+    border-radius: 6px;
     border: 1px solid #333;
     background-color: transparent; 
     color: var(--color-text-light);
     transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-/* Efecto al pasar el cursor sobre un botón de rol. */
-.role-option:hover {
+.auth-login .role-option:hover {
     background-color: var(--color-input-hover); 
     border-color: var(--color-text-muted);
 }
 
-/* Estilo que resalta el botón de rol actualmente seleccionado. */
-.role-option.selected {
+.auth-login .role-option.selected {
     border-color: var(--color-accent-teal); 
     background-color: var(--color-accent-teal); 
     color: var(--color-background-dark); 
@@ -120,254 +103,83 @@
     box-shadow: 0 0 10px rgba(0, 230, 118, 0.4); 
 }
 
-/* Oculta el input de radio nativo, ya que se estiliza el contenedor. */
-.role-option input[type="radio"] {
+.auth-login .role-option input[type="radio"] {
     display: none; 
 }
 
-/* =================================================================
- * SECCIÓN 3: CAMPOS DE FORMULARIO (INPUTS)
- * ================================================================= */
-
-/* Contenedor para cada grupo de label + input. */
-.field {
-    margin-bottom: 10px; /* Espaciado entre campos */
+/* --- Inputs y Campos Login --- */
+.auth-login .field {
+    margin-bottom: 15px;
 }
 
-/* Etiqueta (label) de cada campo. */
-.field label {
+.auth-login .field label {
     display: block;
-    margin-bottom: 0px; 
-    font-weight: bold;
+    margin-bottom: 6px; 
+    font-weight: 600;
     color: var(--color-text-light);
     font-size: 0.9em;
 }
 
-/* Estilo base para los campos de entrada de texto, email y contraseña. */
-input[type="email"],
-input[type="password"],
-input[type="text"] {
+.auth-login input[type="email"],
+.auth-login input[type="password"],
+.auth-login input[type="text"] {
     width: 100%;
-    padding: 12px; /* Más padding para mejor tactilidad */
+    padding: 12px;
     background-color: var(--color-input-background); 
-    border: 1px solid #333; 
-    color: var(--color-text-light);
-    border-radius: 4px;
+    border: 1px solid #333;
+    color: var(--color-input-text);
+    border-radius: 6px;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
 }
 
-/* Efecto de resaltado cuando un campo está en foco. */
-input:focus {
+.auth-login input:focus {
     border-color: var(--color-accent-teal); 
     outline: none;
     box-shadow: 0 0 0 1px var(--color-accent-teal);
 }
 
-/* Estilo para un campo de entrada que tiene un error de validación. */
-input.input-error {
+.auth-login input.input-error {
     border-color: var(--color-error-text) !important;
     box-shadow: 0 0 0 1px var(--color-error-text) !important;
 }
 
-/* Contenedor para alinear la etiqueta y el botón "Mostrar" en la misma fila. */
-.label-row {
+/* Autofill Fix Login */
+.auth-login input:-webkit-autofill,
+.auth-login input:-webkit-autofill:hover, 
+.auth-login input:-webkit-autofill:focus, 
+.auth-login input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-input-background) inset !important;
+    -webkit-text-fill-color: var(--color-input-text) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Utilidad para label y botón mostrar (Login) */
+.auth-login .label-mostrar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px; /* Espacio entre la fila y el input */
+    margin-bottom: 8px;
 }
 
-/* =================================================================
- * SECCIÓN 4: ENLACES Y BOTONES DE TEXTO
- * ================================================================= */
-
-/* Estilo genérico para botones que deben parecer un enlace de texto. */
-.link-button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    color: var(--color-accent-teal);
-    font-size: 0.9.8em;
-    font-family: inherit;
-    cursor: pointer;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-/* Efecto al pasar el cursor sobre un link-button. */
-.link-button:hover {
-    color: var(--color-accent-darker);
-    text-decoration: underline;
-}
-
-/* Estilo genérico para enlaces de texto (etiqueta <a>). */
-.link {
-    color: var(--color-accent-teal);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.link:hover {
-    color: var(--color-accent-darker);
-    text-decoration: underline;
-}
-
-/* =================================================================
- * SECCIÓN 5: BOTÓN DE ACCIÓN PRINCIPAL
- * ================================================================= */
-
-/* Contenedor para el botón de envío principal. */
-.form-actions {
-    margin-top: 20px; /* Espacio extra sobre el botón */
-}
-
-/* Estilo base para el botón de acción principal. */
-.btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
+/* --- Opciones Extra Login (Recordarme / Recuperar) --- */
+.auth-login .Options-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
     font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, opacity 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Modificador para el botón primario (usa el color de acento). */
-.btn.primary {
-    background-color: var(--color-accent-teal);
-    color: var(--color-background-dark); 
-}
-
-/* Efecto hover para el botón primario (si no está deshabilitado). */
-.btn.primary:hover:not(:disabled) {
-    background-color: var(--color-accent-darker);
-}
-
-/* Estilo para cualquier botón en estado deshabilitado. */
-.btn:disabled {
-    background-color: #4a5568;
-    color: #a0aec0;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
-/* Estilo para el ícono de candado dentro de un botón deshabilitado. */
-.btn.primary:disabled .icon-locked {
-    color: #a0aec0;
-    font-size: 1.1em;
-    margin-right: 8px; 
-    animation: shake 0.5s infinite alternate; 
-}
-
-/* Animación sutil de "temblor" para el ícono de candado. */
-@keyframes shake {
-    from { transform: translateX(0); }
-    to { transform: translateX(1px); }
-}
-
-/* =================================================================
- * SECCIÓN 6: MENSAJES DE AYUDA, ERROR Y ESTADO
- * ================================================================= */
-
-/* Texto de ayuda general debajo de un campo de formulario. */
-.help {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.8em;
-    color: var(--color-text-muted);
-}
-
-/* Modificador para el texto de ayuda cuando es un mensaje de error. */
-.help.error {
-    color: var(--color-error-text);
-    font-weight: 600;
-}
-
-/* Contenedor para mensajes de estado globales (ej. "Usuario no encontrado"). */
-.status {
-    text-align: center;
-    padding: 10px 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    font-size: 0.9em;
-    font-weight: 500;
-    animation: fade-in 0.3s ease-out;
-}
-
-/* Modificador para el mensaje de estado cuando es un error. */
-.status.error-message {
-    background-color: #ffeaea;
-    color: #9b2c2c;
-    border: 1px solid #f9d8d8;
-}
-
-/* Modificador para el mensaje de estado cuando es una advertencia. */
-.status.warning-message {
-    background-color: #fffbeb;
-    color: var(--color-warning-text);
-    border: 1px solid #fef3c7;
-}
-
-/* Animación de aparición para los mensajes. */
-@keyframes fade-in {
-    from { opacity: 0; transform: translateY(-3px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* =================================================================
- * SECCIÓN 7: PIE DE FORMULARIO (ENLACE A REGISTRO)
- * ================================================================= */
-
-/* Contenedor para el texto y enlace de "No tienes cuenta?". */
-.register-wrapper {
-    margin-top: 20px; 
-    text-align: center;
-    font-size: 0.9em;
-}
-
-.register-wrapper p {
-    margin: 0;
-    color: var(--color-text-muted);
-}
-
-/* Enlace de texto para ir a la página de registro. */
-.register-link {
-    color: var(--color-accent-teal);
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* =================================================================
- * SECCIÓN 8: FILA DE OPCIONES ADICIONALES (RECORDARME, ETC.)
- * ================================================================= */
-
-/* Contenedor para la fila 'Recordarme' y 'Recuperar contraseña'. */
-.Options-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    font-size: 0.85em;
-}
-
-/* Contenedor para el checkbox 'Recordarme' y su etiqueta. */
-.remember-me {
+.auth-login .remember-me {
     display: flex;
     align-items: center;
     cursor: pointer;
     color: var(--color-text-light);
 }
 
-/* Estilo del input checkbox personalizado. */
-.remember-me input[type="checkbox"] {
+.auth-login .remember-me input[type="checkbox"] {
     margin-right: 8px;
     appearance: none;
     width: 14px;
@@ -382,8 +194,7 @@ input.input-error {
     place-content: center;
 }
 
-/* Pseudo-elemento que crea la marca de verificación (chulito). */
-.remember-me input[type="checkbox"]::after {
+.auth-login .remember-me input[type="checkbox"]::after {
     content: '';
     width: 0.65em;
     height: 0.65em;
@@ -393,30 +204,335 @@ input.input-error {
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
-/* Estilo del checkbox cuando está marcado (cambia el fondo). */
-.remember-me input[type="checkbox"]:checked {
+.auth-login .remember-me input[type="checkbox"]:checked {
     background-color: var(--color-accent-teal);
     border-color: var(--color-accent-teal);
 }
 
-/* Estilo del pseudo-elemento (chulito) cuando el checkbox está marcado. */
-.remember-me input[type="checkbox"]:checked::after {
+.auth-login .remember-me input[type="checkbox"]:checked::after {
     transform: scale(1.2);
 }
 
+/* --- Botones y Enlaces Login --- */
+.auth-login .link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: var(--color-accent-teal);
+    font-size: 0.9em;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-login .link-button:hover {
+    color: var(--color-accent-darker);
+    text-decoration: underline;
+}
+
+.auth-login .form-actions {
+    margin-top: 20px;
+}
+
+.auth-login .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-login .btn.primary {
+    background-color: var(--color-accent-teal);
+    color: var(--color-background-dark); 
+}
+
+.auth-login .btn.primary:hover:not(:disabled) {
+    background-color: var(--color-accent-darker);
+}
+
+.auth-login .btn:disabled {
+    background-color: #4a5568;
+    color: #a0aec0;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* --- Mensajes y Estados Login --- */
+.auth-login .help {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8em;
+    color: var(--color-text-muted);
+}
+
+.auth-login .help.error {
+    color: var(--color-error-text);
+    font-weight: 600;
+}
+
+.auth-login .status {
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    animation: fade-in 0.3s ease-out;
+}
+
+.auth-login .status.error-message {
+    background-color: #ffeaea;
+    color: #9b2c2c;
+    border: 1px solid #f9d8d8;
+}
+
 /* =================================================================
- * SECCIÓN 9: AJUSTES RESPONSIVE
+ * SECCIÓN 2: ESTILOS EXCLUSIVOS PARA REGISTRO (.auth-register)
  * ================================================================= */
 
+/* --- Layout Principal Registro --- */
+.auth-register {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 0px;
+    overflow-y: auto; 
+    background-color: var(--color-background-dark); 
+}
+
+/* --- Tarjeta del Formulario Registro --- */
+.auth-register .auth-card {
+    width: 100%;
+    max-width: 400px; 
+    min-width: 300px; 
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); 
+    background-color: var(--color-card-dark);
+}
+
+/* --- Cabecera Registro --- */
+.auth-register .auth-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-register .brand-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
+}
+
+.auth-register .auth-header h1 {
+    font-size: 1.8em; 
+    font-weight: 700;
+    color: var(--color-accent-teal); 
+    margin: 0;
+}
+
+/* Subtítulo (Exclusivo Registro) */
+.auth-register .subtitle {
+    font-size: 1em; 
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin: 0 0 15px; 
+}
+
+/* --- Inputs y Campos Registro --- */
+.auth-register .field {
+    margin-bottom: 15px;
+}
+
+.auth-register .field label {
+    display: block;
+    margin-bottom: 6px; 
+    font-weight: 600;
+    color: var(--color-text-light);
+    font-size: 0.9em;
+}
+
+.auth-register input[type="email"],
+.auth-register input[type="password"],
+.auth-register input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-input-background); 
+    border: 1px solid #333;
+    color: var(--color-input-text);
+    border-radius: 6px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.auth-register input:focus {
+    border-color: var(--color-accent-teal); 
+    outline: none;
+    box-shadow: 0 0 0 1px var(--color-accent-teal);
+}
+
+.auth-register input.input-error {
+    border-color: var(--color-error-text) !important;
+    box-shadow: 0 0 0 1px var(--color-error-text) !important;
+}
+
+/* Autofill Fix Registro */
+.auth-register input:-webkit-autofill,
+.auth-register input:-webkit-autofill:hover, 
+.auth-register input:-webkit-autofill:focus, 
+.auth-register input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-input-background) inset !important;
+    -webkit-text-fill-color: var(--color-input-text) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Utilidad para label y botón mostrar (Registro) */
+.auth-register .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* --- Botones y Enlaces Registro --- */
+.auth-register .link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: var(--color-accent-teal);
+    font-size: 0.9em;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-register .link-button:hover {
+    color: var(--color-accent-darker);
+    text-decoration: underline;
+}
+
+.auth-register .form-actions {
+    margin-top: 20px;
+}
+
+.auth-register .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-register .btn.primary {
+    background-color: var(--color-accent-teal);
+    color: var(--color-background-dark); 
+}
+
+.auth-register .btn.primary:hover:not(:disabled) {
+    background-color: var(--color-accent-darker);
+}
+
+.auth-register .btn:disabled {
+    background-color: #4a5568;
+    color: #a0aec0;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.auth-register .btn.primary:disabled .icon-locked {
+    color: #a0aec0;
+    font-size: 1.1em;
+    margin-right: 8px; 
+    animation: shake 0.5s infinite alternate; 
+}
+
+/* --- Mensajes y Estados Registro --- */
+.auth-register .help {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8em;
+    color: var(--color-text-muted);
+}
+
+.auth-register .help.error {
+    color: var(--color-error-text);
+    font-weight: 600;
+}
+
+.auth-register .status {
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    animation: fade-in 0.3s ease-out;
+}
+
+.auth-register .status.error-message {
+    background-color: #ffeaea;
+    color: #9b2c2c;
+    border: 1px solid #f9d8d8;
+}
+
+.auth-register .status.success-message {
+    background-color: #f0fff4;
+    color: #2f855a;
+    border: 1px solid #c6f6d5;
+}
+
+/* --- Pie de Página Registro --- */
+.auth-register .register-wrapper {
+    margin-top: 25px; 
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.auth-register .register-wrapper p {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+/* --- Animaciones Globales (Compartidas) --- */
+@keyframes shake {
+    from { transform: translateX(0); }
+    to { transform: translateX(1px); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Ajustes Responsive (Aplicados a ambos) --- */
 @media (max-width: 450px) {
-    /* Ajusta el contenedor principal en pantallas muy pequeñas. */
-    .auth {
+    .auth-login, .auth-register {
         align-items: flex-start; 
         padding: 10px;
     }
 
-    /* La tarjeta ocupa todo el ancho en pantallas pequeñas. */
-    .auth-card {
+    .auth-login .auth-card,
+    .auth-register .auth-card {
         width: 100%; 
         min-width: unset; 
         max-width: 100%;

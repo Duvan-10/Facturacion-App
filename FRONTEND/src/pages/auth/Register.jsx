@@ -162,7 +162,7 @@ function Register() {
     // FUNCIÓN BLUR (onBlur)
     const handleBlur = (e) => {
         const { name: fieldName, value } = e.target;
-        
+
         const errorMessage = validateField(fieldName, value);
         
         setErrors(prevErrors => {
@@ -251,7 +251,7 @@ function Register() {
     // ESTRUCTURA DEL COMPONENTE (RENDERIZADO)
     // ==========================================================
     return (
-        <main className="auth">
+        <main className="auth-register">
             <section className="auth-card" aria-labelledby="auth-title">
                 
                 <header className="auth-header">
@@ -287,7 +287,7 @@ function Register() {
                             onBlur={handleBlur} 
                             className={errors.identification ? 'input-error' : ''}
                         />
-                        <small className="help">Este campo es obligatorio y único.</small>
+                        
                         {errors.identification && <p className="help error">{errors.identification}</p>}
                     </div>
 

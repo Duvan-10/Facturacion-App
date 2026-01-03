@@ -16,9 +16,10 @@
     
     /* Variables de color de la tarjeta y otros elementos*/
     --color-card-dark: hsl(0, 0%, 12%); 
-    --color-input-background: #0d0d0d; 
-    --color-text-light: lab(83.4% 5.91 2.13);
-    --color-text-muted: lab(98.31% -3.36 2.05);
+    --color-input-background: #ebe8e8; 
+    --color-text-light: hsl(0, 6%, 90%);
+    --color-text-muted: oklch(99.794% 0.00329 147.157);
+    --color-input-text: hsl(0, 0%, 3%); /* Color específico para texto dentro de inputs */
     --color-accent-teal: hwb(151 0% 10%); /*Color Fondo Botones login Modo Dar*/
     --color-accent-darker: #008a40;
     --color-accent-darker: #00b35b;
@@ -31,14 +32,14 @@
 html.light-mode {
     /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
     --color-background-dark: hsl(0, 0%, 100%);    /* Fondo de página muy claro */
+   
     --color-card-dark: oklch(100% 0.00011 271.152);          /* Tarjeta blanca */
-    --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
-    
-    --color-text-light: hsl(0, 4%, 5%);         /* Texto oscuro */
-    --color-text-muted: hwb(0 7% 93%);         /* Texto secundario gris */
-
-    --color-accent-teal: lab(11.86% 0.47 0.17); /*Color Fondo Botones login Modo Calro*/
-    --color-accent-darker: #008a40;
+    --color-input-background: hsl(0, 9%, 85%);   /* Fondo de input muy claro */   
+    --color-text-light: oklab(0% 0 0);         /* Texto oscuro */
+    --color-text-muted: rgb(24, 23, 23);         /* Texto secundario gris */
+    --color-input-text: hsl(0, 100%, 1%); /* Texto oscuro para inputs en modo claro */
+    --color-accent-teal: oklch(26.305% 0.00232 146.108); /*Color Fondo Botones login Modo Calro*/
+    --color-accent-darker: hsl(140, 9%, 7%);
 }
 
 /* ------------------------------------- */

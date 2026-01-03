@@ -1,8 +1,9 @@
 /*
  * =================================================================
- *Estilo 1 styles.css (para vistas de autenticación: Login y Register)
+ * Estilo 1 styles.css (para vistas de autenticación)
  * FUNCIÓN: Define la apariencia visual de la tarjeta de autenticación 
  * utilizando un diseño Dark Theme modular y la implementación del Light Mode.
+ * NOTA: Estilos separados para .auth-login y .auth-register.
  * =================================================================
  */
 
@@ -48,11 +49,12 @@ html.light-mode {
     --color-error-background: #f9d8d8;
 }
 
-/* ------------------------------------- */
-/* 1. ESTRUCTURA Y FONDO GENERAL */
-/* ------------------------------------- */
+/* =================================================================
+ * SECCIÓN 1: ESTILOS EXCLUSIVOS PARA LOGIN (.auth-login)
+ * ================================================================= */
 
-.auth {
+/* --- 1. ESTRUCTURA Y FONDO GENERAL (LOGIN) --- */
+.auth-login {
     min-height: 100vh;
     display: flex;
     justify-content: center; 
@@ -62,7 +64,7 @@ html.light-mode {
     background-color: var(--color-background-dark); 
 }
 
-.auth-card {
+.auth-login .auth-card {
     width: 80%; 
     max-width: 400px; 
     min-width: 300px; 
@@ -72,26 +74,20 @@ html.light-mode {
     background-color: var(--color-card-dark);
 }
 
-
-/* ------------------------------------- */
-/* 2. CABECERA Y LOGO */
-/* ------------------------------------- */
-.auth-header {
+/* --- 2. CABECERA Y LOGO (LOGIN) --- */
+.auth-login .auth-header {
     text-align: center;
     margin-bottom: 5px; 
 }
 
-/* AJUSTE LOGO: */
-.brand-logo { /* <-- Selector necesario */
+.auth-login .brand-logo { 
     width: 80px;
     height: 80px;
     margin-bottom: 5px;
     filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
 }
 
-
-/* Título de Marca: PFEPS (h1) - Estilo independiente */
-.auth-header h1{
+.auth-login .auth-header h1 {
     font-size: 1.8em; 
     font-weight: 700;
     color: hsla(0, 0%, 47%, 0.63);
@@ -99,17 +95,8 @@ html.light-mode {
     margin-bottom: 5px; 
 }
 
-/* Subtítulo: Accede a tu cuenta - Estilo independiente */
-.subtitle{
-    font-size: 1em; 
-    font-weight: 400;
-    color: var(--color-text-muted); 
-    margin-top: 0;
-    margin-bottom: 10px; 
-}
-
-/* Tagline: Software de Facturación Electrónica - Estilo independiente */
-.tagline{
+/* Tagline (Exclusivo Login) */
+.auth-login .tagline {
     font-size: 1.1em;
     font-weight: 600;
     color: var(--color-text-light); 
@@ -117,13 +104,12 @@ html.light-mode {
     margin-bottom: 15px; 
 }
 
-
 /* ------------------------------------- */
-/* 2.1. SELECTOR DE ROL */
+/* 2.1. SELECTOR DE ROL (LOGIN)          */
+/* SE MANTIENE EL ESTILO ORIGINAL        */
 /* ------------------------------------- */
 
-/* Título: Ingresar como: */
-.role-selector-title {
+.auth-login .role-selector-title {
     color: lab(56.7% 0 -0.01) ;
     font-family: 'Inter', sans-serif; 
     font-size: 1em; 
@@ -133,8 +119,7 @@ html.light-mode {
     text-align: center;
 }
 
-.role-selector-container {
-/* Define la apariencia y el espaciado vertical del contenedor de "Ingresar como:" y botones de rol */
+.auth-login .role-selector-container {
     background-color: transparent; 
     padding: 0; 
     border-radius: 0; 
@@ -144,30 +129,28 @@ html.light-mode {
     text-align: center;
 }
 
-.role-options {
+.auth-login .role-options {
     display: flex; 
     justify-content: space-evenly; 
     gap:0px; 
 }
 
-.role-icon {
+.auth-login .role-icon {
     margin-right: 5px;
 }
 
-/* ------------------------------------- */
-/* 3. CAMPOS DE FORMULARIO */
-/* ------------------------------------- */
+/* --- 3. CAMPOS DE FORMULARIO (LOGIN) --- */
 
-form {
+.auth-login form {
     text-align: left;
 }
 
-.field {
+.auth-login .field {
     /* AJUSTE COMPRESIÓN: Reducido a 12px */
     margin-bottom: 12px;
 }
 
-.field label {
+.auth-login .field label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -175,9 +158,9 @@ form {
     font-size: 0.9em;
 }
 
-input[type="email"],
-input[type="password"],
-input[type="text"] {
+.auth-login input[type="email"],
+.auth-login input[type="password"],
+.auth-login input[type="text"] {
     width: 100%;
     padding: 10px;
     background-color: var(--color-input-background); 
@@ -188,27 +171,26 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-input:focus {
+.auth-login input:focus {
     border-color: var(--color-accent-teal); 
     outline: none;
     box-shadow: 0 0 0 1px var(--color-accent-teal);
 }
 
-/* ✅ NUEVO: Estilo para inputs cuando tienen un error (clase 'input-error' en JSX) */
-input.input-error {
+.auth-login input.input-error {
     border-color: var(--color-error-text) !important;
     box-shadow: 0 0 0 1px var(--color-error-text) !important;
 }
 
-
-.label-row {
+.auth-login .label-row,
+.auth-login .label-mostrar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
 }
 
-.link-button {
+.auth-login .link-button {
     background: none;
     border: none;
     color: var(--color-accent-teal);
@@ -217,11 +199,10 @@ input.input-error {
     padding: 0;
 }
 
-/* ------------------------------------- */
-/* 4. FILA DE ACCIONES Y LINKS */
-/* ------------------------------------- */
+/* --- 4. FILA DE ACCIONES Y LINKS (LOGIN) --- */
 
-.form-row {
+.auth-login .form-row,
+.auth-login .Options-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -230,14 +211,16 @@ input.input-error {
     font-size: 0.85em;
 }
 
-.checkbox {
+.auth-login .checkbox,
+.auth-login .remember-me {
     display: flex;
     align-items: center;
     cursor: pointer;
     color: var(--color-text-light);
 }
 
-.checkbox input[type="checkbox"] {
+.auth-login .checkbox input[type="checkbox"],
+.auth-login .remember-me input[type="checkbox"] {
     margin-right: 8px;
     appearance: none;
     width: 14px;
@@ -249,32 +232,31 @@ input.input-error {
     cursor: pointer;
 }
 
-.checkbox input[type="checkbox"]:checked {
+.auth-login .checkbox input[type="checkbox"]:checked,
+.auth-login .remember-me input[type="checkbox"]:checked {
     background-color: var(--color-accent-teal);
     border-color: var(--color-accent-teal);
 }
 
-.link {
+.auth-login .link {
     color: var(--color-accent-teal);
     text-decoration: none;
     transition: color 0.3s;
 }
 
-.link:hover {
+.auth-login .link:hover {
     color: var(--color-accent-darker);
     text-decoration: underline;
 }
 
-/* ------------------------------------- */
-/* 5. BOTONES Y ACCIONES */
-/* ------------------------------------- */
+/* --- 5. BOTONES Y ACCIONES (LOGIN) --- */
 
-.form-actions {
+.auth-login .form-actions {
     /* AJUSTE COMPRESIÓN: Reducido a 10px */
     margin-bottom: 10px;
 }
 
-.btn {
+.auth-login .btn {
     width: 100%;
     padding: 12px;
     border: none;
@@ -283,58 +265,37 @@ input.input-error {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, opacity 0.3s;
-    /* ✅ NUEVO: Estilos para alinear icono y texto en el botón */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.btn.primary {
+.auth-login .btn.primary {
     background-color: var(--color-accent-teal);
     color: var(--color-background-dark); 
 }
 
-.btn.primary:hover:not(:disabled) {
+.auth-login .btn.primary:hover:not(:disabled) {
     background-color: var(--color-accent-darker);
 }
 
-.btn:disabled {
-    /* ✅ ESTILO DE BOTÓN DESHABILITADO */
+.auth-login .btn:disabled {
     background-color: #4a5568; /* Gris oscuro para el disabled */
     color: #a0aec0; /* Texto gris claro */
     cursor: not-allowed;
     opacity: 1; 
 }
 
-/* ✅ NUEVO: Estilo para el icono de bloqueo dentro del botón deshabilitado */
-.btn.primary:disabled .icon-locked {
-    color: #a0aec0; /* Color del icono, igual al texto deshabilitado */
-    font-size: 1.1em;
-    margin-right: 8px; 
-    /* Animación sutil para llamar la atención sobre el bloqueo */
-    animation: shake 0.5s infinite alternate; 
-}
+/* --- 6. MENSAJES DE ERROR Y ALERTA (LOGIN) --- */
 
-/* Animación sutil para el candado */
-@keyframes shake {
-    from { transform: translateX(0); }
-    to { transform: translateX(1px); }
-}
-
-/* ------------------------------------- */
-/* 6. MENSAJES DE ERROR Y ALERTA */
-/* ------------------------------------- */
-
-/* Base para mensajes auxiliares bajo el input */
-.help {
+.auth-login .help {
     display: block;
     margin-top: 5px;
     font-size: 0.75em;
     color: var(--color-text-muted);
 }
 
-/* ✅ MENSAJE DE ERROR BAJO EL INPUT */
-.help.error {
+.auth-login .help.error {
     color: var(--color-error-text); /* Rojo fuerte */
     font-weight: 600;
     display: block !important; 
@@ -344,8 +305,7 @@ input.input-error {
     animation: fade-in 0.3s ease-out; /* Animación sutil */
 }
 
-/* Mensaje de estado Global (ej. Error de servidor) */
-.status {
+.auth-login .status {
     text-align: center;
     padding: 10px 15px;
     margin-top: 15px;
@@ -354,21 +314,218 @@ input.input-error {
     font-weight: 500;
 }
 
-/* ✅ MENSAJE DE ERROR GLOBAL (para statusMessage) */
-.status.error-message {
+.auth-login .status.error-message {
     background-color: #ffeaea; /* Fondo rosa claro */
     color: #9b2c2c; /* Texto rojo oscuro */
     border: 1px solid #f9d8d8;
 }
 
-/* ✅ MENSAJE DE ADVERTENCIA GLOBAL (opcional, pero añadido por consistencia) */
-.status.warning-message {
-    background-color: #fffbeb; /* Fondo amarillo claro */
-    color: var(--color-warning-text); /* Texto naranja oscuro */
-    border: 1px solid #fef3c7;
+/* =================================================================
+ * SECCIÓN 2: ESTILOS EXCLUSIVOS PARA REGISTRO (.auth-register)
+ * ================================================================= */
+
+/* --- 1. ESTRUCTURA Y FONDO GENERAL (REGISTRO) --- */
+.auth-register {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 0px; 
+    overflow-y: auto; 
+    background-color: var(--color-background-dark); 
 }
 
-/* Animación de entrada para mensajes */
+.auth-register .auth-card {
+    width: 80%; 
+    max-width: 400px; 
+    min-width: 300px; 
+    padding: 15px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    background-color: var(--color-card-dark);
+}
+
+/* --- 2. CABECERA Y LOGO (REGISTRO) --- */
+.auth-register .auth-header {
+    text-align: center;
+    margin-bottom: 5px; 
+}
+
+.auth-register .brand-logo { 
+    width: 80px;
+    height: 80px;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.6));
+}
+
+.auth-register .auth-header h1 {
+    font-size: 1.8em; 
+    font-weight: 700;
+    color: hsla(0, 0%, 47%, 0.63);
+    margin-top: 0;
+    margin-bottom: 5px; 
+}
+
+/* Subtítulo (Exclusivo Registro) */
+.auth-register .subtitle {
+    font-size: 1em; 
+    font-weight: 400;
+    color: var(--color-text-muted); 
+    margin-top: 0;
+    margin-bottom: 10px; 
+}
+
+/* --- 3. CAMPOS DE FORMULARIO (REGISTRO) --- */
+.auth-register form {
+    text-align: left;
+}
+
+.auth-register .field {
+    margin-bottom: 12px;
+}
+
+.auth-register .field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-text-light);
+    font-size: 0.9em;
+}
+
+.auth-register input[type="email"],
+.auth-register input[type="password"],
+.auth-register input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-input-background); 
+    border: 1px solid #333333; 
+    color: var(--color-text-light);
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.auth-register input:focus {
+    border-color: var(--color-accent-teal); 
+    outline: none;
+    box-shadow: 0 0 0 1px var(--color-accent-teal);
+}
+
+.auth-register input.input-error {
+    border-color: var(--color-error-text) !important;
+    box-shadow: 0 0 0 1px var(--color-error-text) !important;
+}
+
+.auth-register .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.auth-register .link-button {
+    background: none;
+    border: none;
+    color: var(--color-accent-teal);
+    cursor: pointer;
+    font-size: 0.85em;
+    padding: 0;
+}
+
+/* --- 4. BOTONES Y ACCIONES (REGISTRO) --- */
+.auth-register .form-actions {
+    margin-bottom: 10px;
+}
+
+.auth-register .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-register .btn.primary {
+    background-color: var(--color-accent-teal);
+    color: var(--color-background-dark); 
+}
+
+.auth-register .btn.primary:hover:not(:disabled) {
+    background-color: var(--color-accent-darker);
+}
+
+.auth-register .btn:disabled {
+    background-color: #4a5568;
+    color: #a0aec0;
+    cursor: not-allowed;
+    opacity: 1; 
+}
+
+.auth-register .btn.primary:disabled .icon-locked {
+    color: #a0aec0;
+    font-size: 1.1em;
+    margin-right: 8px; 
+    animation: shake 0.5s infinite alternate; 
+}
+
+/* --- 5. MENSAJES DE ERROR Y ALERTA (REGISTRO) --- */
+.auth-register .help {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.75em;
+    color: var(--color-text-muted);
+}
+
+.auth-register .help.error {
+    color: var(--color-error-text);
+    font-weight: 600;
+    display: block !important; 
+    margin-top: 5px; 
+    font-size: 0.8rem;
+    opacity: 1 !important;
+    animation: fade-in 0.3s ease-out;
+}
+
+.auth-register .status {
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.auth-register .status.error-message {
+    background-color: #ffeaea;
+    color: #9b2c2c;
+    border: 1px solid #f9d8d8;
+}
+
+.auth-register .status.success-message {
+    background-color: #f0fff4;
+    color: #2f855a;
+    border: 1px solid #c6f6d5;
+}
+
+/* --- 6. PIE DE FORMULARIO (REGISTRO) --- */
+.auth-register .register-wrapper {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.auth-register .register-wrapper p {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+/* --- ANIMACIONES GLOBALES (COMPARTIDAS) --- */
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -380,39 +537,20 @@ input.input-error {
     }
 }
 
-
-/* ------------------------------------- */
-/* 7. PIE DE FORMULARIO */
-/* ------------------------------------- */
-
-.register-wrapper {
-    margin-top: 10px;
-    text-align: center;
-    font-size: 0.9em;
+@keyframes shake {
+    from { transform: translateX(0); }
+    to { transform: translateX(1px); }
 }
 
-.register-wrapper p {
-    margin: 0;
-    color: var(--color-text-muted);
-}
-
-.register-link {
-    color: var(--color-accent-teal);
-    font-weight: bold;
-    text-decoration: none;
-}
-
-
-/*--------------------------------------------------------------*/
-/* AJUSTE RESPONSIVE: Para pantallas de móvil muy pequeñas */
-/*--------------------------------------------------------------*/
+/* --- AJUSTE RESPONSIVE --- */
 @media (max-width: 450px) {
-    .auth {
+    .auth-login, .auth-register {
         align-items: flex-start; 
         padding-top: 10px;
     }
 
-    .auth-card {
+    .auth-login .auth-card,
+    .auth-register .auth-card {
         width: 100%; 
         min-width: unset; 
         max-width: 100%;
