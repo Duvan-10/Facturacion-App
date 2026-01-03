@@ -16,44 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); 
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [isLoading, setIsLoading] = useState(false);
-    // ✅ setStatusMessage ES LA FUNCIÓN QUE FALTABA EXPORTAR
     const [statusMessage, setStatusMessage] = useState(''); 
-
-    /* * =======================================================
-     * FUNCIÓN NUEVA: GESTIÓN DEL MODO CLARO/OSCURO (THEME)
-     * =======================================================
-     */
-    
-    // 3. ESTADO DEL TEMA: true = Light Mode (Claro), false = Dark Mode (Oscuro)
-    // Se inicializa leyendo la última preferencia del usuario desde el almacenamiento local.
-    const [isLightMode, setIsLightMode] = useState(() => {
-        const savedTheme = localStorage.getItem('theme');
-        return savedTheme === 'light'; // Si guardó 'light', es true
-    });
-
-    // 4. FUNCIÓN PARA CAMBIAR EL TEMA
-    const toggleTheme = () => {
-        setIsLightMode(prev => !prev);
-    };
-
-    // 5. EFECTO PARA APLICAR LA CLASE CSS GLOBAL Y GUARDAR PREFERENCIA
-    useEffect(() => {
-        const root = document.documentElement; // Selecciona la etiqueta <html>
-
-        // Aplicar/Remover la clase 'light-mode' para cambiar las variables CSS
-        if (isLightMode) {
-            root.classList.add('light-mode');
-            localStorage.setItem('theme', 'light');
-        } else {
-            root.classList.remove('light-mode');
-            localStorage.setItem('theme', 'dark');
-        }
-    }, [isLightMode]); // Se ejecuta cada vez que el modo cambia
-    
-    /* * =======================================================
-     * FIN: GESTIÓN DEL MODO CLARO/OSCURO
-     * =======================================================
-     */
 
 
     // --- Lógica de recuperación de sesión (Se mantiene por si hay token guardado) ---
@@ -88,21 +51,30 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
         setStatusMessage('');
 
+        // 1. Limpiamos cualquier sesión previa para evitar que el Login nos redirija a Home
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setToken(null);
+        setUser(null);
+
         try {
             // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
             await new Promise(resolve => setTimeout(resolve, 2000)); 
+
+            // Puedes inspeccionar en consola lo que se intentaría registrar
+            console.log('Simulación registro usuario:', userData);
             
             // SIMULACIÓN: Asumimos que el registro es exitoso en el front-end
-            setStatusMessage(`🎉 SIMULACIÓN EXITOSA. Usuario creado, redirigiendo a Login.`);
+            setStatusMessage('🎉 SIMULACIÓN EXITOSA. Usuario creado, redirigiendo a Login.');
             
-            // Navegamos al login después de la simulación de éxito
-            navigate('/login'); 
-            return { success: true };
+            // Eliminamos navigate() aquí para que Register.jsx maneje la redirección tras mostrar el mensaje
+            return true;
 
         } catch (error) {
             // Esto solo se ejecutaría por errores internos de JS, no por errores de red en este modo.
+            console.error('Error interno durante la simulación de registro:', error);
             setStatusMessage('⚠️ Error interno durante la simulación.');
-            return { success: false, message: 'Error interno.' };
+            return false;
         } finally {
             // Importante: deshabilita el estado de carga
             setIsLoading(false);
@@ -110,7 +82,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     // --- FUNCIÓN DE LOGIN (MODO SIMULACIÓN) ---
-    const handleLogin = async (email, password) => {
+    const handleLogin = async ({ email, password }) => {
         setIsLoading(true);
         setStatusMessage('');
 
@@ -118,33 +90,31 @@ export const AuthProvider = ({ children }) => {
             // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
             await new Promise(resolve => setTimeout(resolve, 2000));
             
-            // --- LÓGICA DE PRUEBA DE ÉXITO/FALLO EN SIMULACIÓN ---
-            
             // Ejemplo de credenciales simuladas
             if (email === 'test@pfeps.com' && password === '123456') {
                 
                 // SIMULACIÓN DE LOGIN EXITOSO: 
-                const mockUser = { id: 1, name: 'Usuario Prueba', email: email };
+                const mockUser = { id: 1, name: 'Usuario Prueba', email };
                 const mockToken = 'mock-jwt-token-12345';
 
                 localStorage.setItem('token', mockToken);
                 localStorage.setItem('user', JSON.stringify(mockUser));
                 setToken(mockToken);
                 setUser(mockUser);
-                setStatusMessage(`🎉 SIMULACIÓN EXITOSA. Redirigiendo a Home...`);
-                // El useEffect de arriba se encargará de la redirección a /home
+                setStatusMessage('🎉 SIMULACIÓN EXITOSA. Redirigiendo a Home...');
 
-                return { success: true };
+                return true;
 
             } else {
                 // SIMULACIÓN DE LOGIN FALLIDO:
-                setStatusMessage(`❌ SIMULACIÓN FALLIDA: Credenciales incorrectas.`);
-                return { success: false, message: 'Credenciales incorrectas.' };
+                setStatusMessage('❌ SIMULACIÓN FALLIDA: Credenciales incorrectas.');
+                return false;
             }
             
         } catch (error) {
+            console.error('Error interno durante la simulación de login:', error);
             setStatusMessage('⚠️ Error interno durante la simulación.');
-            return { success: false, message: 'Error interno.' };
+            return false;
         } finally {
             // Importante: deshabilita el estado de carga
             setIsLoading(false);
@@ -152,20 +122,19 @@ export const AuthProvider = ({ children }) => {
     };
 
 
+    const isAuthenticated = !!user;
+
     // 3. Objeto que se pasa a los componentes que usan el contexto
     const contextValue = {
         user,
         token,
+        isAuthenticated,
         isLoading,
         statusMessage,
         setStatusMessage,
         login: handleLogin,
         register: handleRegister,
         logout: handleLogout,
-        
-        // --- VALORES DEL TEMA A EXPORTAR ---
-        isLightMode,
-        toggleTheme,
     };
 
     return (

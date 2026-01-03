@@ -1,7 +1,7 @@
 // src/components/ThemeSwitch.jsx
 
 import React from 'react';
-import { useAuth } from '../context/AuthContext'; // Importamos el contexto centralizado
+import { useTheme } from '../context/ThemeContext';
 import { Sun, Moon } from 'lucide-react'; // Iconos para representar el modo
 
 /**
@@ -9,8 +9,8 @@ import { Sun, Moon } from 'lucide-react'; // Iconos para representar el modo
  * Está diseñado para ser fijo y visible en todas las páginas de la aplicación.
  */
 const ThemeSwitch = () => {
-    // Obtenemos el estado actual del tema y la función para cambiarlo desde el AuthContext
-    const { isLightMode, toggleTheme } = useAuth(); 
+    // Obtenemos el estado actual del tema y la función para cambiarlo desde el ThemeContext
+    const { isLightMode, toggleTheme } = useTheme(); 
 
     return (
         <div className="theme-switcher-global">

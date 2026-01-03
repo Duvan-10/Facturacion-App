@@ -2,14 +2,11 @@
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import WelcomePage from './pages/auth/WelcomePage';
-import { useAuth } from './context/AuthContext';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
 
 function App() {
-    const { user } = useAuth(); // Obtenemos el estado de la sesión (por si lo usas luego)
-
     return (
         <>
             <ThemeSwitch /> 

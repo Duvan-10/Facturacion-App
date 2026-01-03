@@ -28,7 +28,7 @@ function Login() {
     // Efecto para redirigir si el usuario ya está autenticado
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/welcome', { replace: true }); // O a la ruta principal de la app
+            navigate('/home', { replace: true }); // Redirección principal tras login
         }
     }, [isAuthenticated, navigate]);
 
@@ -70,7 +70,7 @@ function Login() {
             // Se pasa el rol seleccionado a la función de login
             const success = await login({ email, password, role: selectedRole });
             if (success) {
-                navigate('/welcome', { replace: true });
+                navigate('/home', { replace: true });
             }
             // El AuthContext se encarga de gestionar el mensaje de error si 'success' es false
         } catch (error) {
