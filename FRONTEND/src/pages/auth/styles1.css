@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+/*
+ * =================================================================
+ Estilo 2 (para vistas de autenticación: Login y Register)
+ * FUNCIÓN: Define la apariencia visual de la tarjeta de autenticación 
+ * utilizando un diseño Dark Theme modular y la implementación del Light Mode.
+ * ===============================================================*/
+/* ---------------------------------------------------- */
+/* PALETA DE COLORES MODO OSCURO (Variables por Defecto) */
+/* ---------------------------------------------------- */
+
+/* ------------------------------------- */
+/* 1. ESTRUCTURA Y FONDO GENERAL */
+/* ------------------------------------- */
+
+.auth {
+=======
 /* =================================================================
  * ESTILOS DE AUTENTICACIÓN
  * Archivo: styles1.css
@@ -11,6 +28,7 @@
 
 /* --- Layout Principal Login --- */
 .auth-login {
+>>>>>>> login
     min-height: 100vh;
     display: flex;
     justify-content: center; 
@@ -65,9 +83,17 @@
     text-align: center;
 }
 
+<<<<<<< HEAD
+/* Estilo para el título "Ingresar como:" */
+.role-selector-title {
+    color: var(--color-text-light); 
+    font-family: 'Inter', sans-serif; 
+    font-size: 1.1em; 
+=======
 .auth-login .role-selector-title {
     color: var(--color-text-muted);
     font-size: 0.9em; 
+>>>>>>> login
     font-weight: 500; 
     margin: 0 0 10px; 
     text-align: center;
@@ -540,3 +566,4 @@
         padding: 15px; /* Padding reducido para móviles */
     }
 }
+

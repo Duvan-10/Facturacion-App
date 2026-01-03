@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoOnboarding from '../../assets/logo-welcome.png'; 
-import './WelcomePage.css'; 
+import './Welcome.css'; 
 
 
 
-function WelcomePage() { // ✅ Renombrado el componente a WelcomePage (nombre del archivo)
+function Welcome() { // ✅ Renombrado el componente a WelcomePage (nombre del archivo)
 
     // 1. HOOK DE NAVEGACIÓN: Necesario para cambiar de ruta
     const navigate = useNavigate(); 
@@ -58,4 +58,4 @@ function WelcomePage() { // ✅ Renombrado el componente a WelcomePage (nombre d
     );
 };
 
-export default WelcomePage;
+export default Welcome;

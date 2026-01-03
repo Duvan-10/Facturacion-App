@@ -17,6 +17,16 @@
     /* Color de fondo principal de la ventana */
     --color-background-dark: oklch(28.63% 0.00456 145.787); 
     
+<<<<<<< HEAD
+    /* Variables de color de la tarjeta y otros elementos*/
+    --color-card-dark: hsl(0, 0%, 12%); 
+    --color-input-background: #0d0d0d; 
+    --color-text-light: hwb(0 88% 12%);
+    --color-text-muted: lab(98.31% -3.36 2.05);
+    --color-accent-teal: hwb(151 0% 10%); /*Color Fondo Botones login Modo Dar*/
+    --color-accent-darker: #008a40;
+    --color-accent-darker: #00b35b;
+=======
     /* Color de fondo para tarjetas/contenedores centrales */
     --color-card-dark: hwb(0 12% 88%); 
 
@@ -37,6 +47,7 @@
     --color-error-text: #e53e3e;               /* Texto de error */
     --color-error-background: #9b2c2c;         /* Fondos de error */
     --color-warning-text: #9c5700;             /* Advertencias */
+>>>>>>> login
 }
 
 /* ----------------------------------------------------------------- */
@@ -44,9 +55,19 @@
 /* Sobrescribe las variables anteriores cuando el tema es claro.      */
 /* ----------------------------------------------------------------- */
 html.light-mode {
+<<<<<<< HEAD
+    /* Los nombres de las variables se mantienen iguales, solo cambia el valor */
+    --color-background-dark: hsl(0, 0%, 94%);    /* Fondo de página muy claro */
+    --color-card-dark: hsl(0, 0%, 100%);          /* Tarjeta blanca */
+    --color-input-background: #f7f7f7;   /* Fondo de input muy claro */
+    
+    --color-text-light: #333333;         /* Texto oscuro */
+    --color-text-muted: hwb(0 40% 60%);         /* Texto secundario gris */
+=======
     /* --- BASE Y LAYOUT --- */
     --color-background-dark: hsl(0, 0%, 100%); 
     --color-card-dark: oklch(100% 0.00011 271.152); 
+>>>>>>> login
 
     /* --- TIPOGRAFÍA GENERAL --- */
     --color-text-light: oklab(0% 0 0); 
@@ -88,7 +109,7 @@ body, html, #root {
 /* ------------------------------------- */
 
 .theme-switcher-global {
-    position: fixed; 
+    position: fixed; git
     top: 20px;
     right: 20px;
     z-index: 1000; 
@@ -109,5 +130,49 @@ body, html, #root {
 .theme-button:hover {
     color: var(--color-accent-teal); 
     background-color: var(--color-input-background); 
+<<<<<<< HEAD
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================================== */
+/* ESTILOS PARA MENSAJES DE ESTADO (Clase: .status) */
+/* Usado para errores de Login, éxito, o mensajes de Onboarding */
+/* ========================================================== */
+
+.status {
+    /* 1. Espaciado y Ubicación */
+    margin-top: 15px; /* Espacio después del botón/formulario */
+    padding: 12px;
+    
+    /* 2. Tipo de letra y Texto */
+    font-size: 0.95em;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.4;
+    
+    /* 3. Colores y Contorno (Estilo de advertencia/información) */
+    
+    /* Si estás usando variables CSS para el tema: */
+    color: var(--color-text-dark); /* Color del texto */
+    background-color: var(--color-secondary-light); /* Fondo suave (ej. amarillo claro/azul claro) */
+    border: 1px solid var(--color-secondary-dark); /* Borde que coincide con el tema */
+    
+    /* Si no usas variables de tema, puedes usar valores fijos: */
+    /* color: #333; */
+    /* background-color: #ffe0b2;  (Naranja claro para advertencia) */
+    /* border: 1px solid #ff9800; */
+    
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Debes agregar una clase condicional en Login.jsx (Ej: status--error) y estilizarla aquí. */
+/* Ejemplo: */
+.status.error {
+    color: #a00; /* Rojo oscuro */
+    background-color: #fce4e4; /* Rojo muy claro */
+    border-color: #ff8a80; /* Rojo suave */
+=======
     box-shadow: 0 4px 8px hsl(0, 0%, 9%);
+>>>>>>> login
 }
