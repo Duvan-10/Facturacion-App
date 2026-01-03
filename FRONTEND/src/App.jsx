@@ -1,14 +1,12 @@
 // src/App.jsx
+
 import { Routes, Route, Navigate } from 'react-router-dom';
-import WelcomePage from './pages/auth/Welcome'; 
-import { useAuth } from './context/AuthContext';
+import WelcomePage from './pages/auth/WelcomePage';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
 
 function App() {
-    const { user } = useAuth(); // Obtenemos el estado de la sesión (por si lo usas luego)
-
     return (
         <>
             <ThemeSwitch /> 
@@ -19,9 +17,6 @@ function App() {
                     path="/" 
                     element={<WelcomePage />} 
                 />
-                
-                {/* RUTA DE BIENVENIDA EXPLÍCITA */}
-                <Route path="/welcome" element={<WelcomePage />} />
 
                 {/* RUTAS DE AUTENTICACIÓN (Públicas) */}
                 <Route path="/login" element={<Login />} />
