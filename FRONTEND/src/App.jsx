@@ -1,3 +1,4 @@
+// Este archivo define las rutas principales de la aplicación y gestiona la navegación entre las diferentes páginas.
 // src/App.jsx
 
 import { Routes, Route, Navigate } from 'react-router-dom';
