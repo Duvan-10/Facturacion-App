@@ -8,15 +8,23 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './test', // Indica que las pruebas están en la carpeta 'test'
   fullyParallel: true, // Ejecuta pruebas en paralelo para mayor velocidad
-  reporter: 'html', // Genera un reporte HTML al finalizar
+  reporter: [['html', { open: 'always' }]], // Genera un reporte HTML y lo abre siempre
   
   // Configuración para lanzar la App automáticamente antes de las pruebas
-  webServer: {
-    command: 'npm run dev',      // Ejecuta el script 'dev' de la raíz (Backend + Frontend)
-    url: 'http://localhost:5173', // Espera a que esta URL responda (200 OK)
-    reuseExistingServer: !process.env.CI, // Si ya está corriendo, no lo reinicia
-    cwd: '..',                   // Ejecuta desde la raíz del proyecto para levantar todo el sistema
-  },
+  webServer: [
+    {
+      command: 'npm start',
+      cwd: '../BACKEND',
+      url: 'http://localhost:4000',
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: 'npm run f',
+      cwd: '../FRONTEND',
+      url: 'http://localhost:5173',
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 
   use: {
     // URL base de tu Frontend (facilita los goto('/') en los tests)
