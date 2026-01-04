@@ -1,3 +1,7 @@
+// Este archivo es el punto de entrada de la aplicación React.
+//  Se encarga de renderizar el componente principal (App)
+//  y envolverlo en los proveedores de contexto necesarios para el enrutamiento, la gestión de temas y la autenticación.
+
 // src/main.jsx
 
 import React from 'react';
