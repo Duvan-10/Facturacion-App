@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 // 1. Definición del Contexto
 const AuthContext = createContext(null);
 
-// URL base de tu backend (La dejamos por referencia, pero NO se usará en este modo de prueba)
-const API_URL = 'http://localhost:3000/api/auth';
+// URL base de tu backend
+const API_URL = 'http://localhost:4000/api';
 
 // 2. Componente Proveedor (Provider)
 export const AuthProvider = ({ children }) => {
@@ -46,77 +46,75 @@ export const AuthProvider = ({ children }) => {
         navigate('/login', { replace: true });
     };
 
-    // --- FUNCIÓN DE REGISTRO (MODO SIMULACIÓN) ---
+    // --- FUNCIÓN DE REGISTRO ---
     const handleRegister = async (userData) => {
         setIsLoading(true);
         setStatusMessage('');
 
-        // 1. Limpiamos cualquier sesión previa para evitar que el Login nos redirija a Home
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setToken(null);
-        setUser(null);
-
         try {
-            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
-            await new Promise(resolve => setTimeout(resolve, 2000)); 
+            const response = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
 
-            // Puedes inspeccionar en consola lo que se intentaría registrar
-            console.log('Simulación registro usuario:', userData);
-            
-            // SIMULACIÓN: Asumimos que el registro es exitoso en el front-end
-            setStatusMessage('🎉 SIMULACIÓN EXITOSA. Usuario creado, redirigiendo a Login.');
-            
-            // Eliminamos navigate() aquí para que Register.jsx maneje la redirección tras mostrar el mensaje
+            const data = await response.json();
+
+            if (!response.ok) {
+                setStatusMessage(data.message || 'Error en el registro.');
+                return false;
+            }
+
+            setStatusMessage(data.message || 'Usuario registrado exitosamente.');
             return true;
 
         } catch (error) {
-            // Esto solo se ejecutaría por errores internos de JS, no por errores de red en este modo.
-            console.error('Error interno durante la simulación de registro:', error);
-            setStatusMessage('⚠️ Error interno durante la simulación.');
+            console.error('Error en el registro:', error);
+            setStatusMessage('Error de conexión con el servidor.');
             return false;
         } finally {
-            // Importante: deshabilita el estado de carga
             setIsLoading(false);
         }
     };
 
-    // --- FUNCIÓN DE LOGIN (MODO SIMULACIÓN) ---
+    // --- FUNCIÓN DE LOGIN ---
     const handleLogin = async ({ email, password }) => {
         setIsLoading(true);
         setStatusMessage('');
 
         try {
-            // SIMULACIÓN DE RETARDO (2 segundos) para probar el estado 'isLoading'
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Ejemplo de credenciales simuladas
-            if (email === 'test@pfeps.com' && password === '123456') {
-                
-                // SIMULACIÓN DE LOGIN EXITOSO: 
-                const mockUser = { id: 1, name: 'Usuario Prueba', email };
-                const mockToken = 'mock-jwt-token-12345';
+            const response = await fetch(`${API_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
 
-                localStorage.setItem('token', mockToken);
-                localStorage.setItem('user', JSON.stringify(mockUser));
-                setToken(mockToken);
-                setUser(mockUser);
-                setStatusMessage('🎉 SIMULACIÓN EXITOSA. Redirigiendo a Home...');
+            const data = await response.json();
 
-                return true;
-
-            } else {
-                // SIMULACIÓN DE LOGIN FALLIDO:
-                setStatusMessage('❌ SIMULACIÓN FALLIDA: Credenciales incorrectas.');
+            if (!response.ok) {
+                setStatusMessage(data.message || 'Error en el inicio de sesión.');
                 return false;
             }
             
+            const { token, user } = data;
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+            setToken(token);
+            setUser(user);
+            setStatusMessage('Inicio de sesión exitoso.');
+
+            return true;
+            
         } catch (error) {
-            console.error('Error interno durante la simulación de login:', error);
-            setStatusMessage('⚠️ Error interno durante la simulación.');
+            console.error('Error en el inicio de sesión:', error);
+            setStatusMessage('Error de conexión con el servidor.');
             return false;
         } finally {
-            // Importante: deshabilita el estado de carga
             setIsLoading(false);
         }
     };
