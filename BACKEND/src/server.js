@@ -8,6 +8,7 @@ import express from 'express'; // Framework para crear el servidor web
 import cors from 'cors'; // Middleware para permitir peticiones desde otros dominios (React)
 import cookieParser from 'cookie-parser'; // Middleware para leer cookies
 import { connectDB } from './config/db.js'; // Importamos la función de conexión a BD
+import authRoutes from './routes/auth.routes.js'; // Importamos las rutas de autenticación
 
 // Inicialización de la aplicación Express
 const app = express();
@@ -36,12 +37,18 @@ const startServer = async () => {
     // 1. Conectar a la Base de Datos antes de iniciar el servidor web
     await connectDB();
 
+    // Sincronizar modelos (crear tablas si no existen)
+    // await import('./models/user.model.js').then(m => m.default.sync());
+
     // --- RUTAS ---
     
     // Ruta de prueba (Endpoint) para verificar estado del servidor
     app.get('/', (req, res) => {
         res.json({ message: 'API Facturación funcionando correctamente' });
     });
+
+    // Rutas de la API (prefijo /api)
+    app.use('/api', authRoutes);
 
     // 2. Poner el servidor a escuchar en el puerto definido
     app.listen(PORT, () => {
