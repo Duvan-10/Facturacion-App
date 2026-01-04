@@ -5,11 +5,11 @@ import logo from '../../assets/logo.png';
 import './styles1.css';
 
 function Register() {
-    // 1. HOOKS
+    // Navegación y consumo del contexto de autenticación
     const navigate = useNavigate();
     const { register, isLoading, statusMessage, setStatusMessage } = useAuth();
 
-    // 2. ESTADOS
+    // Estados para los campos del formulario y control de interfaz
     const [identification, setIdentification] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -20,19 +20,22 @@ function Register() {
     const [errors, setErrors] = useState({});
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
-    // 3. CONSTANTES Y REGEX
+    // Constantes de configuración y Expresiones Regulares para validación
     const titleText = 'Crear una nueva cuenta de Administrador';
     const MAX_DIGITS = 10;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/;
-    const identificationRegex = /^[0-9]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato básico de email
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\.-]+$/; // Solo letras, espacios y acentos
+    const identificationRegex = /^[0-9]+$/; // Solo números
 
-    // 4. EFECTOS
+    // Efecto para limpiar mensajes de estado globales al cargar el componente
     useEffect(() => {
         if (setStatusMessage) setStatusMessage({ type: null, message: '' });
     }, [setStatusMessage]);
 
-    // 5. VALIDACIONES
+    /**
+     * Valida un campo individual y retorna un mensaje de error si falla.
+     * Se usa tanto en onBlur como en handleSubmit.
+     */
     const validateField = (fieldName, value) => {
         if (!value || !value.trim()) return 'Este campo es obligatorio.';
         
@@ -58,27 +61,33 @@ function Register() {
         return null;
     };
 
+    /**
+     * Maneja la escritura en los inputs.
+     * Actualiza el estado y limpia errores específicos si el formato es correcto.
+     */
     const handleChange = (e, setter) => {
         const { name, value } = e.target;
         setter(value);
 
+        // Limpia el mensaje global de error si el usuario empieza a corregir
         if (statusMessage.message) setStatusMessage({ type: null, message: '' });
 
         setErrors(prev => {
             const newErrors = { ...prev };
-            // Validación inmediata de formato (ej. caracteres inválidos)
+            // Validación inmediata para impedir caracteres inválidos mientras se escribe
             if (name === 'identification' && value && !identificationRegex.test(value)) {
                 newErrors.identification = 'Solo se permiten números.';
             } else if (name === 'name' && value && !nameRegex.test(value)) {
                 newErrors.name = 'Solo letras y espacios.';
             } else {
-                // Si corrige, borramos el error específico
+                // Si el formato es válido (o está vacío), eliminamos el error visual
                 delete newErrors[name];
             }
             return newErrors;
         });
     };
 
+    // Valida el campo cuando el usuario quita el foco del input
     const handleBlur = (e) => {
         const { name, value } = e.target;
         const error = validateField(name, value);
@@ -90,22 +99,26 @@ function Register() {
         });
     };
 
+    // Manejo del envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
         const fields = { identification, name, email, password, confirmPassword };
         const newErrors = {};
         
+        // Validar todos los campos antes de enviar
         Object.keys(fields).forEach(key => {
             const error = validateField(key, fields[key]);
             if (error) newErrors[key] = error;
         });
 
+        // Si hay errores locales, detenemos el envío
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             setStatusMessage({ type: 'error', message: 'Por favor, corrige los errores.' });
             return;
         }
 
+        // Llamada al servicio de registro
         const success = await register({ identification, name, email, password });
         if (success) {
             setRegistrationSuccess(true);
@@ -114,7 +127,6 @@ function Register() {
         }
     };
 
-    // 6. RENDER
     return (
         <main className="auth-register">
             <section className="auth-card" aria-labelledby="auth-title">
