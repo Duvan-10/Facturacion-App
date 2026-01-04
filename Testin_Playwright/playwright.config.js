@@ -1,43 +1,36 @@
-// @ts-check
-const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
 /**
- * @see https://playwright.dev/docs/test-configuration
+ * Configuración de Playwright
+ * Este archivo permite que la extensión de VS Code detecte y ejecute las pruebas
+ * ubicadas en la carpeta 'tests'.
  */
-module.exports = defineConfig({
-  testDir: './tests',
-  /* Run tests in files in parallel */
-  fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:5173',
+export default defineConfig({
+  testDir: './test', // Indica que las pruebas están en la carpeta 'test'
+  fullyParallel: true, // Ejecuta pruebas en paralelo para mayor velocidad
+  reporter: 'html', // Genera un reporte HTML al finalizar
+  
+  // Configuración para lanzar la App automáticamente antes de las pruebas
+  webServer: {
+    command: 'npm run dev',      // Ejecuta el script 'dev' de la raíz (Backend + Frontend)
+    url: 'http://localhost:5173', // Espera a que esta URL responda (200 OK)
+    reuseExistingServer: !process.env.CI, // Si ya está corriendo, no lo reinicia
+    cwd: '..',                   // Ejecuta desde la raíz del proyecto para levantar todo el sistema
+  },
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+  use: {
+    // URL base de tu Frontend (facilita los goto('/') en los tests)
+    baseURL: 'http://localhost:5173',
+    
+    // Recolectar trazas (video/pasos) cuando falla una prueba (muy útil para depurar)
     trace: 'on-first-retry',
   },
 
-  /* Configure projects for major browsers */
+  // Configuración de navegadores
   projects: [
     {
-      name: 'chromium',
+      name: 'Google Chrome',
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run f',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-    cwd: '..',
-  },
 });

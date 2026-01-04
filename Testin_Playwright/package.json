@@ -2,6 +2,7 @@
   "name": "playwright-tests",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "playwright test"
@@ -11,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.57.0"
+  },
+  "dependencies": {
+    "mysql2": "^3.16.0"
   }
 }
