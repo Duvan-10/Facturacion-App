@@ -1,0 +1,24 @@
+#Control Refactorizacion
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#4 ENERO 2026
+#Se Realizo Refactorizacion del codigo en general, y se actualizaron comentarios.
+
+Actividad Realizada:
+Añadí títulos descriptivos al inicio de los archivos clave (backend y frontend) explicando claramente qué responsabilidad tiene cada uno (servidor, contextos, rutas, componentes, estilos).
+Comenté las partes importantes del código (hooks, efectos, validaciones, rutas, lógica de redirección, cambio de tema) para que sea fácil entender el flujo sin tener que deducirlo.
+Unifiqué statusMessage en el AuthContext para que siempre sea un objeto { type, message }, alineado con cómo ya lo usaban las pantallas de Login y Registro (evita errores y hace más claro el manejo de mensajes).
+Renombré el componente de bienvenida a WelcomePage dentro de WelcomePage.jsx para que coincida con el nombre del archivo y limpié comentarios redundantes, manteniendo la misma funcionalidad de redirigir a /register.
+En el backend no cambié la lógica: solo validé que ya estuviera bien documentado (server, rutas, controlador y modelo) y lo dejé tal cual porque ya estaba claro y modula
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Implementación de Lógica de Redirección, Ajustes de Registro y Testing E2E.
+
+Actividad Realizada:
+1. Frontend (Registro): Se actualizó `Register.jsx` para permitir caracteres especiales (puntos/guiones) en el nombre (soporte para Razón Social) y se ajustaron los labels.
+2. Se creó Rama Login
+3. Backend & Frontend (Redirección): Se creó el endpoint `/api/system-status` y se integró en `App.jsx` para redirigir automáticamente al Login si ya existen usuarios, o mostrar la Bienvenida si es una instalación limpia.
+4. Testing: Se crearon pruebas E2E en Playwright (`register_admin_sas.spec.js` y `redirection.spec.js`) para validar el registro de empresas y la lógica de redirección sin alterar la BD existente.
+5. Documentación: Se Creo guía de instalación librerias(`INSTRUCCIONES_INSTALACION.txt`) para facilitar el despliegue en otros equipos.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
