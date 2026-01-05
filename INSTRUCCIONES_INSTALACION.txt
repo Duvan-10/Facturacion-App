@@ -1,0 +1,53 @@
+GUÍA DE INSTALACIÓN Y CONFIGURACIÓN - FACTURACIÓN APP
+=====================================================
+
+Este archivo contiene las instrucciones para desplegar el proyecto en un nuevo equipo.
+El proyecto está dividido en 3 módulos: BACKEND, FRONTEND y TESTING.
+
+1. PRERREQUISITOS
+-----------------
+Asegúrate de tener instalado en el nuevo equipo:
+- Node.js (Versión LTS recomendada, ej: v18 o superior).
+- MySQL Server (Base de datos).
+- Git (Opcional, si vas a clonar el repositorio).
+
+2. INSTALACIÓN DE LIBRERÍAS (DEPENDENCIAS)
+------------------------------------------
+No es necesario instalar librería por librería manualmente. Node.js lee el archivo 
+'package.json' de cada carpeta e instala todo automáticamente.
+
+Sigue estos pasos en la terminal (consola):
+
+A) MÓDULO BACKEND (Servidor y API)
+   1. Abre la terminal y entra a la carpeta BACKEND:
+      cd BACKEND
+   2. Ejecuta el comando de instalación:
+      npm install
+   3. Verifica que la configuración de base de datos en 'src/config/db.js' (o .env) 
+      coincida con la contraseña de MySQL del nuevo equipo.
+
+B) MÓDULO FRONTEND (Interfaz de Usuario React)
+   1. Regresa a la raíz o abre una nueva terminal en la carpeta FRONTEND:
+      cd FRONTEND
+   2. Ejecuta el comando de instalación:
+      npm install
+
+C) MÓDULO TESTING (Pruebas E2E con Playwright)
+   1. Entra a la carpeta de pruebas:
+      cd Testin_Playwright
+   2. Instala las dependencias:
+      npm install
+   3. Instala los navegadores necesarios para las pruebas:
+      npx playwright install
+
+3. EJECUCIÓN DEL PROYECTO
+-------------------------
+Para trabajar, generalmente necesitas dos terminales abiertas simultáneamente:
+
+Terminal 1 (Backend):
+   cd BACKEND
+   npm run dev
+
+Terminal 2 (Frontend):
+   cd FRONTEND
+   npm run dev
