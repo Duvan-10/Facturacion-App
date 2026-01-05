@@ -1,13 +1,16 @@
-// src/components/ThemeSwitch.jsx
+/**
+ * ============================================================
+ * SWITCH GLOBAL DE TEMA (CLARO / OSCURO)
+ * Archivo: ThemeSwitch.jsx
+ * RESPONSABILIDAD:
+ *  - Mostrar un botón fijo en pantalla para cambiar el modo de color.
+ *  - Leer y actualizar el estado de tema desde ThemeContext.
+ * ============================================================
+ */
 
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { Sun, Moon } from 'lucide-react'; // Iconos para representar el modo
-
-/**
- * Componente global que renderiza el botón de cambio de modo (Claro/Oscuro).
- * Está diseñado para ser fijo y visible en todas las páginas de la aplicación.
- */
 const ThemeSwitch = () => {
     // Obtenemos el estado actual del tema y la función para cambiarlo desde el ThemeContext
     const { isLightMode, toggleTheme } = useTheme(); 

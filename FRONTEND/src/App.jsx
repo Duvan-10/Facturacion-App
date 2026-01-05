@@ -1,5 +1,13 @@
-// Este archivo define las rutas principales de la aplicación y gestiona la navegación entre las diferentes páginas.
-// src/App.jsx
+/**
+ * ============================================================
+ * ENRUTADOR PRINCIPAL DE LA APLICACIÓN
+ * Archivo: App.jsx
+ * RESPONSABILIDAD:
+ *  - Definir las rutas públicas principales (Welcome, Login, Register).
+ *  - Consultar al backend si el sistema ya tiene usuarios creados.
+ *  - Redirigir automáticamente según el estado inicial del sistema.
+ * ============================================================
+ */
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -9,12 +17,14 @@ import Register from './pages/auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
 
 function App() {
-    const [hasUsers, setHasUsers] = useState(null); // null = cargando estado
+    // Estado que indica si ya existen usuarios en el sistema
+    // null => aún verificando en el backend
+    const [hasUsers, setHasUsers] = useState(null);
 
     useEffect(() => {
+        // Llama al endpoint del backend que indica si existe al menos un usuario
         const checkSystem = async () => {
             try {
-                // Consultamos al backend si ya hay usuarios registrados
                 const res = await fetch('http://localhost:4000/api/system-status');
                 const data = await res.json();
                 setHasUsers(data.hasUsers);

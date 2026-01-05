@@ -1,8 +1,12 @@
-// Este archivo es el punto de entrada de la aplicación React.
-//  Se encarga de renderizar el componente principal (App)
-//  y envolverlo en los proveedores de contexto necesarios para el enrutamiento, la gestión de temas y la autenticación.
-
-// src/main.jsx
+/**
+ * ============================================================
+ * PUNTO DE ENTRADA DE REACT (FRONTEND)
+ * Archivo: main.jsx
+ * RESPONSABILIDAD:
+ *  - Montar el componente raíz App en el DOM.
+ *  - Envolver la aplicación con BrowserRouter, ThemeProvider y AuthProvider.
+ * ============================================================
+ */
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

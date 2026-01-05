@@ -1,4 +1,13 @@
-// src/context/ThemeContext.jsx
+/**
+ * ============================================================
+ * CONTEXTO GLOBAL DE TEMA (LIGHT / DARK)
+ * Archivo: ThemeContext.jsx
+ * RESPONSABILIDAD:
+ *  - Almacenar el estado del modo claro/oscuro.
+ *  - Sincronizar la preferencia en localStorage y en la etiqueta <html>.
+ *  - Exponer el hook useTheme para usar el tema desde cualquier componente.
+ * ============================================================
+ */
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
@@ -20,7 +29,7 @@ export const ThemeProvider = ({ children }) => {
     };
 
     // Efecto que se ejecuta cada vez que 'isLightMode' cambia.
-    // Aplica la clase CSS al HTML y guarda la preferencia.
+    // Aplica la clase CSS al <html> y guarda la preferencia en localStorage.
     useEffect(() => {
         const root = document.documentElement; // La etiqueta <html>
 

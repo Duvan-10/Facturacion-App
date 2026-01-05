@@ -1,16 +1,25 @@
+/**
+ * ============================================================
+ * PANTALLA DE BIENVENIDA / ONBOARDING INICIAL
+ * Archivo: WelcomePage.jsx
+ * RESPONSABILIDAD:
+ *  - Presentar el sistema de facturación la primera vez que se abre.
+ *  - Guiar al usuario a crear el primer administrador mediante el botón "Registrarse".
+ * ============================================================
+ */
+
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logoOnboarding from '../../assets/logo-welcome.png'; 
 import './WelcomePage.css'; 
 
 
-
-function Welcome() { // ✅ Renombrado el componente a WelcomePage (nombre del archivo)
+function WelcomePage() {
 
     // 1. HOOK DE NAVEGACIÓN: Necesario para cambiar de ruta
     const navigate = useNavigate(); 
     
-    // 2. LÓGICA DE REDIRECCIÓN: Función que se ejecuta al hacer clic en el botón
+    // 2. LÓGICA DE REDIRECCIÓN: envía al usuario al formulario de registro
     const handleStartRegistration = () => {
         // Redirige al usuario a la ruta del formulario de registro del administrador
         navigate('/register'); 
@@ -21,41 +30,36 @@ function Welcome() { // ✅ Renombrado el componente a WelcomePage (nombre del a
     return (
         <div className="onboarding-container"> 
             
-            {/* ✅ Usamos el logo exclusivo para esta fase */}
+            {/* Logo exclusivo de la pantalla de bienvenida */}
             <img 
                 src={logoOnboarding} 
                 alt="Logo de Bienvenida" 
                 className="onboarding-logo" 
             />
             
-            {/* ... (resto del contenido, título, texto, botón) ... */}
-            
             <h2 className="onboarding-title">
                 Bienvenido al Sistema de Facturación Electrónica.
             </h2>
             
             <p className="onboarding-text">
-                Para Empezar, por favor, haz clic en registrarse.
-                <br></br>
-             El usuario que registrarás tendrá la Administración para crear futuros usuarios.
+                Para empezar, por favor haz clic en "Registrarse".
+                <br />
+                El usuario que crearás será el administrador inicial que podrá registrar futuros usuarios.
             </p>
 
-{/* BOTÓN DE REGISTRO: Usa la clase .onboarding-button-register */}
-                    <div className="form-actions">
-                        <button 
-                            type="button" 
-                            className="onboarding-button-register" 
-                            // ✅ Al hacer clic, ejecuta la redirección a /register
-                            onClick={handleStartRegistration}
-                        >
-                            Registrarse
-                        </button>
-                    </div>
+            {/* BOTÓN DE REGISTRO: redirige al formulario del primer administrador */}
+            <div className="form-actions">
+                <button 
+                    type="button" 
+                    className="onboarding-button-register" 
+                    onClick={handleStartRegistration}
+                >
+                    Registrarse
+                </button>
+            </div>
 
-                </div>
-
-       
+        </div>
     );
-};
+}
 
-export default Welcome;
+export default WelcomePage;

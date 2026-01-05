@@ -1,4 +1,13 @@
-// src/context/AuthContext.jsx
+/**
+ * ============================================================
+ * CONTEXTO DE AUTENTICACIÓN
+ * Archivo: AuthContext.jsx
+ * RESPONSABILIDAD:
+ *  - Centralizar el estado de sesión (usuario, token).
+ *  - Exponer funciones de login, registro y logout al resto de la app.
+ *  - Gestionar mensajes de estado para pantallas de Login y Registro.
+ * ============================================================
+ */
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,11 +21,15 @@ const API_URL = 'http://localhost:4000/api';
 // 2. Componente Proveedor (Provider)
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
-    // Los estados user y token estarán en null, simulando que nadie ha iniciado sesión
+
+    // Estado global de autenticación
     const [user, setUser] = useState(null); 
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [isLoading, setIsLoading] = useState(false);
-    const [statusMessage, setStatusMessage] = useState(''); 
+
+    // Mensaje de estado global (error / éxito / info)
+    // Siempre se maneja como objeto: { type: 'error' | 'success' | null, message: string }
+    const [statusMessage, setStatusMessage] = useState({ type: null, message: '' }); 
 
 
     // --- Lógica de recuperación de sesión (Se mantiene por si hay token guardado) ---
@@ -25,9 +38,8 @@ export const AuthProvider = ({ children }) => {
             try {
                 const storedUser = JSON.parse(localStorage.getItem('user'));
                 setUser(storedUser);
-                // if (storedUser) {
-                //     navigate('/home', { replace: true });
-                // }
+                // Podrías redirigir automáticamente a /home si existe sesión válida
+                // navigate('/home', { replace: true });
             } catch (e) {
                 handleLogout();
             }
@@ -36,20 +48,20 @@ export const AuthProvider = ({ children }) => {
         }
     }, [token, navigate]);
 
-    // --- FUNCIÓN DE LOGOUT (Se mantiene funcional) ---
+    // --- FUNCIÓN DE LOGOUT ---
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setToken(null);
         setUser(null);
-        setStatusMessage('Sesión cerrada correctamente.');
+        setStatusMessage({ type: 'success', message: 'Sesión cerrada correctamente.' });
         navigate('/login', { replace: true });
     };
 
     // --- FUNCIÓN DE REGISTRO ---
     const handleRegister = async (userData) => {
         setIsLoading(true);
-        setStatusMessage('');
+        setStatusMessage({ type: null, message: '' });
 
         try {
             const response = await fetch(`${API_URL}/register`, {
@@ -63,16 +75,16 @@ export const AuthProvider = ({ children }) => {
             const data = await response.json();
 
             if (!response.ok) {
-                setStatusMessage(data.message || 'Error en el registro.');
+                setStatusMessage({ type: 'error', message: data.message || 'Error en el registro.' });
                 return false;
             }
 
-            setStatusMessage(data.message || 'Usuario registrado exitosamente.');
+            setStatusMessage({ type: 'success', message: data.message || 'Usuario registrado exitosamente.' });
             return true;
 
         } catch (error) {
             console.error('Error en el registro:', error);
-            setStatusMessage('Error de conexión con el servidor.');
+            setStatusMessage({ type: 'error', message: 'Error de conexión con el servidor.' });
             return false;
         } finally {
             setIsLoading(false);
@@ -82,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     // --- FUNCIÓN DE LOGIN ---
     const handleLogin = async ({ email, password }) => {
         setIsLoading(true);
-        setStatusMessage('');
+        setStatusMessage({ type: null, message: '' });
 
         try {
             const response = await fetch(`${API_URL}/login`, {
@@ -96,23 +108,23 @@ export const AuthProvider = ({ children }) => {
             const data = await response.json();
 
             if (!response.ok) {
-                setStatusMessage(data.message || 'Error en el inicio de sesión.');
+                setStatusMessage({ type: 'error', message: data.message || 'Error en el inicio de sesión.' });
                 return false;
             }
-            
+
             const { token, user } = data;
 
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             setToken(token);
             setUser(user);
-            setStatusMessage('Inicio de sesión exitoso.');
+            setStatusMessage({ type: 'success', message: 'Inicio de sesión exitoso.' });
 
             return true;
             
         } catch (error) {
             console.error('Error en el inicio de sesión:', error);
-            setStatusMessage('Error de conexión con el servidor.');
+            setStatusMessage({ type: 'error', message: 'Error de conexión con el servidor.' });
             return false;
         } finally {
             setIsLoading(false);
