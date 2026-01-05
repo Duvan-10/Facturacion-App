@@ -51,7 +51,7 @@ function Register() {
                 if (value.length > MAX_DIGITS) return `Máximo ${MAX_DIGITS} dígitos.`;
                 break;
             case 'name':
-                if (!nameRegex.test(value)) return 'Solo letras y espacios.';
+                if (!nameRegex.test(value)) return 'Solo letras, espacios, puntos y guiones.';
                 break;
             case 'email':
                 if (!emailRegex.test(value)) return 'Formato de correo inválido.';
@@ -84,7 +84,7 @@ function Register() {
             if (name === 'identification' && value && !identificationRegex.test(value)) {
                 newErrors.identification = 'Solo se permiten números.';
             } else if (name === 'name' && value && !nameRegex.test(value)) {
-                newErrors.name = 'Solo letras y espacios.';
+                newErrors.name = 'Solo letras, espacios, puntos y guiones.';
             } else {
                 // Si el formato es válido (o está vacío), eliminamos el error visual
                 delete newErrors[name];
@@ -166,7 +166,7 @@ function Register() {
                     </div>
 
                     <div className="field">
-                        <label htmlFor="name">Nombre Completo</label>
+                        <label htmlFor="name">Nombre Completo / Razón Social</label>
                         <input
                             type="text"
                             id="name"
@@ -175,7 +175,7 @@ function Register() {
                             onChange={(e) => handleChange(e, setName)}
                             onBlur={handleBlur}
                             className={errors.name ? 'input-error' : ''}
-                            placeholder="Tu nombre completo"
+                            placeholder="Tu nombre o razón social"
                         />
                         {errors.name && <p className="help error">{errors.name}</p>}
                     </div>
