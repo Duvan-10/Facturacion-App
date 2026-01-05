@@ -9,6 +9,7 @@ import cors from 'cors'; // Middleware para permitir peticiones desde otros domi
 import cookieParser from 'cookie-parser'; // Middleware para leer cookies
 import { connectDB } from './config/db.js'; // Importamos la función de conexión a BD
 import authRoutes from './routes/auth.routes.js'; // Importamos las rutas de autenticación
+import { checkSystemStatus } from './controllers/auth.controller.js';
 
 // Inicialización de la aplicación Express
 const app = express();
@@ -46,6 +47,9 @@ const startServer = async () => {
     app.get('/', (req, res) => {
         res.json({ message: 'API Facturación funcionando correctamente' });
     });
+
+    // Ruta para verificar si el sistema ya tiene usuarios registrados
+    app.get('/api/system-status', checkSystemStatus);
 
     // Rutas de la API (prefijo /api)
     app.use('/api', authRoutes);

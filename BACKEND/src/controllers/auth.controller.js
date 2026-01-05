@@ -61,3 +61,15 @@ export const register = async (req, res) => {
         res.status(500).json({ message: "Error interno del servidor" });
     }
 };
+
+export const checkSystemStatus = async (req, res) => {
+    try {
+        // Contamos cuántos usuarios existen en total
+        const count = await User.count();
+        // Retornamos true si hay al menos uno, false si está vacío
+        res.json({ hasUsers: count > 0 });
+    } catch (error) {
+        console.error("Error verificando estado del sistema:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
