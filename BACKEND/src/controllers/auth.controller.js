@@ -50,6 +50,9 @@ export const register = async (req, res) => {
             role: 'admin' // Forzamos el rol o dejamos el default del modelo
         });
 
+        // LOG DE CONFIRMACIÓN: Para ver en la consola del servidor
+        console.log(`✅ NUEVO USUARIO REGISTRADO: ${newUser.name} (${newUser.email})`);
+
         // 6. Responder al Frontend
         res.status(201).json({
             message: "Usuario registrado exitosamente",
@@ -71,5 +74,49 @@ export const checkSystemStatus = async (req, res) => {
     } catch (error) {
         console.error("Error verificando estado del sistema:", error);
         res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+export const login = async (req, res) => {
+    try {
+        // Extraer credenciales enviadas por el frontend
+        const { email, password } = req.body;
+
+        // Validar que ambos campos vengan presentes
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Correo y contraseña son obligatorios' });
+        }
+
+        // Buscar al usuario por su correo
+        const existingUser = await User.findOne({ where: { email } });
+        if (!existingUser) {
+            return res.status(401).json({ message: 'Credenciales inválidas' });
+        }
+
+        // Comparar contraseñas usando bcrypt
+        const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Credenciales inválidas' });
+        }
+
+        // Preparar datos seguros del usuario para la respuesta
+        const safeUser = {
+            id: existingUser.id,
+            name: existingUser.name,
+            email: existingUser.email,
+            role: existingUser.role,
+        };
+
+        // Token simple para mantener compatibilidad con el frontend actual
+        const token = `token-${existingUser.id}-${Date.now()}`;
+
+        return res.json({
+            message: 'Inicio de sesión exitoso',
+            token,
+            user: safeUser,
+        });
+    } catch (error) {
+        console.error('Error en login:', error);
+        return res.status(500).json({ message: 'Error interno del servidor' });
     }
 };

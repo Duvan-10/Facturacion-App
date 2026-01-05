@@ -1,4 +1,13 @@
-// src/pages/auth/Login.jsx
+/**
+ * ============================================================
+ * PANTALLA DE INICIO DE SESIÓN
+ * Archivo: Login.jsx
+ * RESPONSABILIDAD:
+ *  - Mostrar el formulario de autenticación y selector de rol.
+ *  - Validar datos antes de llamar al AuthContext.
+ *  - Redirigir al usuario autenticado hacia /home.
+ * ============================================================
+ */
 
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
