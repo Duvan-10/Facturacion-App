@@ -5,13 +5,19 @@
 
 /* 1. Contenedor Principal */
 .onboarding-container {
-    padding: 20px 0;
+    padding: 20px;
     text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 2. Logo */
 .onboarding-logo {
-    width: 250px; 
+    width: 60%;
+    max-width: 250px; 
     height: auto;
     margin-bottom: 25px; 
     transition: transform 0.3s ease;
@@ -91,4 +97,16 @@
     color: var(--color-accent-teal);
     font-weight: 600;
     text-decoration: none;
+}
+
+/* ============================================== */
+/* MEDIA QUERIES (RESPONSIVE) */
+/* ============================================== */
+@media (max-width: 480px) {
+    .onboarding-title {
+        font-size: 1.5em;
+    }
+    .onboarding-text {
+        font-size: 1.1em;
+    }
 }

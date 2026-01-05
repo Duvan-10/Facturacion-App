@@ -65,9 +65,8 @@ html.light-mode {
 }
 
 .auth-login .auth-card {
-    width: 80%; 
+    width: 90%; 
     max-width: 400px; 
-    min-width: 300px; 
     padding: 15px; 
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
@@ -336,9 +335,8 @@ html.light-mode {
 }
 
 .auth-register .auth-card {
-    width: 80%; 
+    width: 90%; 
     max-width: 400px; 
-    min-width: 300px; 
     padding: 15px; 
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
@@ -545,17 +543,15 @@ html.light-mode {
 /* --- AJUSTE RESPONSIVE --- */
 @media (max-width: 450px) {
     .auth-login, .auth-register {
-        align-items: flex-start; 
-        padding-top: 10px;
+        padding: 15px;
+        align-items: center;
     }
 
     .auth-login .auth-card,
     .auth-register .auth-card {
         width: 100%; 
-        min-width: unset; 
         max-width: 100%;
-        margin: 0;
-        padding: 10px;
+        padding: 20px;
     }
 }
 
