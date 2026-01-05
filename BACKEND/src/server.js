@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser'; // Middleware para leer cookies
 import { connectDB } from './config/db.js'; // Importamos la función de conexión a BD
 import authRoutes from './routes/auth.routes.js'; // Importamos las rutas de autenticación
 import { checkSystemStatus } from './controllers/auth.controller.js';
+import os from 'os'; // Para obtener la IP del sistema
 
 // Inicialización de la aplicación Express
 const app = express();
@@ -21,7 +22,19 @@ const PORT = process.env.PORT || 4000;
 
 // 1. CORS: Configuración de seguridad para permitir peticiones desde el Frontend
 app.use(cors({
-    origin: 'http://localhost:5173', // URL exacta de tu aplicación React (Vite)
+    origin: (origin, callback) => {
+        // Permitir requests sin origen (ej. Postman) o si coincide con la variable de entorno
+        if (!origin || origin === process.env.FRONTEND_URL) return callback(null, true);
+
+        // Permitir localhost y IPs de red local típicas (192.168.x.x, 10.x.x.x)
+        const isLocalNetwork = origin.startsWith('http://localhost') || 
+                               origin.startsWith('http://127.0.0.1') || 
+                               origin.startsWith('http://192.168.') ||
+                               origin.startsWith('http://10.');
+
+        if (isLocalNetwork) callback(null, true);
+        else callback(new Error('No permitido por CORS'));
+    },
     credentials: true                // Permite el envío de cookies y headers de autorización
 }));
 
@@ -57,6 +70,16 @@ const startServer = async () => {
     // 2. Poner el servidor a escuchar en el puerto definido
     app.listen(PORT, () => {
         console.log(`\n🚀 Servidor corriendo en http://localhost:${PORT}`);
+
+        // Mostrar IP de red para facilitar conexión desde otros dispositivos
+        const interfaces = os.networkInterfaces();
+        Object.keys(interfaces).forEach((ifname) => {
+            interfaces[ifname].forEach((iface) => {
+                if (iface.family === 'IPv4' && !iface.internal) {
+                    console.log(`📡 Acceso en red:   http://${iface.address}:${PORT}`);
+                }
+            });
+        });
     });
 };
 
