@@ -11,7 +11,7 @@
 
 /* --- Layout Principal Login --- */
 .auth-login {
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -302,7 +302,7 @@
 
 /* --- Layout Principal Registro --- */
 .auth-register {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -316,7 +316,7 @@
     width: 100%;
     max-width: 400px; 
     min-width: 300px; 
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); 
     background-color: var(--color-card-dark);

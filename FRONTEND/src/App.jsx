@@ -15,29 +15,31 @@ import WelcomePage from './pages/auth/WelcomePage';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
+import { API_URL } from './api'; // Importamos la configuración local del Frontend
 
-function App() {
-    // Estado que indica si ya existen usuarios en el sistema
-    // null => aún verificando en el backend
+// Componente Guard: Se monta cada vez que se visita la ruta "/"
+// asegurando que siempre se verifique el estado actual de la BD.
+const RootGuard = () => {
     const [hasUsers, setHasUsers] = useState(null);
 
     useEffect(() => {
-        // Llama al endpoint del backend que indica si existe al menos un usuario
+        // LOG DE PRUEBA: Muestra en la consola a dónde se está conectando
+        console.log("📡 Conectando a la API en:", API_URL);
+
         const checkSystem = async () => {
             try {
-                const res = await fetch('http://localhost:4000/api/system-status');
+                const res = await fetch(`${API_URL}/system-status`);
                 const data = await res.json();
                 setHasUsers(data.hasUsers);
             } catch (error) {
                 console.error("Error verificando sistema:", error);
-                // En caso de error de conexión, asumimos false para permitir ver la bienvenida/configuración
+                // En caso de error, asumimos false para no bloquear la app
                 setHasUsers(false);
             }
         };
         checkSystem();
     }, []);
 
-    // Pantalla de carga simple mientras verificamos el estado
     if (hasUsers === null) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'var(--color-background-dark)', color: 'var(--color-text-light)' }}>
@@ -46,17 +48,18 @@ function App() {
         );
     }
 
+    return hasUsers ? <Navigate to="/login" replace /> : <WelcomePage />;
+};
+
+function App() {
     return (
         <>
             <ThemeSwitch /> 
 
             <Routes>
                 {/* PÁGINA DE BIENVENIDA (ruta inicial) */}
-                {/* Si hay usuarios, redirige a Login. Si no, muestra WelcomePage */}
-                <Route 
-                    path="/" 
-                    element={hasUsers ? <Navigate to="/login" replace /> : <WelcomePage />} 
-                />
+                {/* Usamos RootGuard para que la validación ocurra al entrar a esta ruta */}
+                <Route path="/" element={<RootGuard />} />
 
                 {/* RUTAS DE AUTENTICACIÓN (Públicas) */}
                 <Route path="/login" element={<Login />} />

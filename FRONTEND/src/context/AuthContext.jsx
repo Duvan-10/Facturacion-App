@@ -11,12 +11,10 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../api'; // Importamos la configuración local del Frontend
 
 // 1. Definición del Contexto
 const AuthContext = createContext(null);
-
-// URL base de tu backend
-const API_URL = 'http://localhost:4000/api';
 
 // 2. Componente Proveedor (Provider)
 export const AuthProvider = ({ children }) => {
