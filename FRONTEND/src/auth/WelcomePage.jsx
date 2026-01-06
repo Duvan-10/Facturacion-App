@@ -10,8 +10,8 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logoOnboarding from '../../assets/logo-welcome.png'; 
-import './WelcomePage.css'; 
+import logoOnboarding from '../assets/logo-welcome.png';
+import '../styles/WelcomePage.css'; 
 
 
 function WelcomePage() {

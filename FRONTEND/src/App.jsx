@@ -11,9 +11,9 @@
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import WelcomePage from './pages/auth/WelcomePage';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import WelcomePage from './auth/WelcomePage';
+import Login from './auth/Login';
+import Register from './auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
 import { API_URL } from './api'; // Importamos la configuración local del Frontend
 

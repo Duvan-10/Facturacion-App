@@ -19,7 +19,7 @@ import { AuthProvider } from './context/AuthContext.jsx';
 // 3. Proveedor global de tema (claro/oscuro).
 import { ThemeProvider } from './context/ThemeContext.jsx';
 
-import './global.css'; 
+import './styles/global.css'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
