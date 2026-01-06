@@ -2,7 +2,7 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #4 ENERO 2026
-#Se Realizo Refactorizacion del codigo en general, y se actualizaron comentarios.
+-Se Realizo Refactorizacion del codigo en general, y se actualizaron comentarios.
 
 Actividad Realizada:
 Añadí títulos descriptivos al inicio de los archivos clave (backend y frontend) explicando claramente qué responsabilidad tiene cada uno (servidor, contextos, rutas, componentes, estilos).
@@ -14,7 +14,6 @@ En el backend no cambié la lógica: solo validé que ya estuviera bien document
 
 #Implementación de Lógica de Redirección, Ajustes de Registro y Testing E2E.
 
-Actividad Realizada:
 1. Frontend (Registro): Se actualizó `Register.jsx` para permitir caracteres especiales (puntos/guiones) en el nombre (soporte para Razón Social) y se ajustaron los labels.
 2. Se creó Rama Login
 3. Backend & Frontend (Redirección): Se creó el endpoint `/api/system-status` y se integró en `App.jsx` para redirigir automáticamente al Login si ya existen usuarios, o mostrar la Bienvenida si es una instalación limpia.
@@ -22,3 +21,14 @@ Actividad Realizada:
 5. Documentación: Se Creo guía de instalación librerias(`INSTRUCCIONES_INSTALACION.txt`) para facilitar el despliegue en otros equipos.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+#5 ENERO 2026
+Actividad Realizadas:
+
+1.Se Ajusto Codigo para que sea versatil su ejecucion en cualquier Pc o Dispositivo y muestre la direccion IP que usa en el Fronter y Backend
+2.Se Configuro Host de Vite para que permita Conexion de otros Dispositivos en la misma red a la Apps.
+3.Se Ajusto estilos de Login, Registro y Pagina de Bienvenida para que se ajusten a cualquier pantalla
+4. Se Ajusto Testing de Pruebas de Redireccion si existe usuario registrado o no, ya que la prueba del Testing anterior no vañidaba correctamente el registro en la basa de Datos
+5. Se Realizo merge a Rama master desde Login y Push a Rama Login.
