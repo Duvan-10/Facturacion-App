@@ -44,4 +44,5 @@ Actividad Realizadas:
 2. Seguridad (SessionStorage): Se actualizó AuthContext y App.jsx para usar sessionStorage, asegurando que la sesión expire al cerrar la pestaña, y se protegió la ruta /home.
 3. Testing E2E (Playwright): Se creó home.spec.js validando el flujo de Login, redirección de seguridad y visualización del Dashboard.
 4. Documentación: Se agregaron encabezados y comentarios técnicos detallados en los archivos modificados (home.jsx, home.css, AuthContext.jsx, App.jsx, global.css).
+5. Se instalaron nuevas librerias "react-icons" para los iconos en el Home y "playwright" para las pruebas E2E.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
