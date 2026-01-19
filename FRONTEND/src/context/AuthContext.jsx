@@ -3,7 +3,7 @@
  * CONTEXTO DE AUTENTICACIÓN
  * Archivo: AuthContext.jsx
  * RESPONSABILIDAD:
- *  - Centralizar el estado de sesión (usuario, token).
+ *  - Centralizar el estado de sesión (usuario, token) usando sessionStorage.
  *  - Exponer funciones de login, registro y logout al resto de la app.
  *  - Gestionar mensajes de estado para pantallas de Login y Registro.
  * ============================================================
@@ -21,8 +21,9 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
     // Estado global de autenticación
-    const [user, setUser] = useState(null); 
-    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [user, setUser] = useState(null);
+    // Inicializamos leyendo sessionStorage para persistir sesión solo mientras la pestaña esté abierta
+    const [token, setToken] = useState(sessionStorage.getItem('token'));
     const [isLoading, setIsLoading] = useState(false);
 
     // Mensaje de estado global (error / éxito / info)
@@ -30,11 +31,11 @@ export const AuthProvider = ({ children }) => {
     const [statusMessage, setStatusMessage] = useState({ type: null, message: '' }); 
 
 
-    // --- Lógica de recuperación de sesión (Se mantiene por si hay token guardado) ---
+    // --- EFECTO: RECUPERACIÓN DE SESIÓN ---
     useEffect(() => {
         if (token) {
             try {
-                const storedUser = JSON.parse(localStorage.getItem('user'));
+                const storedUser = JSON.parse(sessionStorage.getItem('user'));
                 setUser(storedUser);
                 // Podrías redirigir automáticamente a /home si existe sesión válida
                 // navigate('/home', { replace: true });
@@ -47,9 +48,10 @@ export const AuthProvider = ({ children }) => {
     }, [token, navigate]);
 
     // --- FUNCIÓN DE LOGOUT ---
+    // Limpia el almacenamiento de sesión y el estado global
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
         setToken(null);
         setUser(null);
         setStatusMessage({ type: 'success', message: 'Sesión cerrada correctamente.' });
@@ -112,8 +114,9 @@ export const AuthProvider = ({ children }) => {
 
             const { token, user } = data;
 
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
+            // Guardamos en sessionStorage para seguridad (se borra al cerrar navegador)
+            sessionStorage.setItem('token', token);
+            sessionStorage.setItem('user', JSON.stringify(user));
             setToken(token);
             setUser(user);
             setStatusMessage({ type: 'success', message: 'Inicio de sesión exitoso.' });

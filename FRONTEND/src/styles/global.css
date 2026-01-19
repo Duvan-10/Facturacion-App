@@ -21,13 +21,13 @@
     --color-card-dark: hwb(0 12% 88%); 
 
     /* --- TIPOGRAFÍA GENERAL --- */
-    --color-text-light: hsl(0, 6%, 90%);       /* Texto principal */
+    --color-text-light: hwb(0 89% 9%);       /* Texto principal */
     --color-text-muted: rgb(250, 250, 250);    /* Texto secundario/subtítulos */
 
     /* --- FORMULARIOS E INPUTS (Específico Login/Register) --- */
-    --color-input-background: #ebe8e8;         /* Fondo de inputs */
+    --color-input-background: oklab(31.351000000000003% -0.01049 0.00595); /* Fondo de inputs */
     --color-input-text: hwb(0 3% 97%);         /* Texto dentro de inputs */
-    --color-input-hover: hwb(0 15% 85%);       /* Color hover genérico */
+    --color-input-hover: lab(15.16% 0 0);       /* Color hover genérico */
 
     /* --- BOTONES Y ACENTOS (Welcome, Login, Register) --- */
     --color-accent-teal: hwb(151 0% 10%);      /* Color principal (Botones, Links) */
@@ -37,6 +37,12 @@
     --color-error-text: #e53e3e;               /* Texto de error */
     --color-error-background: #9b2c2c;         /* Fondos de error */
     --color-warning-text: #9c5700;             /* Advertencias */
+
+    /* --- ESTILOS EXCLUSIVOS HOME / DASHBOARD (Modo Oscuro) --- */
+    --home-sidebar-bg: var(--color-card-dark); /* Sidebar oscuro integrado */
+    --home-main-bg: var(--color-background-dark); /* Fondo principal oscuro */
+    --home-card-bg: var(--color-card-dark);    /* Fondo de widgets/tarjetas */
+    --home-text-primary: var(--color-text-light);
 }
 
 /* ----------------------------------------------------------------- */
@@ -64,6 +70,16 @@ html.light-mode {
     /* --- ESTADOS Y FEEDBACK --- */
     --color-error-text: hsl(0, 55%, 46%); 
     --color-error-background: #f9d8d8;
+    
+/*--------------------------------------------------------------------------------------------------------------------------*/
+/* --- ESTILOS EXCLUSIVOS HOME / DASHBOARD (Modo Claro) --- */
+/* Define colores específicos para dar contraste tipo "Admin Panel" en modo claro */
+    --home-sidebar-bg: lch(100% 0.01 296.81);    /* Sidebar blanco puro para limpieza visual */
+    --home-main-bg: hwb(210 95% 2%);    /* Fondo gris muy suave (Slate-50) para diferenciar del sidebar */
+    --home-card-bg: #ffffff;        /* Tarjetas blancas sobre fondo gris */
+    --home-text-primary: hsl(210, 10%, 12%);/* Texto oscuro con tinte azulado (Slate) */
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
 }
 
 /* ------------------------------------- */

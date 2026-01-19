@@ -30,5 +30,19 @@ Actividad Realizadas:
 1.Se Ajusto Codigo para que sea versatil su ejecucion en cualquier Pc o Dispositivo y muestre la direccion IP que usa en el Fronter y Backend
 2.Se Configuro Host de Vite para que permita Conexion de otros Dispositivos en la misma red a la Apps.
 3.Se Ajusto estilos de Login, Registro y Pagina de Bienvenida para que se ajusten a cualquier pantalla
-4. Se Ajusto Testing de Pruebas de Redireccion si existe usuario registrado o no, ya que la prueba del Testing anterior no vañidaba correctamente el registro en la basa de Datos
-5. Se Realizo merge a Rama master desde Login y Push a Rama Login.
+4.Se Ajusto Testing de Pruebas de Redireccion si existe usuario registrado o no, ya que la prueba del Testing anterior no vañidaba correctamente el registro en la basa de Datos
+5.Se Realizo merge a Rama master desde Login y Push a Rama Login.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#6 ENERO 2026
+Actividad Realizadas:
+
+1. Refactorización Home (JSX/CSS): Se transformó home.jsx a React, implementando react-icons y estilos responsivos en home.css conectados al tema global (Claro/Oscuro).
+2. Seguridad (SessionStorage): Se actualizó AuthContext y App.jsx para usar sessionStorage, asegurando que la sesión expire al cerrar la pestaña, y se protegió la ruta /home.
+3. Testing E2E (Playwright): Se creó home.spec.js validando el flujo de Login, redirección de seguridad y visualización del Dashboard.
+4. Documentación: Se agregaron encabezados y comentarios técnicos detallados en los archivos modificados (home.jsx, home.css, AuthContext.jsx, App.jsx, global.css).
+5. Se instalaron nuevas librerias "react-icons" para los iconos en el Home y "playwright" para las pruebas E2E.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

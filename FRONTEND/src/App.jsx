@@ -5,19 +5,33 @@
  * RESPONSABILIDAD:
  *  - Definir las rutas públicas principales (Welcome, Login, Register).
  *  - Consultar al backend si el sistema ya tiene usuarios creados.
- *  - Redirigir automáticamente según el estado inicial del sistema.
+ *  - Proteger rutas privadas (Home) verificando el token.
+ *  - Gestionar la navegación global.
  * ============================================================
  */
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import WelcomePage from './pages/auth/WelcomePage';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import WelcomePage from './auth/WelcomePage';
+import Login from './auth/Login';
+import Register from './auth/Register';
 import ThemeSwitch from './components/ThemeSwitch'; 
+import Home from './home/home';
 import { API_URL } from './api'; // Importamos la configuración local del Frontend
 
-// Componente Guard: Se monta cada vez que se visita la ruta "/"
+// --- COMPONENTE DE SEGURIDAD ---
+// Verifica si existe el token en sessionStorage.
+// Si no hay token, expulsa al usuario al Login.
+const ProtectedRoute = ({ children }) => {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+        return <Navigate to="/login" replace />;
+    }
+    return children;
+};
+
+// --- COMPONENTE GUARD (ROOT) ---
+// Se monta cada vez que se visita la ruta "/"
 // asegurando que siempre se verifique el estado actual de la BD.
 const RootGuard = () => {
     const [hasUsers, setHasUsers] = useState(null);
@@ -61,25 +75,20 @@ function App() {
                 {/* Usamos RootGuard para que la validación ocurra al entrar a esta ruta */}
                 <Route path="/" element={<RootGuard />} />
 
+                 {/* RUTA DE REGISTRO */}
+                <Route path="/register" element={<Register />} />
+
                 {/* RUTAS DE AUTENTICACIÓN (Públicas) */}
                 <Route path="/login" element={<Login />} />
-                
-                {/* RUTA DE REGISTRO */}
-                <Route path="/register" element={<Register />} />
-                
-                {/* RUTA TEMPORAL HOME */}
-                <Route 
-                    path="/home" 
-                    element={
-                        <div style={{ padding: '50px', color: 'var(--color-text-light)' }}>
-                            <h2>🎉 ÉXITO: REDIRECCIÓN A HOME (Temporal)</h2>
-                            <p>El switch de tema debe estar visible en la esquina superior derecha.</p>
-                        </div>
-                    } 
-                />
 
-                {/* CUALQUIER OTRA RUTA → REDIRIGE A BIENVENIDA */}
-                <Route path="*" element={<Navigate to="/" replace />} />
+                {/* --- RUTA PROTEGIDA: HOME / DASHBOARD --- */}
+                {/* Solo accesible si hay token en sessionStorage */}
+                <Route path="/home" element={
+                    <ProtectedRoute>
+                        <Home />
+                    </ProtectedRoute>
+                } />
+
             </Routes>
         </>
     );
